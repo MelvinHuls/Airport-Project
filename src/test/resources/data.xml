@@ -1,6 +1,12 @@
 <dataset>
+	<user>
+		<id>500</id>
+		<username>JohnD</username>
+		<password>dbtest</password>
+		<email>JD52@gmail.com</email>
+	</user>
 
-    
-    
+
+
 
 </dataset>

@@ -14,6 +14,11 @@ public class Partner extends User {
 		this.company = company;
 	}
 
+	public Partner(String username, String password, String email, String company) {
+		super(username, password, email);
+		this.company = company;
+	}
+
 	public String getCompany() {
 		return company;
 	}

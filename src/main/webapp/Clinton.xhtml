@@ -13,9 +13,17 @@
 
 <h:body>
 	<h1>Vote for Clinton</h1>
-	
-	<p:commandButton value="Submit"
-			action="Clinton.xhtml"
-			icon="ui-icon-check" />
+
+	<h:form>
+		<h3>
+			<p:inputText binding="#{name}" />
+			<p:inputText binding="#{password}" />
+		</h3>
+
+		<p:commandButton value="Submit" icon="ui-icon-check" action="#{rAirBean.logOn(name.value, password.value)}"/>
+		
+		<p:commandButton value="Test" icon="ui-icon-check" action="#{rAirBean.testingFunctionality()}"/>
+
+	</h:form>
 </h:body>
 </html>

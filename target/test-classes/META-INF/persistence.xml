@@ -24,6 +24,8 @@
 			entities from src/main/java because they are in another source root. Currently 
 			haven't found an elegant way around this. -->
 		<class>com.realdolmen.test.Person</class>
+		<class>com.realdolmen.domain.User</class>
+		<class>com.realdolmen.domain.Partner</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
