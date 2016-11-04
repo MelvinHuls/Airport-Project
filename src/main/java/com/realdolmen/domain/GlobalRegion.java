@@ -1,5 +1,5 @@
 package com.realdolmen.domain;
 
 public enum GlobalRegion {
-	Region1, Region2, Region3;
+	Western_Europe, Eastern_Europe, North_America, Middle_America, South_America;
 }

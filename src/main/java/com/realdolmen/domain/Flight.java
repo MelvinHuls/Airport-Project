@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Flight {
@@ -18,12 +20,22 @@ public class Flight {
 	private BigDecimal priceEconomy;
 	private BigDecimal priceBusiness;
 	private BigDecimal priceFirstClass;
+
+	@ManyToOne
+	@NotNull
 	private Location departure;
+
+	@ManyToOne
+	@NotNull
 	private Location destination;
+
+	@NotNull
 	private Integer flightDuration;
+
+	@NotNull
 	private String company;
 
-	public Flight() {
+	protected Flight() {
 	}
 
 	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
@@ -133,6 +145,10 @@ public class Flight {
 
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public Integer getNumberOfSeats() {
+		return seatsBusiness + seatsEconomy + seatsFirstClass;
 	}
 
 }

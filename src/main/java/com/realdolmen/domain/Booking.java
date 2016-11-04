@@ -3,29 +3,38 @@ package com.realdolmen.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Booking {
-
 	@Id
 	@GeneratedValue
 	private Long id;
-	private User client;
-	private Flight flight;
-	private Integer numberOfEconomyTickets;
-	private Integer numberOfBusinessTickets;
-	private Integer numberOfFirstClassTickets;
 
-	public Booking() {
+	@ManyToOne
+	@NotNull
+	private User client;
+
+	@ManyToOne
+	private Flight incoming;
+
+	@ManyToOne
+	@NotNull
+	private Flight outgoing;
+
+	protected Booking() {
 	}
 
-	public Booking(User client, Flight flight, Integer numberOfEconomyTickets, Integer numberOfBusinessTickets,
-			Integer numberOfFirstClassTickets) {
+	public Booking(User client, Flight flight) {
 		this.client = client;
-		this.flight = flight;
-		this.numberOfEconomyTickets = numberOfEconomyTickets;
-		this.numberOfBusinessTickets = numberOfBusinessTickets;
-		this.numberOfFirstClassTickets = numberOfFirstClassTickets;
+		this.outgoing = flight;
+	}
+
+	public Booking(User client, Flight flight1, Flight flight2) {
+		this.client = client;
+		this.incoming = flight1;
+		this.outgoing = flight2;
 	}
 
 	public User getClient() {
@@ -36,36 +45,20 @@ public class Booking {
 		this.client = client;
 	}
 
-	public Flight getFlight() {
-		return flight;
+	public Flight getIncoming() {
+		return incoming;
 	}
 
-	public void setFlight(Flight flight) {
-		this.flight = flight;
+	public void setIncoming(Flight incoming) {
+		this.incoming = incoming;
 	}
 
-	public Integer getNumberOfEconomyTickets() {
-		return numberOfEconomyTickets;
+	public Flight getOutgoing() {
+		return outgoing;
 	}
 
-	public void setNumberOfEconomyTickets(Integer numberOfEconomyTickets) {
-		this.numberOfEconomyTickets = numberOfEconomyTickets;
-	}
-
-	public Integer getNumberOfBusinessTickets() {
-		return numberOfBusinessTickets;
-	}
-
-	public void setNumberOfBusinessTickets(Integer numberOfBusinessTickets) {
-		this.numberOfBusinessTickets = numberOfBusinessTickets;
-	}
-
-	public Integer getNumberOfFirstClassTickets() {
-		return numberOfFirstClassTickets;
-	}
-
-	public void setNumberOfFirstClassTickets(Integer numberOfFirstClassTickets) {
-		this.numberOfFirstClassTickets = numberOfFirstClassTickets;
+	public void setOutgoing(Flight outgoing) {
+		this.outgoing = outgoing;
 	}
 
 	public Long getId() {

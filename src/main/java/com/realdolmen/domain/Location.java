@@ -3,6 +3,7 @@ package com.realdolmen.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Location {
@@ -10,12 +11,16 @@ public class Location {
 	@Id
 	@GeneratedValue
 	private long id;
+	@NotNull
 	private String airport;
+	@NotNull
 	private String country;
+	@NotNull
 	private String code;
+	@NotNull
 	private GlobalRegion region;
 
-	public Location() {
+	protected Location() {
 	}
 
 	public Location(String airport, String country, String code, GlobalRegion region) {
