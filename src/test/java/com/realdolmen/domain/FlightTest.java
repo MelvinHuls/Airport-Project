@@ -1,19 +1,23 @@
 package com.realdolmen.domain;
 
-import javax.persistence.EntityManager;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class FlightTest extends JpaPersistenceTest {
 
+	private Flight flight;
+
+	@Before
+	public void setUp() {
+		flight = new Flight();
+	}
+
 	@Test
 	public void makingAndRetrievingFlight() throws Exception {
-		Flight flight = new Flight();
-		assertNotNull(flight);
-		EntityManager em = entityManager();
-		em.persist(flight);
-		assertNotNull(em.find(Flight.class, flight.getId()));
+		assertNull(flight.getId());
+		entityManager().persist(flight);
+		assertNotNull(flight.getId());
 	}
 }
