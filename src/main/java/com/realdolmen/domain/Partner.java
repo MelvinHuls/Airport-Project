@@ -8,12 +8,8 @@ public class Partner extends User {
 	@NotNull
 	private String company;
 
-	public Partner() {
-	}
-
-	public Partner(String company) {
+	protected Partner() {
 		super();
-		this.company = company;
 	}
 
 	public Partner(String username, String password, String email, String company) {

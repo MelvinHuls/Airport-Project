@@ -14,10 +14,13 @@ import com.realdolmen.domain.Partner;
 
 @Stateful
 @LocalBean
-//@EJB(name="java:global/RAir/PartnerService", beanInterface = SessionRemote.class, beanName="PartnerService")
+// @EJB(name="java:global/RAir/PartnerService", beanInterface =
+// SessionRemote.class, beanName="PartnerService")
 public class PartnerService implements SessionRemote {
 	private Partner partner;
-	
+
+	private Flight flight;
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -43,34 +46,54 @@ public class PartnerService implements SessionRemote {
 
 	@Override
 	public List<Flight> obtainFlights() {
-		System.err.println("obtaining flights");
-		System.out.println(partner.getCompany());
-		if(em==null){
-			System.out.println("the fricking entity manager is still empty ... sigh");
-		} else {
-			System.out.println("the em isn't empty ... alright, finally");
-		}
-		System.err.println("em should work");
-		List<Flight> flights =  em.createQuery("select f from Flight f where f.company = :company", Flight.class).setParameter("company", partner.getCompany()).getResultList();
-		System.err.println("obtained flights");
-		if(flights == null) {
-			System.err.println("flights is null");
-			return new ArrayList<Flight>();
-		} else if (flights.isEmpty()) {
-			System.err.println("flights is empty");
+		List<Flight> flights = em.createQuery("select f from Flight f where f.company = :company", Flight.class)
+				.setParameter("company", partner.getCompany()).getResultList();
+
+		if (flights == null || flights.isEmpty()) {
 			return new ArrayList<Flight>();
 		} else {
-			System.err.println("it should work");
 			return flights;
 		}
 	}
-	
+
 	@Override
 	public Flight getFlight(Long id) throws AccessRightsException {
-		Flight flight = em.createQuery("select f from Flight f where f.id = :id", Flight.class).setParameter("id", id).getSingleResult();
-		if(flight.getCompany().equals(partner.getCompany())) {
+		System.out.println(id);
+		Flight flight = em.createQuery("select f from Flight f where f.id = :id", Flight.class).setParameter("id", id)
+				.getSingleResult();
+		if (flight.getCompany().equals(partner.getCompany())) {
 			return flight;
 		}
-		throw new AccessRightsException("This flight does not belong to your company");		 
+		throw new AccessRightsException("This flight does not belong to your company");
+	}
+
+	@Override
+	public String changeFlight() throws AccessRightsException {
+		System.out.println("test");
+		System.out.println(this.flight.getId());
+		System.out.println("test");
+		if (flight.getCompany().equals(partner.getCompany())) {
+			em.merge(this.flight);
+			this.flight = null;
+			return "success";
+		}
+
+		throw new AccessRightsException("This flight does not belong to your company");
+	}
+
+	public Flight getFlight() {
+		System.out.println("test");
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		System.out.println("flightset");
+		this.flight = flight;
+	}
+	
+	public String storeFlight(Flight flight) {
+		System.out.println("flightset");
+		this.flight = flight;
+		return "edit";
 	}
 }

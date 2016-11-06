@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	@NotNull
 	private String username;
 	@NotNull
@@ -29,7 +29,7 @@ public class User {
 		this.email = email;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
