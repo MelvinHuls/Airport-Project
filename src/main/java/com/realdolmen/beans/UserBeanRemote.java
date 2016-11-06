@@ -1,4 +1,4 @@
-package com.realdolmen.service;
+package com.realdolmen.beans;
 
 import javax.ejb.Remote;
 

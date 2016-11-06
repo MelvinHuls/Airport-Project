@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Location {
-
 	@Id
 	@GeneratedValue
 	private long id;
@@ -18,6 +17,7 @@ public class Location {
 	@NotNull
 	private String code;
 	@NotNull
+	//todo: add enumeration annotation
 	private GlobalRegion region;
 
 	protected Location() {

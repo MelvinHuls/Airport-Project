@@ -8,12 +8,12 @@ import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class ClientTest extends JpaPersistenceTest {
 
-	@Test
+	/*@Test
 	public void makingAndRetrievingClient() throws Exception {
 		Client client = new Client();
 		assertNotNull(client);
 		EntityManager em = entityManager();
 		em.persist(client);
 		assertNotNull(em.find(Client.class, client.getId()));
-	}
+	}*/
 }

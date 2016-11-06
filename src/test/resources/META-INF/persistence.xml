@@ -25,6 +25,11 @@
 			haven't found an elegant way around this. -->
 		<class>com.realdolmen.test.Person</class>
 		<class>com.realdolmen.domain.User</class>
+		<class>com.realdolmen.domain.Partner</class>		
+		<class>com.realdolmen.domain.Flight</class>
+		<class>com.realdolmen.domain.Location</class>
+		<class>com.realdolmen.domain.Client</class>
+		<class>com.realdolmen.domain.Booking</class>
 		<class>com.realdolmen.domain.Partner</class>
 
 		<properties>

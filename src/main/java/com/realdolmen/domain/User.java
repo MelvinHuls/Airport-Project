@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 //@MappedSuperclass
 @Entity
 public class User {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

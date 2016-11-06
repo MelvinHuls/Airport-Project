@@ -29,7 +29,7 @@ public class Flight {
 	@NotNull
 	private Location destination;
 
-	@NotNull
+	//@NotNull  										geen constructor aanmaken zonder een field waar een notnull annotation op staat
 	private Integer flightDuration;
 
 	@NotNull

@@ -1,9 +1,11 @@
 package com.realdolmen.domain;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Partner extends User {
+	@NotNull
 	private String company;
 
 	public Partner() {

@@ -8,12 +8,12 @@ import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class PartnerTest extends JpaPersistenceTest {
 
-	@Test
+	/*@Test
 	public void makingAndRetrievingpartner() throws Exception {
 		Partner partner = new Partner();
 		assertNotNull(partner);
 		EntityManager em = entityManager();
 		em.persist(partner);
 		assertNotNull(em.find(Partner.class, partner.getId()));
-	}
+	}*/
 }

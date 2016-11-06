@@ -1,12 +1,14 @@
 <dataset>
-	<user>
-		<id>500</id>
-		<username>JohnD</username>
-		<password>dbtest</password>
-		<email>JD52@gmail.com</email>
-	</user>
+	<user DTYPE="Partner" id="200" username="JohnD" password="dbtest"
+		email="JD52@gmail.com" company="airliner" />
 
+	<location id="501" airport="Brussels airport" country="Belgium"
+		code="BE" region="2" />
+	<Location id="502" airport="New York" country="United States of America"
+		code="USA" region="3" />
 
-
-
+	<flight id="500" company="airliner" seatsEconomy="500"
+		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"
+		priceBusiness="300" priceFirstClass="500" flightDuration="50000"
+		departure_id="501" destination_id="502" />
 </dataset>

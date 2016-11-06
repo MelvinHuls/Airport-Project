@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
+
+<h:head>
+	<title>Edit A Flight</title>
+</h:head>
+
+<h:body>
+	<h1>You can edit you flight on this page</h1>
+
+	<c:set var="flight"
+		value="#{rAirBean.partnerService.getFlight(param['indexSelectedFlight'])}" />
+
+	<p:panelGrid columns="2" layout="grid">
+		<p:outputLabel value="Remaining seats in economy" />
+		<p:inputText value="#{flight.seatsEconomy}" />
+
+		<p:outputLabel value="Remaining seats in business" />
+		<p:inputText value="#{flight.seatsBusiness}" />
+
+		<p:outputLabel value="Remaining seats in first class" />
+		<p:inputText value="#{flight.seatsFirstClass}" />
+
+		<p:outputLabel value="Price of an economy seat" />
+		<p:inputText value="#{flight.priceEconomy}" />
+
+		<p:outputLabel value="Price of an business seat" />
+		<p:inputText value="#{flight.priceBusiness}" />
+
+		<p:outputLabel value="Price of an first class seat" />
+		<p:inputText value="#{flight.priceFirstClass}" />
+
+		<p:outputLabel value="Departure airport" />
+		<p:outputLabel value="#{flight.departure.airport}" />
+
+		<p:outputLabel value="Destination airport" />
+		<p:outputLabel value="#{flight.destination.airport}" />
+
+		<p:outputLabel value="Flight duration" />
+		<p:inputText value="#{flight.flightDuration}" />
+	</p:panelGrid>
+
+	<h:form>
+	</h:form>
+</h:body>
+
+</html>
