@@ -1,19 +1,23 @@
 package com.realdolmen.domain;
 
-import javax.persistence.EntityManager;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class LocationTest extends JpaPersistenceTest {
 
-	/*@Test
+	private Location location;
+
+	@Before
+	public void setUp() {
+		location = new Location();
+	}
+
+	@Test
 	public void makingAndRetrievinglocation() throws Exception {
-		Location location = new Location();
-		assertNotNull(location);
-		EntityManager em = entityManager();
-		em.persist(location);
-		assertNotNull(em.find(Location.class, location.getId()));
-	}*/
+		assertNull(location.getId());
+		entityManager().persist(location);
+		assertNotNull(location.getId());
+	}
 }

@@ -1,19 +1,23 @@
 package com.realdolmen.domain;
 
-import javax.persistence.EntityManager;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class PartnerTest extends JpaPersistenceTest {
 
-	/*@Test
+	private Partner partner;
+
+	@Before
+	public void setUp() {
+		partner = new Partner();
+	}
+
+	@Test
 	public void makingAndRetrievingpartner() throws Exception {
-		Partner partner = new Partner();
-		assertNotNull(partner);
-		EntityManager em = entityManager();
-		em.persist(partner);
-		assertNotNull(em.find(Partner.class, partner.getId()));
-	}*/
+		assertNull(partner.getId());
+		entityManager().persist(partner);
+		assertNotNull(partner.getId());
+	}
 }

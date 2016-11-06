@@ -1,19 +1,23 @@
 package com.realdolmen.domain;
 
-import javax.persistence.EntityManager;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class EmployeeTest extends JpaPersistenceTest {
 
-	/*@Test
+	private Employee employee;
+
+	@Before
+	public void setUp() {
+		employee = new Employee();
+	}
+
+	@Test
 	public void makingAndRetrievingemployee() throws Exception {
-		Employee employee = new Employee();
-		assertNotNull(employee);
-		EntityManager em = entityManager();
-		em.persist(employee);
-		assertNotNull(em.find(Employee.class, employee.getId()));
-	}*/
+		assertNull(employee.getId());
+		entityManager().persist(employee);
+		assertNotNull(employee.getId());
+	}
 }
