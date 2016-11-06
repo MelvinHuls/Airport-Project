@@ -22,6 +22,10 @@
 			<from-outcome>success</from-outcome>
 			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>overviewFlights</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
@@ -29,6 +33,22 @@
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
 			<to-view-id>editFlight</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>add</from-outcome>
+			<to-view-id>addFlight</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/addFlight.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>overviewFlights</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

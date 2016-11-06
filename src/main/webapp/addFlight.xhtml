@@ -8,11 +8,11 @@
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
 <h:head>
-	<title>Edit A Flight</title>
+	<title>Add A Flight</title>
 </h:head>
 
 <h:body>
-	<h1>You can edit you flight on this page</h1>
+	<h1>You can make a new flight on this page</h1>
 
 	<h:form>
 		<p:panelGrid columns="2" layout="grid">
@@ -35,16 +35,31 @@
 			<p:inputText value="#{rAirBean.partnerService.flight.priceFirstClass}" />
 
 			<p:outputLabel value="Departure airport" />
+			<h:panelGroup>
+			<p:selectOneMenu value="#{rAirBean.partnerService.flight.departure.country}">
+                <p:ajax update="airport" />
+                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+            </p:selectOneMenu>
+            
+            <p:selectOneMenu id="airport" value="#{rAirBean.partnerService.flight.departure.airport}">
+                <f:selectItem itemLabel="Select Airport" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{rAirBean.partnerService.getAirportsCountry(country)}" />
+            </p:selectOneMenu>
+            
 			<p:outputLabel value="#{rAirBean.partnerService.flight.departure.airport}" />
+			</h:panelGroup>
 
 			<p:outputLabel value="Destination airport" />
+			<h:panelGroup>
 			<p:outputLabel value="#{rAirBean.partnerService.flight.destination.airport}" />
+			</h:panelGroup>
 
 			<p:outputLabel value="Flight duration" />
 			<p:inputText value="#{rAirBean.partnerService.flight.flightDuration}" />
 		</p:panelGrid>
 		
-		<p:commandButton value="Save changes" action="#{rAirBean.partnerService.changeFlight()}"/>		
+		<p:commandButton value="Add flight" action="#{rAirBean.partnerService.addFlight()}"/>		
 		<p:commandButton value="Return" action="return"/>
 		
 	</h:form>

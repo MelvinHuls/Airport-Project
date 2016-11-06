@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 
 import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Flight;
+import com.realdolmen.domain.GlobalRegion;
+import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
 
 @Stateful
@@ -69,9 +71,6 @@ public class PartnerService implements SessionRemote {
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
-		System.out.println("test");
-		System.out.println(this.flight.getId());
-		System.out.println("test");
 		if (flight.getCompany().equals(partner.getCompany())) {
 			em.merge(this.flight);
 			this.flight = null;
@@ -82,18 +81,45 @@ public class PartnerService implements SessionRemote {
 	}
 
 	public Flight getFlight() {
-		System.out.println("test");
 		return flight;
 	}
 
 	public void setFlight(Flight flight) {
-		System.out.println("flightset");
 		this.flight = flight;
 	}
-	
+
 	public String storeFlight(Flight flight) {
-		System.out.println("flightset");
 		this.flight = flight;
 		return "edit";
+	}
+
+	public String newFlight() {
+		this.flight = new Flight();
+		flight.setDeparture(new Location());
+		flight.setDestination(new Location());
+		System.out.println("new flight");
+		return "add";
+	}
+
+	public String addFlight() {
+		System.out.println("adding flight");
+		if (this.flight == null) {
+			System.out.println("the flight is null");
+
+			return "failed";
+		}
+		System.out.println("flight:  " + flight.getCompany() + "  " + flight.getFlightDuration() + "  " + flight.getNumberOfSeats() + "  " + flight.getSeatsBusiness() + "  " + flight.getSeatsEconomy());
+		System.out.println(flight.getPriceFirstClass() + "  " + flight.getPriceBusiness());
+		flight.setCompany(partner.getCompany());
+		em.persist(this.flight);
+		return "success";
+	}
+	
+	public List<String> getCountries() {
+		return em.createQuery("select distinct c.country from Location c", String.class).getResultList();
+	}
+	
+	public List<String> getAirportsCountry(String country) {
+		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class).setParameter("country", country).getResultList();
 	}
 }

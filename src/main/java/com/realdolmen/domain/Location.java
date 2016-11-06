@@ -20,7 +20,7 @@ public class Location {
 	//todo: add enumeration annotation
 	private GlobalRegion region;
 
-	protected Location() {
+	public Location() {
 	}
 
 	public Location(String airport, String country, String code, GlobalRegion region) {

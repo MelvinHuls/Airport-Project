@@ -36,10 +36,16 @@
 
 		<p:column>
 			<h:form>
-				<p:commandButton icon="ui-icon-search" action="#{rAirBean.partnerService.storeFlight(flight)}" />
+				<p:commandButton icon="ui-icon-search"
+					action="#{rAirBean.partnerService.storeFlight(flight)}" />
 			</h:form>
 		</p:column>
 	</p:dataTable>
+
+	<h:form>
+		<p:commandButton icon="ui-icon-search"
+			action="#{rAirBean.partnerService.newFlight()}" />
+	</h:form>
 
 </h:body>
 

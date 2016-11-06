@@ -35,7 +35,7 @@ public class Flight {
 	@NotNull
 	private String company;
 
-	protected Flight() {
+	public Flight() {
 	}
 
 	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
