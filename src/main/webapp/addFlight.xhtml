@@ -37,22 +37,29 @@
 			<p:outputLabel value="Departure airport" />
 			<h:panelGroup>
 			<p:selectOneMenu value="#{rAirBean.partnerService.flight.departure.country}">
-                <p:ajax update="airport" />
+                <p:ajax event="change" update="airportdep" />
                 <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
             </p:selectOneMenu>
             
-            <p:selectOneMenu id="airport" value="#{rAirBean.partnerService.flight.departure.airport}">
+            <p:selectOneMenu id="airportdep" value="#{rAirBean.partnerService.flight.departure.airport}">
                 <f:selectItem itemLabel="Select Airport" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{rAirBean.partnerService.getAirportsCountry(country)}" />
+                <f:selectItems value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.departure.country)}" />
             </p:selectOneMenu>
-            
-			<p:outputLabel value="#{rAirBean.partnerService.flight.departure.airport}" />
 			</h:panelGroup>
 
 			<p:outputLabel value="Destination airport" />
 			<h:panelGroup>
-			<p:outputLabel value="#{rAirBean.partnerService.flight.destination.airport}" />
+			<p:selectOneMenu value="#{rAirBean.partnerService.flight.destination.country}">
+                <p:ajax event="change" update="airportdest" />
+                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+            </p:selectOneMenu>
+            
+            <p:selectOneMenu id="airportdest" value="#{rAirBean.partnerService.flight.destination.airport}">
+                <f:selectItem itemLabel="Select Airport" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.destination.country)}" />
+            </p:selectOneMenu>
 			</h:panelGroup>
 
 			<p:outputLabel value="Flight duration" />
@@ -60,7 +67,7 @@
 		</p:panelGrid>
 		
 		<p:commandButton value="Add flight" action="#{rAirBean.partnerService.addFlight()}"/>		
-		<p:commandButton value="Return" action="return"/>
+		<p:commandButton value="Return" action="return" /> <!-- to do: somehow doesn't want to work -->
 		
 	</h:form>
 </h:body>

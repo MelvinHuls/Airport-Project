@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14782020793410" configfile="/project-exercise-1/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="editFlight.xhtml" id="pf147845316793024" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf147845316793025 pf147846204472530" path="/editFlight.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="overviewFlights" id="pf147845316793026" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" inlinks="pf147845316793025 pf147846204472530 pf147846227897833 pf147846227897834" path="overviewFlights"/>
+  <nodes xsi:type="pageflow:PFPage" name="editFlight.xhtml" id="pf147845316793024" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf147845316793025 pf147846204472530" path="/editFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewFlights" id="pf147845316793026" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" inlinks="pf147845316793025 pf147846204472530 pf147846227897833 pf147846227897834" path="overviewFlights"/>
   <nodes xsi:type="pageflow:PFPage" name="overviewFlights.xhtml" id="pf147845322461527" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf147845322461528 pf147846219784431" path="/overviewFlights.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="editFlight" id="pf147845322461529" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf147845322461528" path="editFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="editFlight" id="pf147845322461529" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf147845322461528" path="editFlight"/>
   <nodes xsi:type="pageflow:PFPage" name="addFlight" id="pf147846219784432" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf147846219784431" path="addFlight"/>
-  <nodes xsi:type="pageflow:PFPage" name="ediFlight.xhtml" id="pf147846227897835" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf147846227897833 pf147846227897834" path="/addFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ediFlight.xhtml" id="pf147846227897835" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf147846227897833 pf147846227897834" path="/addFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Flight.xhtml" id="pf14785095407750" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14785095407751 pf14785095407752" path="/overviewLocations.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addLocations" id="pf14785095407753" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" inlinks="pf14785095407751" path="addLocations"/>
+  <nodes xsi:type="pageflow:PFPage" name="editLocation" id="pf14785095407754" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14785095407752" path="editLocation"/>
   <links id="pf147845316793025" target="pf147845316793026" source="pf147845316793024" outcome="success"/>
   <links id="pf147845322461528" target="pf147845322461529" source="pf147845322461527" outcome="edit"/>
   <links id="pf147846204472530" target="pf147845316793026" source="pf147845316793024" outcome="return"/>
   <links id="pf147846219784431" target="pf147846219784432" source="pf147845322461527" outcome="add"/>
   <links id="pf147846227897833" target="pf147845316793026" source="pf147846227897835" outcome="success"/>
   <links id="pf147846227897834" target="pf147845316793026" source="pf147846227897835" outcome="return"/>
+  <links id="pf14785095407751" target="pf14785095407753" source="pf14785095407750" outcome="add"/>
+  <links id="pf14785095407752" target="pf14785095407754" source="pf14785095407750" outcome="edit"/>
 </pageflow:Pageflow>

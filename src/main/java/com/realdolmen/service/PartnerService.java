@@ -71,6 +71,9 @@ public class PartnerService implements SessionRemote {
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
+		flight.setDeparture(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDeparture().getCountry()).setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
+		flight.setDestination(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDestination().getCountry()).setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
+		
 		if (flight.getCompany().equals(partner.getCompany())) {
 			em.merge(this.flight);
 			this.flight = null;
@@ -108,9 +111,11 @@ public class PartnerService implements SessionRemote {
 
 			return "failed";
 		}
-		System.out.println("flight:  " + flight.getCompany() + "  " + flight.getFlightDuration() + "  " + flight.getNumberOfSeats() + "  " + flight.getSeatsBusiness() + "  " + flight.getSeatsEconomy());
-		System.out.println(flight.getPriceFirstClass() + "  " + flight.getPriceBusiness());
+		
+		flight.setDeparture(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDeparture().getCountry()).setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
+		flight.setDestination(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDestination().getCountry()).setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
 		flight.setCompany(partner.getCompany());
+		
 		em.persist(this.flight);
 		return "success";
 	}

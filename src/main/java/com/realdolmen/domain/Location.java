@@ -1,5 +1,8 @@
 package com.realdolmen.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +22,8 @@ public class Location {
 	@NotNull
 	//todo: add enumeration annotation
 	private GlobalRegion region;
+	
+	private String regionName;
 
 	public Location() {
 	}
@@ -57,13 +62,37 @@ public class Location {
 	public GlobalRegion getRegion() {
 		return region;
 	}
+	
+	public String getRegionName() {
+		return region.toString();
+	}
 
 	public void setRegion(GlobalRegion region) {
 		this.region = region;
+	}
+	
+	public void setRegion(String region) {		
+		this.region = GlobalRegion.valueOf(region);
+	}
+	
+	//convert regionName to region enum
+	public void setRegion() {		
+		this.region = GlobalRegion.valueOf(regionName);
 	}
 
 	public long getId() {
 		return id;
 	}
+	
+	public List<String> getRegions() {
+		return Arrays.asList(GlobalRegion.values().toString());
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+	
+	
+	
 
 }

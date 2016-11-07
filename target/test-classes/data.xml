@@ -1,6 +1,12 @@
 <dataset>
 	<user DTYPE="Partner" id="200" username="JohnD" password="dbtest"
 		email="JD52@gmail.com" company="airliner" />
+	
+	<user DTYPE="Partner" id="201" username="p" password="p"
+		email="AA31@gmail.com" company="airliner" />
+		
+		<user DTYPE="Employee" id="202" username="e" password="e"
+		email="BB43@gmail.com" company="airliner" />
 
 	<location id="501" airport="Brussels airport" country="Belgium"
 		code="BE" region="2" />

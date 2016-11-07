@@ -50,7 +50,7 @@ public class Flight {
 
 	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
 			BigDecimal priceEconomy, BigDecimal priceBusiness, BigDecimal priceFirstClass,
-			TravellingClass travellingClass, Integer flightDuration, Location departure, Location destination) {
+			/*TravellingClass travellingClass,*/ Integer flightDuration, Location departure, Location destination) {
 		this.company = company;
 		this.seatsEconomy = seatsEconomy;
 		this.seatsBusiness = seatsBusiness;

@@ -51,4 +51,16 @@
 			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/overviewLocations.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>editLocation</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>add</from-outcome>
+			<to-view-id>addLocations</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

@@ -1,5 +1,6 @@
 package com.realdolmen.beans;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Client;
 import com.realdolmen.domain.Employee;
+import com.realdolmen.domain.GlobalRegion;
 import com.realdolmen.domain.Partner;
 import com.realdolmen.domain.User;
 import com.realdolmen.service.ClientService;
@@ -104,5 +106,7 @@ public class RAirBean {
 		return employeeService;
 	}
 	
-	
+	public List<String> getRegions() {
+		return Arrays.asList(GlobalRegion.values().toString());
+	}	
 }

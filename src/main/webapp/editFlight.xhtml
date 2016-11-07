@@ -23,7 +23,8 @@
 			<p:inputText value="#{rAirBean.partnerService.flight.seatsBusiness}" />
 
 			<p:outputLabel value="Remaining seats in first class" />
-			<p:inputText value="#{rAirBean.partnerService.flight.seatsFirstClass}" />
+			<p:inputText
+				value="#{rAirBean.partnerService.flight.seatsFirstClass}" />
 
 			<p:outputLabel value="Price of an economy seat" />
 			<p:inputText value="#{rAirBean.partnerService.flight.priceEconomy}" />
@@ -32,21 +33,55 @@
 			<p:inputText value="#{rAirBean.partnerService.flight.priceBusiness}" />
 
 			<p:outputLabel value="Price of an first class seat" />
-			<p:inputText value="#{rAirBean.partnerService.flight.priceFirstClass}" />
+			<p:inputText
+				value="#{rAirBean.partnerService.flight.priceFirstClass}" />
 
 			<p:outputLabel value="Departure airport" />
-			<p:outputLabel value="#{rAirBean.partnerService.flight.departure.airport}" />
+			<h:panelGroup>
+				<p:selectOneMenu
+					value="#{rAirBean.partnerService.flight.departure.country}">
+					<p:ajax event="change" update="airportdep" />
+					<f:selectItem itemLabel="Select Country" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+				</p:selectOneMenu>
+
+				<p:selectOneMenu id="airportdep"
+					value="#{rAirBean.partnerService.flight.departure.airport}">
+					<f:selectItem itemLabel="Select Airport" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems
+						value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.departure.country)}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
 
 			<p:outputLabel value="Destination airport" />
-			<p:outputLabel value="#{rAirBean.partnerService.flight.destination.airport}" />
+			<h:panelGroup>
+				<p:selectOneMenu
+					value="#{rAirBean.partnerService.flight.destination.country}">
+					<p:ajax event="change" update="airportdest" />
+					<f:selectItem itemLabel="Select Country" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+				</p:selectOneMenu>
+
+				<p:selectOneMenu id="airportdest"
+					value="#{rAirBean.partnerService.flight.destination.airport}">
+					<f:selectItem itemLabel="Select Airport" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems
+						value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.destination.country)}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
 
 			<p:outputLabel value="Flight duration" />
 			<p:inputText value="#{rAirBean.partnerService.flight.flightDuration}" />
 		</p:panelGrid>
-		
-		<p:commandButton value="Save changes" action="#{rAirBean.partnerService.changeFlight()}"/>		
-		<p:commandButton value="Return" action="return"/>
-		
+
+		<p:commandButton value="Save changes"
+			action="#{rAirBean.partnerService.changeFlight()}" />
+		<p:commandButton value="Return" action="return" />
+
 	</h:form>
 </h:body>
 
