@@ -127,4 +127,9 @@ public class PartnerService implements SessionRemote {
 	public List<String> getAirportsCountry(String country) {
 		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class).setParameter("country", country).getResultList();
 	}
+	
+	public String deleteFlight() {
+		em.remove(em.find(Flight.class, flight.getId()));
+		return "deleted";
+	}
 }

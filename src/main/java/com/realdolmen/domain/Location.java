@@ -1,5 +1,6 @@
 package com.realdolmen.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class Location {
 	private String code;
 	@NotNull
 	//todo: add enumeration annotation
-	private GlobalRegion region;
+	private GlobalRegion region; 
 	
-	private String regionName;
+	private String regionname;
 
 	public Location() {
 	}
@@ -33,6 +34,7 @@ public class Location {
 		this.country = country;
 		this.code = code;
 		this.region = region;
+		//this.regionName = region.toString();
 	}
 
 	public String getAirport() {
@@ -63,7 +65,7 @@ public class Location {
 		return region;
 	}
 	
-	public String getRegionName() {
+	public String getNameRegion() {
 		return region.toString();
 	}
 
@@ -77,7 +79,7 @@ public class Location {
 	
 	//convert regionName to region enum
 	public void setRegion() {		
-		this.region = GlobalRegion.valueOf(regionName);
+		this.region = GlobalRegion.valueOf(regionname);
 	}
 
 	public long getId() {
@@ -85,11 +87,21 @@ public class Location {
 	}
 	
 	public List<String> getRegions() {
-		return Arrays.asList(GlobalRegion.values().toString());
+		GlobalRegion[] regions = GlobalRegion.values();
+		List<String> regionNames = new ArrayList<String>();
+
+		for(int i =0; i < regions.length; i++){
+			regionNames.add(regions[i].toString());
+		}
+		return regionNames;
 	}
 
-	public void setRegionName(String regionName) {
-		this.regionName = regionName;
+	public String getRegionname() {
+		return regionname;
+	}
+
+	public void setRegionname(String regionname) {
+		this.regionname = regionname;
 	}
 	
 	

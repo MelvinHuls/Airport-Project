@@ -26,6 +26,10 @@
 			<from-outcome>return</from-outcome>
 			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleted</from-outcome>
+			<to-view-id>overviewFlights</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
@@ -60,7 +64,35 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>add</from-outcome>
-			<to-view-id>addLocations</to-view-id>
+			<to-view-id>addLocation</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/editLocation.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>deleted</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/addLocation.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

@@ -63,4 +63,23 @@ public class EmployeeService implements SessionRemote {
 		this.location = null;
 		return "success";
 	}
+	
+	public String newLocation() {
+		this.location = new Location();
+		return "add";
+	}
+	
+	public String addLocation() {
+		this.location.setRegion();
+		
+		em.persist(this.location);
+		this.location = null;
+		
+		return "success";
+	}
+	
+	public String deleteLocation() {
+		em.remove(em.find(Location.class, location.getId()));
+		return "deleted";
+	}
 }

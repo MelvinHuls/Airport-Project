@@ -26,7 +26,7 @@
 			<p:inputText value="#{rAirBean.employeeService.location.code}" />
 
 			<p:outputLabel value="Global region" />
-			<p:selectOneMenu value="#{rAirBean.employeeService.location.regionName}">
+			<p:selectOneMenu value="#{rAirBean.employeeService.location.regionname}">
 				<f:selectItem itemLabel="Select Region" itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{rAirBean.employeeService.location.getRegions()}" />
@@ -35,6 +35,8 @@
 		
 		<p:commandButton value="Save changes"
 			action="#{rAirBean.employeeService.changeLocation()}" />
+		<p:commandButton value="Return" action="return" />
+		<p:commandButton value="Delete" action="#{rAirBean.employeeService.deleteLocation()}" />
 	</h:form>
 </h:body>
 </html>
