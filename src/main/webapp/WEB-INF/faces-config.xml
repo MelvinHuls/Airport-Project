@@ -31,7 +31,7 @@
 			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/overviewFlights.xhtml</from-view-id>
 		<navigation-case>
@@ -43,7 +43,7 @@
 			<to-view-id>addFlight</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/addFlight.xhtml</from-view-id>
 		<navigation-case>
@@ -55,7 +55,7 @@
 			<to-view-id>overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/overviewLocations.xhtml</from-view-id>
 		<navigation-case>
@@ -67,7 +67,7 @@
 			<to-view-id>addLocation</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/editLocation.xhtml</from-view-id>
 		<navigation-case>
@@ -83,7 +83,7 @@
 			<to-view-id>overviewLocations</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/addLocation.xhtml</from-view-id>
 		<navigation-case>
@@ -93,6 +93,14 @@
 		<navigation-case>
 			<from-outcome>return</from-outcome>
 			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/error.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goHome</from-outcome>
+			<to-view-id>/overviewLocations.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

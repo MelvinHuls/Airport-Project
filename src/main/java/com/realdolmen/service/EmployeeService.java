@@ -7,9 +7,9 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Employee;
 import com.realdolmen.domain.Location;
+import com.realdolmen.repository.EmployeeRepository;
 
 //@EJB(name="java:global/RAir/EmployeeService", beanInterface = SessionRemote.class, beanName="EmployeeService")
 @Stateful
@@ -21,6 +21,24 @@ public class EmployeeService implements SessionRemote {
 
 	@PersistenceContext
 	EntityManager em;
+
+	private EmployeeRepository eRepo;
+
+	public void create(Employee employee) {
+		eRepo.create(employee);
+	}
+
+	public Employee read(Long id) {
+		return eRepo.read(id);
+	}
+
+	public void update(Employee employee) {
+		eRepo.update(employee);
+	}
+
+	public void delete(Employee employee) {
+		eRepo.delete(employee);
+	}
 
 	public EmployeeService() {
 		super();
@@ -63,21 +81,21 @@ public class EmployeeService implements SessionRemote {
 		this.location = null;
 		return "success";
 	}
-	
+
 	public String newLocation() {
 		this.location = new Location();
 		return "add";
 	}
-	
+
 	public String addLocation() {
 		this.location.setRegion();
-		
+
 		em.persist(this.location);
 		this.location = null;
-		
+
 		return "success";
 	}
-	
+
 	public String deleteLocation() {
 		em.remove(em.find(Location.class, location.getId()));
 		return "deleted";
