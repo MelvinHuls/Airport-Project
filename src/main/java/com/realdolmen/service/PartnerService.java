@@ -18,7 +18,7 @@ import com.realdolmen.repository.PartnerRepository;
 @LocalBean
 // @EJB(name="java:global/RAir/PartnerService", beanInterface =
 // SessionRemote.class, beanName="PartnerService")
-public class PartnerService implements SessionRemote {
+public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	private Partner partner;
 
 	private Flight flight;
@@ -28,20 +28,29 @@ public class PartnerService implements SessionRemote {
 
 	private PartnerRepository pRepo;
 
+	@Override
 	public void create(Partner partner) {
 		pRepo.create(partner);
 	}
 
-	public Partner read(Long id) {
+	@Override
+	public Partner findById(Long id) {
 		return pRepo.read(id);
 	}
 
+	@Override
 	public void update(Partner partner) {
 		pRepo.update(partner);
 	}
 
+	@Override
 	public void delete(Partner partner) {
 		pRepo.delete(partner);
+	}
+
+	@Override
+	public List<Partner> findAll() {
+		return pRepo.findAll();
 	}
 
 	protected PartnerService() {
@@ -66,47 +75,18 @@ public class PartnerService implements SessionRemote {
 
 	@Override
 	public List<Flight> obtainFlights() {
-		List<Flight> flights = em.createQuery("select f from Flight f where f.company = :company", Flight.class)
-				.setParameter("company", partner.getCompany()).getResultList();
-
-		if (flights == null || flights.isEmpty()) {
-			return new ArrayList<Flight>();
-		} else {
-			return flights;
-		}
+		return pRepo.getFlightsByCompany(partner.getCompany(), partner);
 	}
 
 	@Override
 	public Flight getFlight(Long id) throws AccessRightsException {
-		System.out.println(id);
-		Flight flight = em.createQuery("select f from Flight f where f.id = :id", Flight.class).setParameter("id", id)
-				.getSingleResult();
-		if (flight.getCompany().equals(partner.getCompany())) {
-			return flight;
-		}
-		throw new AccessRightsException("This flight does not belong to your company");
+		return pRepo.getFlight(partner, id);
 	}
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
-		flight.setDeparture(em
-				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
-						Location.class)
-				.setParameter("country", flight.getDeparture().getCountry())
-				.setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
-		flight.setDestination(em
-				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
-						Location.class)
-				.setParameter("country", flight.getDestination().getCountry())
-				.setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
 
-		if (flight.getCompany().equals(partner.getCompany())) {
-			em.merge(this.flight);
-			this.flight = null;
-			return "success";
-		}
-
-		throw new AccessRightsException("This flight does not belong to your company");
+		return pRepo.changeFlight(flight, partner);
 	}
 
 	public Flight getFlight() {

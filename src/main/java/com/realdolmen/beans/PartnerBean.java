@@ -15,19 +15,19 @@ import com.realdolmen.domain.Flight;
 public class PartnerBean {
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	public List<Flight> obtainFlights(String company) {
 		System.err.println("obtaining flights");
 		System.out.println(company);
-		if(em==null){
+		if (em == null) {
 			System.out.println("the fricking entity manager is still empty ... sigh");
 		} else {
 			System.out.println("the em isn't empty ... alright, finally");
 		}
 		System.err.println("em should work");
-		List<Flight> flights =  em.createQuery("select f from Flight f", Flight.class).getResultList();
+		List<Flight> flights = em.createQuery("select f from Flight f", Flight.class).getResultList();
 		System.err.println("obtained flights");
-		if(flights == null) {
+		if (flights == null) {
 			System.err.println("flights is null");
 			return new ArrayList<Flight>();
 		} else if (flights.isEmpty()) {
@@ -38,5 +38,5 @@ public class PartnerBean {
 			return flights;
 		}
 	}
-	
+
 }
