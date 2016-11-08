@@ -1,7 +1,11 @@
 package com.realdolmen.repository;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Booking;
@@ -26,5 +30,13 @@ public class BookingRepository {
 
 	public void delete(Booking o) {
 		em.remove(o);
+	}
+
+	public List<Booking> findAll() {
+		try {
+			return em.createNamedQuery("SELECT b FROM Booking b", Booking.class).getResultList();
+		} catch (NoResultException e) {
+			return Collections.emptyList();
+		}
 	}
 }

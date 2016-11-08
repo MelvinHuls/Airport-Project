@@ -168,7 +168,7 @@
 			<version>1.0.3</version> <!-- Version used by Wildfly 10.0.0.Final -->
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
@@ -178,6 +178,11 @@
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>flick</artifactId>
 			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
 		</dependency>
 	</dependencies>
 
@@ -238,6 +243,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		
+
 	</build>
 </project>

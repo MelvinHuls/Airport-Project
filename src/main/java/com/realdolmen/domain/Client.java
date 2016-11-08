@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Client extends User {
-	protected Client() {
+	public Client() {
 		super();
 	}
 

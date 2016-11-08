@@ -14,7 +14,7 @@ import com.realdolmen.repository.EmployeeRepository;
 //@EJB(name="java:global/RAir/EmployeeService", beanInterface = SessionRemote.class, beanName="EmployeeService")
 @Stateful
 @LocalBean
-public class EmployeeService implements SessionRemote {
+public class EmployeeService implements SessionRemote, AbstractService<Employee> {
 	private Employee employee;
 
 	private Location location;
@@ -24,20 +24,29 @@ public class EmployeeService implements SessionRemote {
 
 	private EmployeeRepository eRepo;
 
+	@Override
 	public void create(Employee employee) {
 		eRepo.create(employee);
 	}
 
-	public Employee read(Long id) {
+	@Override
+	public Employee findById(Long id) {
 		return eRepo.read(id);
 	}
 
+	@Override
 	public void update(Employee employee) {
 		eRepo.update(employee);
 	}
 
+	@Override
 	public void delete(Employee employee) {
 		eRepo.delete(employee);
+	}
+
+	@Override
+	public List<Employee> findAll() {
+		return eRepo.findAll();
 	}
 
 	public EmployeeService() {
