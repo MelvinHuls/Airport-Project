@@ -1,18 +1,21 @@
 package com.realdolmen.service;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
 import com.realdolmen.domain.Client;
-import com.realdolmen.repository.ClientRepository;
+import com.realdolmen.domain.Flight;
+import com.realdolmen.repository.ClientRepository2;
 
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
 @Stateful
 @LocalBean
-public class ClientService implements SessionRemote {
+public class ClientService2 implements SessionRemote {
 	private Client client;
 
-	private ClientRepository cRepo;
+	private ClientRepository2 cRepo;
 
 	public void create(Client client) {
 		cRepo.create(client);
@@ -30,11 +33,11 @@ public class ClientService implements SessionRemote {
 		cRepo.delete(client);
 	}
 
-	public ClientService() {
+	public ClientService2() {
 		super();
 	}
 
-	public ClientService(Client client) {
+	public ClientService2(Client client) {
 		super();
 		this.client = client;
 	}
@@ -47,14 +50,7 @@ public class ClientService implements SessionRemote {
 		this.client = client;
 	}
 	
-	/*@Override
-	public List<Flight> obtainFlights() {
-		List<Flight> flights = em.createQuery("select f from Flight f", Flight.class).getResultList();
-
-		if (flights == null || flights.isEmpty()) {
-			return new ArrayList<Flight>();
-		} else {
-			return flights;
-		}
-	}*/
+	public List<Flight> getFlights() {
+		return cRepo.getFlights();
+	}
 }
