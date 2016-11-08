@@ -97,6 +97,7 @@
 	</navigation-rule>
 
 	<navigation-rule>
+<<<<<<< HEAD
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>searchFlight</from-outcome>
@@ -117,6 +118,12 @@
 		<navigation-case>
 			<from-outcome>partnerLoggedIn</from-outcome>
 			<to-view-id>overviewFlights</to-view-id>
+=======
+		<from-view-id>/error.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goHome</from-outcome>
+			<to-view-id>/overviewLocations.xhtml</to-view-id>
+>>>>>>> 54e70392f15e97c6a881acae66b2f7574c3febb4
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

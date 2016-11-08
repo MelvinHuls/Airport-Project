@@ -15,7 +15,7 @@ import com.mysql.fabric.xmlrpc.base.Array;
 public class Location {
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	@NotNull
 	private String airport;
 	@NotNull
@@ -23,8 +23,8 @@ public class Location {
 	@NotNull
 	private String code;
 	@NotNull
-	//todo: add enumeration annotation
-	private GlobalRegion region; 
+	// todo: add enumeration annotation
+	private GlobalRegion region;
 
 	public Location() {
 	}
@@ -34,7 +34,7 @@ public class Location {
 		this.country = country;
 		this.code = code;
 		this.region = region;
-		//this.regionName = region.toString();
+		// this.regionName = region.toString();
 	}
 
 	public String getAirport() {
@@ -68,24 +68,16 @@ public class Location {
 	public void setRegion(GlobalRegion region) {
 		this.region = region;
 	}
-	
-	public void setRegion(String region) {		
+
+	public void setRegion(String region) {
 		this.region = GlobalRegion.valueOf(region);
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
 	public List<GlobalRegion> getRegions() {
-		/*GlobalRegion[] regions = GlobalRegion.values();
-		List<String> regionNames = new ArrayList<String>();
-
-		for(int i =0; i < regions.length; i++){
-			regionNames.add(regions[i].toString());
-		}
-		return regionNames;*/
-		System.out.println("test");
 		return Arrays.asList(GlobalRegion.values());
 	}
 }

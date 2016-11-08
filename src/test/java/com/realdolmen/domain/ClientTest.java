@@ -2,7 +2,6 @@ package com.realdolmen.domain;
 
 import javax.persistence.EntityManager;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;

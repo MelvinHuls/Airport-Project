@@ -9,15 +9,34 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Client;
+
 import com.realdolmen.domain.Flight;
+
+import com.realdolmen.repository.ClientRepository;
+
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
 @Stateful
 @LocalBean
-public class ClientService implements SessionRemote{
+public class ClientService implements SessionRemote {
 	private Client client;
 
-	@PersistenceContext
-	private EntityManager em;
+	private ClientRepository cRepo;
+
+	public void create(Client client) {
+		cRepo.create(client);
+	}
+
+	public Client read(Long id) {
+		return cRepo.read(id);
+	}
+
+	public void update(Client client) {
+		cRepo.update(client);
+	}
+
+	public void delete(Client client) {
+		cRepo.delete(client);
+	}
 
 	public ClientService() {
 		super();
@@ -36,7 +55,7 @@ public class ClientService implements SessionRemote{
 		this.client = client;
 	}
 	
-	@Override
+	/*@Override
 	public List<Flight> obtainFlights() {
 		List<Flight> flights = em.createQuery("select f from Flight f", Flight.class).getResultList();
 
@@ -45,5 +64,5 @@ public class ClientService implements SessionRemote{
 		} else {
 			return flights;
 		}
-	}
+	}*/
 }

@@ -10,9 +10,9 @@ import javax.persistence.PersistenceContext;
 
 import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Flight;
-import com.realdolmen.domain.GlobalRegion;
 import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
+import com.realdolmen.repository.PartnerRepository;
 
 @Stateful
 @LocalBean
@@ -25,6 +25,24 @@ public class PartnerService implements SessionRemote {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	private PartnerRepository pRepo;
+
+	public void create(Partner partner) {
+		pRepo.create(partner);
+	}
+
+	public Partner read(Long id) {
+		return pRepo.read(id);
+	}
+
+	public void update(Partner partner) {
+		pRepo.update(partner);
+	}
+
+	public void delete(Partner partner) {
+		pRepo.delete(partner);
+	}
 
 	protected PartnerService() {
 	}
@@ -71,9 +89,17 @@ public class PartnerService implements SessionRemote {
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
-		flight.setDeparture(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDeparture().getCountry()).setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
-		flight.setDestination(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDestination().getCountry()).setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
-		
+		flight.setDeparture(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDeparture().getCountry())
+				.setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
+		flight.setDestination(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDestination().getCountry())
+				.setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
+
 		if (flight.getCompany().equals(partner.getCompany())) {
 			em.merge(this.flight);
 			this.flight = null;
@@ -111,23 +137,32 @@ public class PartnerService implements SessionRemote {
 
 			return "failed";
 		}
-		
-		flight.setDeparture(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDeparture().getCountry()).setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
-		flight.setDestination(em.createQuery("select l from Location l where l.country = :country and l.airport = :airport", Location.class).setParameter("country", flight.getDestination().getCountry()).setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
+
+		flight.setDeparture(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDeparture().getCountry())
+				.setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
+		flight.setDestination(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDestination().getCountry())
+				.setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
 		flight.setCompany(partner.getCompany());
-		
+
 		em.persist(this.flight);
 		return "success";
 	}
-	
+
 	public List<String> getCountries() {
 		return em.createQuery("select distinct c.country from Location c", String.class).getResultList();
 	}
-	
+
 	public List<String> getAirportsCountry(String country) {
-		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class).setParameter("country", country).getResultList();
+		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class)
+				.setParameter("country", country).getResultList();
 	}
-	
+
 	public String deleteFlight() {
 		em.remove(em.find(Flight.class, flight.getId()));
 		return "deleted";
