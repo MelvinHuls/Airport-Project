@@ -6,7 +6,10 @@
 		email="AA31@gmail.com" company="airliner" />
 		
 		<user DTYPE="Employee" id="202" username="e" password="e"
-		email="BB43@gmail.com" company="airliner" />
+		email="BB43@gmail.com" />
+		
+		<user DTYPE="Client" id="203" username="c" password="c"
+		email="CC38@gmail.com" />
 
 	<location id="501" airport="Brussels airport" country="Belgium"
 		code="BE" region="2" />

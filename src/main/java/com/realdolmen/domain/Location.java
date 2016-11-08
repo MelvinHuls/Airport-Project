@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 @Entity
 public class Location {
 	@Id
@@ -23,8 +25,6 @@ public class Location {
 	@NotNull
 	//todo: add enumeration annotation
 	private GlobalRegion region; 
-	
-	private String regionname;
 
 	public Location() {
 	}
@@ -64,10 +64,6 @@ public class Location {
 	public GlobalRegion getRegion() {
 		return region;
 	}
-	
-	public String getNameRegion() {
-		return region.toString();
-	}
 
 	public void setRegion(GlobalRegion region) {
 		this.region = region;
@@ -76,35 +72,20 @@ public class Location {
 	public void setRegion(String region) {		
 		this.region = GlobalRegion.valueOf(region);
 	}
-	
-	//convert regionName to region enum
-	public void setRegion() {		
-		this.region = GlobalRegion.valueOf(regionname);
-	}
 
 	public long getId() {
 		return id;
 	}
 	
-	public List<String> getRegions() {
-		GlobalRegion[] regions = GlobalRegion.values();
+	public List<GlobalRegion> getRegions() {
+		/*GlobalRegion[] regions = GlobalRegion.values();
 		List<String> regionNames = new ArrayList<String>();
 
 		for(int i =0; i < regions.length; i++){
 			regionNames.add(regions[i].toString());
 		}
-		return regionNames;
+		return regionNames;*/
+		System.out.println("test");
+		return Arrays.asList(GlobalRegion.values());
 	}
-
-	public String getRegionname() {
-		return regionname;
-	}
-
-	public void setRegionname(String regionname) {
-		this.regionname = regionname;
-	}
-	
-	
-	
-
 }

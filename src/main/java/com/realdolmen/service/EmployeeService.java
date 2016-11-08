@@ -57,7 +57,7 @@ public class EmployeeService implements SessionRemote {
 	}
 
 	public String changeLocation() {
-		this.location.setRegion();
+		//this.location.setRegion();
 
 		em.merge(this.location);
 		this.location = null;
@@ -70,7 +70,7 @@ public class EmployeeService implements SessionRemote {
 	}
 	
 	public String addLocation() {
-		this.location.setRegion();
+		//this.location.setRegion();
 		
 		em.persist(this.location);
 		this.location = null;

@@ -39,7 +39,7 @@ public class RAirBean {
 	@EJB
 	private EmployeeService employeeService;
 		
-	public void logOn(String username, String password) throws NonUniqueResultException {
+	public String logOn(String username, String password) throws NonUniqueResultException {
 		try {
 			Class<? extends User> kind = Partner.class;
 			Partner partner = (Partner) searchUser(kind, username, password);
@@ -48,28 +48,33 @@ public class RAirBean {
 				clientService.setClient(null);
 				employeeService.setEmployee(null);
 				System.out.println("partner session made");
+				return "partnerLoggedIn";
 			} else {
 				kind = Client.class;
 				Client client = (Client) searchUser(kind, username, password);
 				if (client != null) {
 					clientService.setClient(client);
-					partnerService.setPartner(partner);
+					partnerService.setPartner(null);
 					employeeService.setEmployee(null);
 					System.out.println("client session made");
+					return "clientLoggedIn";
 				} else {
 					kind = Employee.class;
 					Employee employee = (Employee) searchUser(kind, username, password);
 					if (employee != null) {
 						employeeService.setEmployee(employee);
-						partnerService.setPartner(partner);
+						partnerService.setPartner(null);
 						clientService.setClient(null);
 						System.out.println("employee session made");
+						return "employeeLoggedIn";
 					}
 				}
 			}
 		} catch (NoResultException ex) {
 			System.out.println("No user found with username " + username);
 		}
+		
+		return "failedtoLogIn";
 	}
 
 	/*public void testingFunctionality() {
