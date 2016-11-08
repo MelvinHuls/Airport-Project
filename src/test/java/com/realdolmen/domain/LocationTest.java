@@ -2,6 +2,7 @@ package com.realdolmen.domain;
 
 import org.junit.Test;
 
+import com.realdolmen.enumerations.GlobalRegion;
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class LocationTest extends JpaPersistenceTest {

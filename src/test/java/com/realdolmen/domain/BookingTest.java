@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.junit.Test;
 
+import com.realdolmen.enumerations.GlobalRegion;
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class BookingTest extends JpaPersistenceTest {

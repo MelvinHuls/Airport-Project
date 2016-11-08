@@ -2,11 +2,13 @@ package com.realdolmen.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.realdolmen.beans.FlightSearchBean;
 import com.realdolmen.domain.Client;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.repository.ClientRepository;
@@ -18,6 +20,9 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 	private Client client;
 
 	private ClientRepository cRepo;
+	
+	@EJB
+	private FlightSearchBean fsearch;
 
 	@Override
 	public void create(Client client) {
@@ -86,9 +91,5 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 			return false;
 		}
 		return true;
-	}
-	
-	public List<Flight> getFlights() {
-		return cRepo.getFlights();
 	}
 }

@@ -51,13 +51,5 @@ public class ClientRepository {
 		}
 	}
 	
-	public List<Flight> getFlights() {
-		List<Flight> flights = em.createQuery("select f from Flight f", Flight.class).getResultList();
-
-		if (flights == null || flights.isEmpty()) {
-			return new ArrayList<Flight>();
-		} else {
-			return flights;
-		}
-	}
+	
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import com.mysql.fabric.xmlrpc.base.Array;
+import com.realdolmen.enumerations.GlobalRegion;
 
 @Entity
 public class Location {
