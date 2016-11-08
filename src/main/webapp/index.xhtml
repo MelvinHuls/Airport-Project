@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
+
+<h:head>
+	<title>Welcome page!!! Feeling welcome is not an obligation but
+		a requirement</title>
+</h:head>
+
+<h:body>
+	<h1>Welcome page filler</h1>
+
+	<h:form>
+		<h3>
+			<p:inputText binding="#{name}" />
+			<p:inputText binding="#{password}" />
+		</h3>
+
+		<p:commandButton value="Log in" icon="ui-icon-check"
+			action="#{rAirBean.logOn(name.value, password.value)}" />
+
+		<p:commandButton value="Search Flight" action="searchFlight" />
+
+	</h:form>
+</h:body>
+</html>

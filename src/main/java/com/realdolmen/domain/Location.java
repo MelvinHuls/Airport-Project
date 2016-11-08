@@ -1,12 +1,15 @@
 package com.realdolmen.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 @Entity
 public class Location {
@@ -22,8 +25,6 @@ public class Location {
 	@NotNull
 	// todo: add enumeration annotation
 	private GlobalRegion region;
-
-	private String regionname;
 
 	public Location() {
 	}
@@ -64,10 +65,6 @@ public class Location {
 		return region;
 	}
 
-	public String getNameRegion() {
-		return region.toString();
-	}
-
 	public void setRegion(GlobalRegion region) {
 		this.region = region;
 	}
@@ -76,31 +73,11 @@ public class Location {
 		this.region = GlobalRegion.valueOf(region);
 	}
 
-	// convert regionName to region enum
-	public void setRegion() {
-		this.region = GlobalRegion.valueOf(regionname);
-	}
-
 	public Long getId() {
 		return id;
 	}
-
-	public List<String> getRegions() {
-		GlobalRegion[] regions = GlobalRegion.values();
-		List<String> regionNames = new ArrayList<String>();
-
-		for (int i = 0; i < regions.length; i++) {
-			regionNames.add(regions[i].toString());
-		}
-		return regionNames;
+	
+	public List<GlobalRegion> getRegions() {
+		return Arrays.asList(GlobalRegion.values());
 	}
-
-	public String getRegionname() {
-		return regionname;
-	}
-
-	public void setRegionname(String regionname) {
-		this.regionname = regionname;
-	}
-
 }

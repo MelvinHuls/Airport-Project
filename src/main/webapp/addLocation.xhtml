@@ -25,7 +25,7 @@
 			<p:inputText value="#{rAirBean.employeeService.location.code}" />
 
 			<p:outputLabel value="Global region" />
-			<p:selectOneMenu value="#{rAirBean.employeeService.location.regionname}">
+			<p:selectOneMenu value="#{rAirBean.employeeService.location.region}">
 				<f:selectItem itemLabel="Select Region" itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{rAirBean.employeeService.location.getRegions()}" />
 			</p:selectOneMenu>			

@@ -97,6 +97,30 @@
 	</navigation-rule>
 
 	<navigation-rule>
+		<from-view-id>/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>searchFlight</from-outcome>
+			<to-view-id>searchFlight</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failedtoLogIn</from-outcome>
+			<to-view-id>index</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>employeeLoggedIn</from-outcome>
+			<to-view-id>overviewLocations</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>clientLoggedIn</from-outcome>
+			<to-view-id>index</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>partnerLoggedIn</from-outcome>
+			<to-view-id>overviewFlights</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/error.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>goHome</from-outcome>
