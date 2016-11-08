@@ -1,7 +1,6 @@
 package com.realdolmen.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Location {
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	@NotNull
 	private String airport;
 	@NotNull
@@ -21,9 +20,9 @@ public class Location {
 	@NotNull
 	private String code;
 	@NotNull
-	//todo: add enumeration annotation
-	private GlobalRegion region; 
-	
+	// todo: add enumeration annotation
+	private GlobalRegion region;
+
 	private String regionname;
 
 	public Location() {
@@ -34,7 +33,7 @@ public class Location {
 		this.country = country;
 		this.code = code;
 		this.region = region;
-		//this.regionName = region.toString();
+		// this.regionName = region.toString();
 	}
 
 	public String getAirport() {
@@ -64,7 +63,7 @@ public class Location {
 	public GlobalRegion getRegion() {
 		return region;
 	}
-	
+
 	public String getNameRegion() {
 		return region.toString();
 	}
@@ -72,25 +71,25 @@ public class Location {
 	public void setRegion(GlobalRegion region) {
 		this.region = region;
 	}
-	
-	public void setRegion(String region) {		
+
+	public void setRegion(String region) {
 		this.region = GlobalRegion.valueOf(region);
 	}
-	
-	//convert regionName to region enum
-	public void setRegion() {		
+
+	// convert regionName to region enum
+	public void setRegion() {
 		this.region = GlobalRegion.valueOf(regionname);
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	
+
 	public List<String> getRegions() {
 		GlobalRegion[] regions = GlobalRegion.values();
 		List<String> regionNames = new ArrayList<String>();
 
-		for(int i =0; i < regions.length; i++){
+		for (int i = 0; i < regions.length; i++) {
 			regionNames.add(regions[i].toString());
 		}
 		return regionNames;
@@ -103,8 +102,5 @@ public class Location {
 	public void setRegionname(String regionname) {
 		this.regionname = regionname;
 	}
-	
-	
-	
 
 }
