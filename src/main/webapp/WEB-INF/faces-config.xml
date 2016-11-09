@@ -20,15 +20,15 @@
 		<from-view-id>/editFlight.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>return</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>deleted</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -36,11 +36,11 @@
 		<from-view-id>/overviewFlights.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
-			<to-view-id>editFlight</to-view-id>
+			<to-view-id>/editFlight</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>add</from-outcome>
-			<to-view-id>addFlight</to-view-id>
+			<to-view-id>/addFlight</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -48,11 +48,11 @@
 		<from-view-id>/addFlight.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>return</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -60,11 +60,11 @@
 		<from-view-id>/overviewLocations.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
-			<to-view-id>editLocation</to-view-id>
+			<to-view-id>/editLocation</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>add</from-outcome>
-			<to-view-id>addLocation</to-view-id>
+			<to-view-id>/addLocation</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -72,15 +72,15 @@
 		<from-view-id>/editLocation.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>return</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>deleted</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -88,11 +88,11 @@
 		<from-view-id>/addLocation.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>return</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -100,23 +100,23 @@
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>searchFlight</from-outcome>
-			<to-view-id>searchFlight</to-view-id>
+			<to-view-id>/searchFlights</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>failedtoLogIn</from-outcome>
-			<to-view-id>index</to-view-id>
+			<to-view-id>/index</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>employeeLoggedIn</from-outcome>
-			<to-view-id>overviewLocations</to-view-id>
+			<to-view-id>/overviewLocations</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>clientLoggedIn</from-outcome>
-			<to-view-id>index</to-view-id>
+			<to-view-id>/index</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>partnerLoggedIn</from-outcome>
-			<to-view-id>overviewFlights</to-view-id>
+			<to-view-id>/overviewFlights</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -127,16 +127,12 @@
 			<to-view-id>/overviewLocations.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
-	<application>
-		<resource-bundle>
-			<base-name>ErrorMessages</base-name>
-			<var>msgs</var>
-		</resource-bundle>
-		<locale-config>
-			<default-locale>en</default-locale>
-			<supported-locale>nl</supported-locale>
-			<supported-locale>en</supported-locale>
-		</locale-config>
-	</application>
+	
+	<navigation-rule>
+		<from-view-id>/searchFlights.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>searchFlights</from-outcome>
+			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

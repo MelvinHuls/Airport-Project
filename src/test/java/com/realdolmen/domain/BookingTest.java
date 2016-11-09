@@ -1,9 +1,12 @@
 package com.realdolmen.domain;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
 import org.junit.Test;
 
+import com.realdolmen.enumerations.GlobalRegion;
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class BookingTest extends JpaPersistenceTest {
@@ -21,7 +24,7 @@ public class BookingTest extends JpaPersistenceTest {
 				GlobalRegion.North_America);
 		em.persist(departure);
 		em.persist(destination);
-		Flight flight = new Flight("Flyan Air", 25, 200, 400, departure, destination);
+		Flight flight = new Flight("Flyan Air", 25, 200, 400, new Date(2016,11,30,10,0,0), new Date(2016,11,30,23,30,0), departure, destination);
 		em.persist(flight);
 		booking = new Booking(client, flight);
 		assertNull(booking.getId());

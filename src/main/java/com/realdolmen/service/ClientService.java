@@ -2,13 +2,16 @@ package com.realdolmen.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.realdolmen.beans.FlightSearchBean;
 import com.realdolmen.domain.Client;
+import com.realdolmen.domain.Flight;
 import com.realdolmen.repository.ClientRepository;
 
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
@@ -19,6 +22,9 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 
 	@RequestScoped
 	private ClientRepository cRepo;
+	
+	@EJB
+	private FlightSearchBean fsearch;
 
 	@Override
 	public void create(Client client) {

@@ -2,6 +2,7 @@ package com.realdolmen.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
@@ -28,7 +29,8 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	@PersistenceContext
 	private EntityManager em;
 
-	@RequestScoped
+
+	@EJB
 	private PartnerRepository pRepo;
 	@RequestScoped
 	private FlightRepository fRepo;

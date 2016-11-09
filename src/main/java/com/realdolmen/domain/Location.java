@@ -2,14 +2,19 @@ package com.realdolmen.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import com.mysql.fabric.xmlrpc.base.Array;
+import com.realdolmen.enumerations.GlobalRegion;
 
 @Entity
 public class Location {
@@ -23,7 +28,7 @@ public class Location {
 	@NotNull
 	private String code;
 	@NotNull
-	// todo: add enumeration annotation
+	@Enumerated(EnumType.STRING)
 	private GlobalRegion region;
 
 	public Location() {

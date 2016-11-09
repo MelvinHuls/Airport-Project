@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.realdolmen.domain.GlobalRegion;
+import com.realdolmen.enumerations.GlobalRegion;
 
 @FacesConverter(forClass = GlobalRegion.class)
 public class GlobalRegionConverter implements Converter {

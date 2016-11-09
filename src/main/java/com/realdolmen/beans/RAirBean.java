@@ -15,9 +15,9 @@ import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Client;
 import com.realdolmen.domain.Employee;
-import com.realdolmen.domain.GlobalRegion;
 import com.realdolmen.domain.Partner;
 import com.realdolmen.domain.User;
+import com.realdolmen.enumerations.GlobalRegion;
 import com.realdolmen.service.ClientService;
 import com.realdolmen.service.EmployeeService;
 import com.realdolmen.service.PartnerService;
