@@ -1,11 +1,13 @@
 package com.realdolmen.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,9 +30,12 @@ public class Flight {
 	@ManyToOne
 	@NotNull
 	private Location destination;
-
-	//@NotNull  										geen constructor aanmaken zonder een field waar een notnull annotation op staat
-	private Integer flightDuration;
+	
+	@NotNull
+	private Date departureTime;
+	@NotNull
+	@Future
+	private Date arrivalTime;	
 
 	@NotNull
 	private String company;
@@ -38,19 +43,21 @@ public class Flight {
 	public Flight() {
 	}
 
-	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
+	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass, Date departureTime, Date arrivalTime,
 			Location departure, Location destination) {
 		this.seatsEconomy = seatsEconomy;
 		this.seatsBusiness = seatsBusiness;
 		this.seatsFirstClass = seatsFirstClass;
 		this.departure = departure;
 		this.destination = destination;
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
 		this.company = company;
 	}
 
 	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
 			BigDecimal priceEconomy, BigDecimal priceBusiness, BigDecimal priceFirstClass,
-			/*TravellingClass travellingClass,*/ Integer flightDuration, Location departure, Location destination) {
+			/*TravellingClass travellingClass,*/ Location departure, Location destination) {
 		this.company = company;
 		this.seatsEconomy = seatsEconomy;
 		this.seatsBusiness = seatsBusiness;
@@ -58,9 +65,23 @@ public class Flight {
 		this.priceEconomy = priceEconomy;
 		this.priceBusiness = priceBusiness;
 		this.priceFirstClass = priceFirstClass;
-		this.flightDuration = flightDuration;
 		this.departure = departure;
 		this.destination = destination;
+	}
+
+	public Flight(String company, Integer seatsEconomy, Integer seatsBusiness, Integer seatsFirstClass,
+			BigDecimal priceEconomy, BigDecimal priceBusiness, BigDecimal priceFirstClass, Date departureTime, Date arrivalTime, Location departure, Location destination) {
+		this.company = company;
+		this.seatsEconomy = seatsEconomy;
+		this.seatsBusiness = seatsBusiness;
+		this.seatsFirstClass = seatsFirstClass;
+		this.priceEconomy = priceEconomy;
+		this.priceBusiness = priceBusiness;
+		this.priceFirstClass = priceFirstClass;
+		this.departure = departure;
+		this.destination = destination;
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
 	}
 
 	public Integer getSeatsEconomy() {
@@ -111,12 +132,8 @@ public class Flight {
 		this.priceFirstClass = priceFirstClass;
 	}
 
-	public Integer getFlightDuration() {
-		return flightDuration;
-	}
-
-	public void setFlightDuration(Integer flightDuration) {
-		this.flightDuration = flightDuration;
+	public Long getFlightDuration() {
+		return arrivalTime.getTime() - departureTime.getTime();
 	}
 
 	public Location getDeparture() {
@@ -150,5 +167,23 @@ public class Flight {
 	public Integer getNumberOfSeats() {
 		return seatsBusiness + seatsEconomy + seatsFirstClass;
 	}
+	
+	public Date getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(Date arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public Date getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
+	}
+	
+	
 
 }

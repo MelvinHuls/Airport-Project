@@ -2,6 +2,7 @@ package com.realdolmen.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -22,6 +23,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	@PersistenceContext
 	EntityManager em;
 
+	@EJB
 	private EmployeeRepository eRepo;
 
 	@Override

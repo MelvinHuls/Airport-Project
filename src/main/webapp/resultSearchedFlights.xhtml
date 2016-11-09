@@ -14,15 +14,42 @@
 <h:body>
 	<h2>Your resulting flights</h2>
 
-	<p:outputLabel value="#{flightSearchBean.flight.flightclass}" />
-	<p:outputLabel value="#{flightSearchBean.flight.seats}" />
-	<p:outputLabel value="#{flightSearchBean.flight.airlineCompany}" />
-	<p:outputLabel value="#{flightSearchBean.flight.setAirport}" />
-	<p:outputLabel value="#{flightSearchBean.flight.departure}" />
-	<p:outputLabel value="#{flightSearchBean.flight.destination}" />
-	<p:outputLabel value="#{flightSearchBean.flight.region}" />
-	<p:outputLabel value="#{flightSearchBean.flight.dateDeparture}" />
-	<p:outputLabel value="#{flightSearchBean.flight.dateReturn}" />
+	<p:dataTable value="#{flightSearchBean.getFlightsUsingCriteria()}"
+		var="flight" id="listOfFlights">
+		<p:column>
+			<f:facet name="header">Price</f:facet>
+			<p:outputLabel
+				value="#{flightSearchBean.getPriceFlightClass(flight)}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Discount</f:facet>
+			<p:outputLabel value="Filler" />
+		</p:column>
 
+		<p:column>
+			<f:facet name="header">Departure Time</f:facet>
+			<p:outputLabel value="#{flight.departureTime}">
+				<f:convertDateTime type="both" timeStyle="short" />
+			</p:outputLabel>
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">Arrival Time</f:facet>
+			<p:outputLabel value="#{flight.arrivalTime}">
+				<f:convertDateTime type="both" timeStyle="short"/>
+			</p:outputLabel>
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">Airline Company</f:facet>
+			<p:outputLabel value="#{flight.company}"/>
+		</p:column>
+
+		<p:column>
+			<h:form>
+				<p:commandButton icon="ui-icon-search" />
+			</h:form>
+		</p:column>
+	</p:dataTable>
 </h:body>
 </html>

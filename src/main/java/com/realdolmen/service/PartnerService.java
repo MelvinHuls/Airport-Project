@@ -1,8 +1,8 @@
 package com.realdolmen.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -26,6 +26,7 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	@PersistenceContext
 	private EntityManager em;
 
+	@EJB
 	private PartnerRepository pRepo;
 
 	@Override

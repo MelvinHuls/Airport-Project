@@ -100,7 +100,7 @@
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>searchFlight</from-outcome>
-			<to-view-id>/searchFlight</to-view-id>
+			<to-view-id>/searchFlights</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>failedtoLogIn</from-outcome>

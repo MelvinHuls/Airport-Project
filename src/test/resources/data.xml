@@ -12,12 +12,12 @@
 		email="CC38@gmail.com" />
 
 	<location id="501" airport="Brussels airport" country="Belgium"
-		code="BE" region="2" />
+		code="BE" region="Western_Europe" />
 	<Location id="502" airport="New York" country="United States of America"
-		code="USA" region="3" />
+		code="USA" region="North_America" />
 
 	<flight id="500" company="airliner" seatsEconomy="500"
 		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"
-		priceBusiness="300" priceFirstClass="500" flightDuration="50000"
+		priceBusiness="300" priceFirstClass="500" departureTime="2017-01-19 15:00:00" arrivalTime="2017-01-20 05:00:00"
 		departure_id="501" destination_id="502" />
 </dataset>

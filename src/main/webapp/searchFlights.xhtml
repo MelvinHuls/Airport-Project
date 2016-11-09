@@ -16,7 +16,7 @@
 
 	<h:form id="formA">
 		<p:panelGrid id="panelA" columns="2" layout="grid">
-			<p:outputLabel value="Amount of seats" id="seatslabel" />
+			<p:outputLabel value="Amount of seats*" id="seatslabel" />
 			<h:panelGroup>
 				<p:inputText value="#{flightSearchBean.flight.seats}" id="seats">
 					<f:convertNumber />
@@ -26,7 +26,7 @@
 				<p:message for="seats" />
 			</h:panelGroup>
 
-			<p:outputLabel value="Traveling class" />
+			<p:outputLabel value="Traveling class*" />
 			<h:panelGroup>
 				<p:selectOneMenu value="#{flightSearchBean.flight.flightclass}"
 					id="flightclass">
@@ -53,7 +53,9 @@
 				value="What way would you like to input your locations?" />
 			<p:selectOneRadio id="console"
 				value="#{flightSearchBean.flight.setAirport}">
-				<p:ajax event="change" update="panelA" listener="#{flightSearchBean.flight.emptyCountrySelection()}"/>
+				<p:ajax event="change" process="destdate depdate" partialSubmit="true" />
+				<p:ajax event="change" update="panelA"
+					listener="#{flightSearchBean.flight.emptyCountrySelection()}" />
 				<f:selectItem itemLabel="Departure(and destination) airports"
 					itemValue="1" />
 				<f:selectItem itemLabel="General region" itemValue="2" />
@@ -114,22 +116,20 @@
 					value="#{flightSearchBean.flight.destination.getRegions()}" />
 			</p:selectOneMenu>
 
-			<p:outputLabel for="depdate" value="Departure date" />
+			<p:outputLabel for="depdate" value="Departure date*" />
 			<h:panelGroup>
 				<p:calendar id="depdate"
-					value="#{flightSearchBean.flight.dateDeparture}">
-					<p:ajax process="@this" event="change" update="depdate"
-						partialSubmit="true" />
+					value="#{flightSearchBean.flight.dateDeparture}"
+					pattern="MM/dd/yyyy">
 				</p:calendar>
 				<p:message for="depdate" />
 			</h:panelGroup>
 
 			<p:outputLabel for="destdate" value="Date of Return" />
 			<p:calendar id="destdate"
-				value="#{flightSearchBean.flight.dateReturn}">
-				<p:ajax process="@this" event="change" update="destdate"
-					partialSubmit="true" />
-			</p:calendar>	
+				value="#{flightSearchBean.flight.dateReturn}"
+				pattern="MM/dd/yyyy">
+			</p:calendar>
 		</p:panelGrid>
 
 		<p:commandButton value="Search flights" action="searchFlights" />

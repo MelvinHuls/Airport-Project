@@ -2,6 +2,8 @@ package com.realdolmen.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.realdolmen.enumerations.FlightClass;
@@ -19,6 +21,8 @@ public class FlightSearch {
 	@NotNull
 	private Integer seats;
 	private String airlineCompany;
+	@Min(1)
+	@Max(2)
 	private int setAirport; //desides in what way the user will search, 0 is empty, 1 is airports, 2 is general region
 	private Location departure;
 	private Location destination;
@@ -108,4 +112,5 @@ public class FlightSearch {
 		this.destination.setCountry(null);
 		this.departure.setCountry(null);
 	}	
+	
 }
