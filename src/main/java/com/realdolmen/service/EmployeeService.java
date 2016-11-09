@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Employee;
 import com.realdolmen.domain.Location;
 import com.realdolmen.repository.EmployeeRepository;
+import com.realdolmen.repository.LocationRepository;
 
 //@EJB(name="java:global/RAir/EmployeeService", beanInterface = SessionRemote.class, beanName="EmployeeService")
 @Stateful
@@ -18,6 +20,9 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	private Employee employee;
 
 	private Location location;
+
+	@RequestScoped
+	private LocationRepository lRepo;
 
 	@PersistenceContext
 	EntityManager em;
@@ -75,7 +80,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public List<Location> obtainLocations() {
-		return em.createQuery("select l from Location l", Location.class).getResultList();
+		return lRepo.findAll();
 	}
 
 	public String storeLocation(Location location) {
@@ -84,7 +89,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public String changeLocation() {
-		//this.location.setRegion();
+		// this.location.setRegion();
 
 		em.merge(this.location);
 		this.location = null;
@@ -97,8 +102,8 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public String addLocation() {
-		//this.location.setRegion();
-	
+		// this.location.setRegion();
+
 		em.persist(this.location);
 		this.location = null;
 

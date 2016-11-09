@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -16,6 +17,7 @@ import com.realdolmen.repository.ClientRepository;
 public class ClientService implements SessionRemote, AbstractService<Client> {
 	private Client client;
 
+	@RequestScoped
 	private ClientRepository cRepo;
 
 	@Override
@@ -43,8 +45,8 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 		return cRepo.read(id);
 	}
 
-	public List<Client> findByUserName(String userName) {
-		return cRepo.findByUserName(userName);
+	public Client findByEmail(String email) {
+		return cRepo.findByEmail(email);
 	}
 
 	@Override
@@ -79,9 +81,9 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 		this.client = client;
 	}
 
-	private boolean clientExistsCheck(String userName) {
-		List<Client> customerByEmail = findByUserName(userName);
-		if (customerByEmail.isEmpty()) {
+	private boolean clientExistsCheck(String email) {
+		Client customerByEmail = findByEmail(email);
+		if (customerByEmail == null) {
 			return false;
 		}
 		return true;

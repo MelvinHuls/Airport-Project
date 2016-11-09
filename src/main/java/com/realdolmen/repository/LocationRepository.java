@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 
 @Stateless
@@ -39,5 +38,14 @@ public class LocationRepository {
 		} catch (NoResultException e) {
 			return Collections.emptyList();
 		}
+	}
+
+	public List<String> getAirportsCountry(String country) {
+		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class)
+				.setParameter("country", country).getResultList();
+	}
+
+	public List<String> getCountries() {
+		return em.createQuery("select distinct l.country from Location l", String.class).getResultList();
 	}
 }

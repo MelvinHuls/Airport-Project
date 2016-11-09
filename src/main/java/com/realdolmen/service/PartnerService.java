@@ -1,10 +1,10 @@
 package com.realdolmen.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -12,6 +12,8 @@ import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
+import com.realdolmen.repository.FlightRepository;
+import com.realdolmen.repository.LocationRepository;
 import com.realdolmen.repository.PartnerRepository;
 
 @Stateful
@@ -26,7 +28,12 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	@PersistenceContext
 	private EntityManager em;
 
+	@RequestScoped
 	private PartnerRepository pRepo;
+	@RequestScoped
+	private FlightRepository fRepo;
+	@RequestScoped
+	private LocationRepository lRepo;
 
 	@Override
 	public void create(Partner partner) {
@@ -75,18 +82,19 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 	@Override
 	public List<Flight> obtainFlights() {
-		return pRepo.getFlightsByCompany(partner.getCompany(), partner);
+		partner = new Partner("Gerald", "123", "Gerald@airliner.com", "airliner");
+		return fRepo.getFlightsByCompany(partner.getCompany(), partner);
 	}
 
 	@Override
 	public Flight getFlight(Long id) throws AccessRightsException {
-		return pRepo.getFlight(partner, id);
+		return fRepo.getFlight(partner, id);
 	}
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
 
-		return pRepo.changeFlight(flight, partner);
+		return fRepo.changeFlight(flight, partner);
 	}
 
 	public Flight getFlight() {
@@ -117,30 +125,15 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 			return "failed";
 		}
-
-		flight.setDeparture(em
-				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
-						Location.class)
-				.setParameter("country", flight.getDeparture().getCountry())
-				.setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
-		flight.setDestination(em
-				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
-						Location.class)
-				.setParameter("country", flight.getDestination().getCountry())
-				.setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
-		flight.setCompany(partner.getCompany());
-
-		em.persist(this.flight);
-		return "success";
+		return fRepo.addFlight(flight, partner);
 	}
 
 	public List<String> getCountries() {
-		return em.createQuery("select distinct c.country from Location c", String.class).getResultList();
+		return lRepo.getCountries();
 	}
 
 	public List<String> getAirportsCountry(String country) {
-		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class)
-				.setParameter("country", country).getResultList();
+		return lRepo.getAirportsCountry(country);
 	}
 
 	public String deleteFlight() {

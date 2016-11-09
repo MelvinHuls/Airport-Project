@@ -32,12 +32,12 @@ public class ClientRepository {
 		em.remove(o);
 	}
 
-	public List<Client> findByUserName(String userName) {
+	public Client findByEmail(String email) {
 		try {
-			return em.createNamedQuery("SELECT c from Client c WHERE c.userName LIKE :userName", Client.class)
-					.setParameter("userName", userName).getResultList();
+			return em.createNamedQuery("SELECT c from Client c WHERE c.email LIKE :email", Client.class)
+					.setParameter("email", email).getSingleResult();
 		} catch (NoResultException e) {
-			return Collections.emptyList();
+			return null;
 		}
 	}
 

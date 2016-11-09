@@ -15,6 +15,8 @@
 		code="BE" region="2" />
 	<Location id="502" airport="New York" country="United States of America"
 		code="USA" region="3" />
+	<Location id="503" airport="Tokyo" country="Japan"
+		code="JP" region="4" />
 
 	<flight id="500" company="airliner" seatsEconomy="500"
 		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"

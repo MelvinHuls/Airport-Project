@@ -16,20 +16,23 @@ public class BookingRepository {
 	@PersistenceContext
 	EntityManager em;
 
-	public void create(Booking o) {
+	public Booking create(Booking o) {
 		em.persist(o);
+		return o;
 	}
 
 	public Booking read(Long id) {
 		return em.find(Booking.class, id);
 	}
 
-	public void update(Booking o) {
+	public Booking update(Booking o) {
 		em.merge(o);
+		return o;
 	}
 
-	public void delete(Booking o) {
+	public Booking delete(Booking o) {
 		em.remove(o);
+		return o;
 	}
 
 	public List<Booking> findAll() {
