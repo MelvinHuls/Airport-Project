@@ -62,8 +62,15 @@
             </p:selectOneMenu>
 			</h:panelGroup>
 
-			<p:outputLabel value="Flight duration" />
-			<p:inputText value="#{rAirBean.partnerService.flight.flightDuration}" />
+		<p:outputLabel value="Departure Time"/>
+				<p:calendar id="deptime"
+					value="#{rAirBean.partnerService.flight.departureTime}"
+					pattern="MM/dd/yyyy HH:mm:ss"/>
+					
+			<p:outputLabel value="Duration Flight"/>			
+				<p:calendar id="duration"
+					value="#{rAirBean.partnerService.flight.duration}"
+					pattern="HH:mm" timeOnly="true"/>
 		</p:panelGrid>
 		
 		<p:commandButton value="Add flight" action="#{rAirBean.partnerService.addFlight()}"/>		

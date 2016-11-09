@@ -1,6 +1,5 @@
 package com.realdolmen.beans;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -258,7 +257,7 @@ public class FlightSearchBean {
 		throw new LackingSearchCriteriaException("The search criteria were not properly filled in");
 	}
 
-	public BigDecimal getPriceFlightClass(Flight f) throws LackingSearchCriteriaException {
+	public Double getPriceFlightClass(Flight f) throws LackingSearchCriteriaException {
 		if (flight.getFlightclass() == FlightClass.Economy) {
 			return f.getPriceEconomy();
 		} else if (flight.getFlightclass() == FlightClass.Business) {
