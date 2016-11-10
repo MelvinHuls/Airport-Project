@@ -1,6 +1,5 @@
 package com.realdolmen.repository;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Client;
-import com.realdolmen.domain.Flight;
 
 @Stateless
 public class ClientRepository {

@@ -4,27 +4,23 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.realdolmen.beans.FlightSearchBean;
 import com.realdolmen.domain.Client;
-import com.realdolmen.domain.Flight;
 import com.realdolmen.repository.ClientRepository;
 
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
-@Stateful
+@Stateless
 @LocalBean
 public class ClientService implements SessionRemote, AbstractService<Client> {
 	private Client client;
 
-	@RequestScoped
+	@Inject
 	private ClientRepository cRepo;
-	
-	@EJB
-	private FlightSearchBean fsearch;
 
 	@Override
 	public void create(Client client) {
@@ -93,5 +89,28 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean validate(String email, String password) {
+
+		Client c = cRepo.findByEmail(email);
+		if (c.getId() != null) {
+			if (checkPassword(password, c.getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkPassword(String password, String hashed) {
+		try {
+			return BCrypt.checkpw(password, hashed);
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	public String hashPassword(String password) {
+		return BCrypt.hashpw(password, BCrypt.gensalt(24));
 	}
 }

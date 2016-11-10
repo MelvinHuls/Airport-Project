@@ -2,7 +2,6 @@ package com.realdolmen.beans;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,8 +19,8 @@ import com.realdolmen.service.ClientService;
 public class RegistrationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private SessionBean sessionBean;
+//	@Inject
+//	private SessionBean sessionBean;
 
 	@Inject
 	ClientService clientService;
@@ -76,8 +75,8 @@ public class RegistrationBean implements Serializable {
 		Client c = clientService.findByEmail(email);
 		if (c.getId() == null) {
 			clientService.create(userName, password, email);
-			HttpSession session = sessionBean.getSession();
-			session.setAttribute("email", email);
+//			HttpSession session = sessionBean.getSession();
+//			session.setAttribute("email", email);
 		}
 	}
 

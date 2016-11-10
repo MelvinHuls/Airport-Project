@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.realdolmen.test.PersonTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.39 sec <<< FAILURE! - in com.realdolmen.test.PersonTest
-makingAndRetrievingPerson(com.realdolmen.test.PersonTest)  Time elapsed: 0.297 sec  <<< ERROR!
-javax.persistence.PersistenceException: No Persistence provider for EntityManager named MyTestPersistenceUnit
-	at com.realdolmen.test.PersonTest.makingAndRetrievingPerson(PersonTest.java:19)
-

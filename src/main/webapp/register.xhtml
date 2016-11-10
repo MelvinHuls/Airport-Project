@@ -9,61 +9,95 @@
 	<title>Registration</title>
 </h:head>
 <h:body>
-	<h1>Please register here:</h1>
-
+	<h1>Fill in this form to register yourself</h1>
 	<h:form>
-		<p:panelGrid columns="3">
-
-			<h:outputLabel value="E-mail: " />
+		<p:panelGrid columns="2">
+			<h:outputText value="E-mail: "></h:outputText>
 			<h:panelGroup>
-				<h:inputText id="email" value="#{registrationBean.email}"
-					rendered="#{registrationBean.editable}" required="true">
-					<f:validator validatorId="com.realdolmen.validators.emailValidator" />
-				</h:inputText>
-				<h:message for="email" />
-				<h:outputText value="#{registrationBean.email}"
-					rendered="#{not registrationBean.editable}" />
+				<p:inputText value="#{cBean.client.email}" id="mail">
+					<f:ajax event="blur" render="mailMsg" />
+				</p:inputText>
+				<font color="red">* </font>
+				<h:message for="mail" id="mailMsg"></h:message>
 			</h:panelGroup>
-
-			<h:outputLabel value="password: " />
+			<h:outputText value=" Password: "></h:outputText>
 			<h:panelGroup>
-				<h:inputSecret value="#{registrationBean.password}"
-					rendered="#{registrationBean.editable}" id="password"
-					requred="true"
-					requiredMessage="please enter a password of at least 6 characters">
-					<f:validateLength minimum="6" maximum="255" />
-				</h:inputSecret>
-				<h:outputText value="#{registrationBean.password}"
-					rendered="#{not registrationBean.editable}" />
+				<p:password value="#{cBean.client.email}" id="password">
+					<f:ajax event="blur" render="passwordMsg" />
+				</p:password>
+				<font color="red">* </font>
+				<h:message for="password" id="passwordMsg"></h:message>
 			</h:panelGroup>
-			<h:message for="password" />
-
-			<h:outputLabel value="username: " />
-			<h:panelGroup>
-				<h:inputText value="#{registrationBean.userName}"
-					rendered="#{registrationBean.editable}" id="firstName">
-					<f:validateLength minimum="2" maximum="50" />
-				</h:inputText>
-				<h:outputText value="#{registrationBean.userName}"
-					rendered="#{not registrationBean.editable}" />
-			</h:panelGroup>
-			<h:message for="userName" />
 		</p:panelGrid>
-
-
-		<p:commandButton value="Register"
-			action="#{registrationBean.setEditable(!registrationBean.isEditable())}"
-			rendered="#{registrationBean.editable}" />
-
-		<p:commandButton value="Edit"
-			action="#{registrationBean.setEditable(!registrationBean.isEditable())}"
-			rendered="#{not registrationBean.editable}" />
-
-		<p:commandButton value="Confirm"
-			action="#{registrationBean.setEditable(!registrationBean.isEditable())}"
-			rendered="#{not registrationBean.editable}" />
-
-		<p:button value="cancel" outcome="index.xhtml" />
+		<h:commandButton value="Register" id="register" action="Clinton.xhtml" />
 	</h:form>
 </h:body>
 </html>
+
+<!-- 	<f:view> -->
+<!-- 		<h:form> -->
+<!-- 			<h:panelGroup layout="block" styleClass="login-register-buttons"> -->
+<!-- 				<span> <h:commandButton value="#log in" -->
+<!-- 						action="#{registerController.login()}" /> -->
+<!-- 				</span> -->
+<!-- 				<span> <h:commandButton -->
+<!-- 						value="register" -->
+<!-- 						action="#{registerController.register()}" -->
+<!-- 						styleClass="button-primary" /> -->
+<!-- 				</span> -->
+<!-- 			</h:panelGroup> -->
+
+
+
+<!-- 			<h:panelGrid columns="2"> -->
+
+<!-- 				<h:outputText value="#First name:" /> -->
+<!-- 				<h:panelGroup> -->
+<!-- 					<h:inputText id="register_form_firstname_input" -->
+<!-- 						value="#{registerController.firstName}" required="true"> -->
+<!-- 						<f:ajax event="blur" -->
+<!-- 							render="register_form_firstname_input register_form_firstname_input_error_empty"></f:ajax> -->
+<!-- 					</h:inputText> -->
+<!-- 					<h:message id="register_form_firstname_input_error_empty" -->
+<!-- 						for="register_form_firstname_input" styleClass="error_messages" /> -->
+
+<!-- 				</h:panelGroup> -->
+
+<!-- 				<h:outputText value="#{msg.register_form_lastname}" /> -->
+<!-- 				<h:panelGroup> -->
+<!-- 					<h:inputText id="register_form_lastname_input" -->
+<!-- 						value="#{registerController.lastName}" required="true"> -->
+<!-- 						<f:ajax event="blur" -->
+<!-- 							render="register_form_lastname_input register_form_lastname_input_error_empty"></f:ajax> -->
+<!-- 					</h:inputText> -->
+<!-- 					<h:message id="register_form_lastname_input_error_empty" -->
+<!-- 						for="register_form_lastname_input" styleClass="error_messages" /> -->
+<!-- 				</h:panelGroup> -->
+
+
+<!-- 				<h:outputText value="#{msg.login_form_email}" /> -->
+<!-- 				<h:panelGroup> -->
+<!-- 					<h:inputText id="register_form_email_input" -->
+<!-- 						value="#{registerController.email}" required="true"> -->
+<!-- 						<f:ajax event="blur" -->
+<!-- 							render="register_form_email_input register_form_email_input_error_empty"></f:ajax> -->
+<!-- 					</h:inputText> -->
+<!-- 					<h:message id="register_form_email_input_error_empty" -->
+<!-- 						for="register_form_email_input" styleClass="error_messages" /> -->
+<!-- 				</h:panelGroup> -->
+
+<!-- 				<h:outputText value="password: " /> -->
+<!-- 				<h:panelGroup> -->
+<!-- 					<h:inputSecret id="register_form_password_input" -->
+<!-- 						value="#{registerController.password}" required="true"> -->
+<!-- 					</h:inputSecret> -->
+<!-- 					<h:message id="register_form_password_input_error_empty" -->
+<!-- 						for="register_form_password_input" styleClass="error_messages" /> -->
+<!-- 				</h:panelGroup> -->
+<!-- 			</h:panelGrid> -->
+<!-- 			<h:commandButton value="Register" -->
+<!-- 				action="#{registerController.register}" /> -->
+
+<!-- 		</h:form> -->
+<!-- 	</f:view> -->
+<!-- </h:body> -->
