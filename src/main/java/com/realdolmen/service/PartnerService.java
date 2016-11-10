@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +15,7 @@ import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
 import com.realdolmen.repository.PartnerRepository;
 
-@Stateful
+@Stateless
 @LocalBean
 // @EJB(name="java:global/RAir/PartnerService", beanInterface =
 // SessionRemote.class, beanName="PartnerService")

@@ -13,8 +13,8 @@ public class FlightTest extends JpaPersistenceTest {
 
 	@Test
 	public void makingAndRetrievingFlight() throws Exception {
-		Location departure = new Location("Brussels airport", "Belgium", "BE", GlobalRegion.Western_Europe);
-		Location destination = new Location("New York", "United States of America", "USA", GlobalRegion.North_America);
+		Location departure = new Location("Brussels airport", "Belgium", "BE", GlobalRegion.WESTERN_EUROPE);
+		Location destination = new Location("New York", "United States of America", "USA", GlobalRegion.NORTH_AMERICA);
 		entityManager().persist(departure);
 		entityManager().persist(destination);
 		Flight flight = new Flight("airliner", 300, 200, 10, 300d, 400d, 600d, new Date(2016,12,01,8,30), new Date(2016,12,01,23,00), departure, destination);

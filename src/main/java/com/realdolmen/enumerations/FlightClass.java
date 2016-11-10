@@ -1,5 +1,19 @@
 package com.realdolmen.enumerations;
 
 public enum FlightClass {
-	Economy, Business, First_Class
+	ECONOMY, BUSINESS, FIRST_CLASS;
+	
+	@Override
+	public String toString() {
+		switch (this) {
+		case ECONOMY:
+			return "Economy";
+		case BUSINESS:
+			return "Business";
+		case FIRST_CLASS:
+			return "First Class";
+		default:
+			throw new IllegalArgumentException();
+		}
+	}
 }

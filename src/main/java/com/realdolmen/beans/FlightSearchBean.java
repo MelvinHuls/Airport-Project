@@ -8,8 +8,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -20,9 +20,9 @@ import com.realdolmen.domain.Location;
 import com.realdolmen.enumerations.FlightClass;
 
 @Stateless
-@RequestScoped
+@SessionScoped
 @Remote
-@Named("flightSearchBean")
+@ManagedBean(name="flightSearchBean")
 public class FlightSearchBean {
 
 	@PersistenceContext
@@ -79,13 +79,13 @@ public class FlightSearchBean {
 	private List<Flight> portCompCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -107,13 +107,13 @@ public class FlightSearchBean {
 	private List<Flight> portCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -133,13 +133,13 @@ public class FlightSearchBean {
 	private List<Flight> regionCompCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -159,13 +159,13 @@ public class FlightSearchBean {
 	private List<Flight> minCompCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -184,13 +184,13 @@ public class FlightSearchBean {
 	private List<Flight> minimalCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -207,13 +207,13 @@ public class FlightSearchBean {
 	private List<Flight> regionCriteriaQuery() throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
-		if (flight.getFlightclass().equals(FlightClass.Economy)) {
+		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
 			seatsName = "seatsEconomy";
 			classQuery = "f.seatsEconomy>=:seatsEconomy";
-		} else if (flight.getFlightclass().equals(FlightClass.Business)) {
+		} else if (flight.getFlightclass().equals(FlightClass.BUSINESS)) {
 			seatsName = "seatsBusiness";
 			classQuery = "f.seatsBusiness>=:seatsBusiness";
-		} else if (flight.getFlightclass().equals(FlightClass.First_Class)) {
+		} else if (flight.getFlightclass().equals(FlightClass.FIRST_CLASS)) {
 			seatsName = "seatsFirstClass";
 			classQuery = "f.seatsFirstClass>=:seatsFirstClass";
 		} else {
@@ -230,6 +230,7 @@ public class FlightSearchBean {
 	}
 
 	public List<Flight> getFlightsUsingCriteria() throws LackingSearchCriteriaException {
+		System.out.println(flight.toString());
 		if (flight.getFlightclass() != null && flight.getSeats() != null && flight.getDateDeparture() != null) {
 			if (flight.getSetAirport() == 1 && flight.getDeparture().getCountry() != null
 					&& flight.getDeparture().getAirport() != null && !flight.getDeparture().getCountry().equals("")
@@ -258,14 +259,22 @@ public class FlightSearchBean {
 	}
 
 	public Double getPriceFlightClass(Flight f) throws LackingSearchCriteriaException {
-		if (flight.getFlightclass() == FlightClass.Economy) {
+		if (flight.getFlightclass() == FlightClass.ECONOMY) {
 			return f.getPriceEconomy();
-		} else if (flight.getFlightclass() == FlightClass.Business) {
+		} else if (flight.getFlightclass() == FlightClass.BUSINESS) {
 			return f.getPriceBusiness();
-		} else if (flight.getFlightclass() == FlightClass.First_Class) {
+		} else if (flight.getFlightclass() == FlightClass.FIRST_CLASS) {
 			return f.getPriceFirstClass();
 		} else {
 			throw new LackingSearchCriteriaException("The flight class is not filled in properly");
 		}
+	}
+	
+	public Double calculateTotalPrice(Flight actualFlight) {
+		return actualFlight.calculateTotalPriceClass(flight.getFlightclass(), flight.getSeats());
+	}
+	
+	public Double calculateDiscount(Flight actualFlight) {
+		return actualFlight.calculateDiscountClass(flight.getFlightclass(), flight.getSeats());
 	}
 }

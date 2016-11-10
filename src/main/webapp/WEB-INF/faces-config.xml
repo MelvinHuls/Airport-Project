@@ -135,4 +135,20 @@
 			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/flightDetails.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/resultSearchedFlights.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>details</from-outcome>
+			<to-view-id>/flightDetails.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

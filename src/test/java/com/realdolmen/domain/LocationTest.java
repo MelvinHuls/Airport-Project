@@ -9,7 +9,7 @@ public class LocationTest extends JpaPersistenceTest {
 
 	@Test
 	public void makingAndRetrievinglocation() throws Exception {
-		Location location = new Location("redo airport", "Belgium", "BE", GlobalRegion.Western_Europe);
+		Location location = new Location("redo airport", "Belgium", "BE", GlobalRegion.WESTERN_EUROPE);
 		assertNull(location.getId());
 		entityManager().persist(location);
 		assertNotNull(location.getId());

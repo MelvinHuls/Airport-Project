@@ -12,9 +12,9 @@
 		email="CC38@gmail.com" />
 
 	<location id="501" airport="Brussels airport" country="Belgium"
-		code="BE" region="Western_Europe" />
+		code="BE" region="WESTERN_EUROPE" />
 	<Location id="502" airport="New York" country="United States of America"
-		code="USA" region="North_America" />
+		code="USA" region="NORTH_AMERICA" />
 
 	<flight id="500" company="airliner" seatsEconomy="500"
 		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"

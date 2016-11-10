@@ -74,19 +74,16 @@ public class Discounts {
 	}	
 	
 	public Double calculatePrice(Double price, Date date, int seats) {	
-		System.out.println("beginning calculate price");
 		Double discountedPrice = price;
 		 Calendar c = Calendar.getInstance();
 		c.set(date.getYear(), date.getMonth(), date.getDay());
 		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 				discountedPrice *= (1-weekendDiscount);
 		}
-		System.out.println("after week discount");
 		
 		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
 				discountedPrice *= (1-nightlyDiscount);
 		}
-		System.out.println("after night discount");
 		
 		Iterator<Discount> iterator = discounts.iterator();
 		while(iterator.hasNext()) {
@@ -95,8 +92,6 @@ public class Discounts {
 					discountedPrice *= (1-discount.getPercentage());
 			}
 		}
-		
-		System.out.println("after discounts iteration");
 		
 		Set<Integer> keySet = this.seatsDiscount.keySet();
 		Iterator<Integer> iterator2 = keySet.iterator();
@@ -107,13 +102,10 @@ public class Discounts {
 				largestAmountOfSeats = amountOfSeats;
 			}
 		}
-		System.out.println("after seats discount iteration");
 		
 		if(largestAmountOfSeats > 0) {
 			discountedPrice *= (1-this.seatsDiscount.get(largestAmountOfSeats));
 		}
-		
-		System.out.println("returning " + discountedPrice);
 		
 		return discountedPrice * seats;
 	}
@@ -140,6 +132,44 @@ public class Discounts {
 		
 		return discountedPrice;
 	}
+	
+	public Double calculateDiscount(Double price, Date date, int seats) {	
+		Double discountedPrice = price;
+		 Calendar c = Calendar.getInstance();
+		c.set(date.getYear(), date.getMonth(), date.getDay());
+		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				discountedPrice *= (1-weekendDiscount);
+		}
+		
+		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
+				discountedPrice *= (1-nightlyDiscount);
+		}
+		
+		Iterator<Discount> iterator = discounts.iterator();
+		while(iterator.hasNext()) {
+			Discount discount = iterator.next();
+			if(discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
+					discountedPrice *= (1-discount.getPercentage());
+			}
+		}
+		
+		Set<Integer> keySet = this.seatsDiscount.keySet();
+		Iterator<Integer> iterator2 = keySet.iterator();
+		Integer largestAmountOfSeats = 0;
+		while(iterator2.hasNext() && seats > largestAmountOfSeats) {
+			Integer amountOfSeats = iterator2.next();
+			if(seats > amountOfSeats && amountOfSeats > largestAmountOfSeats) {
+				largestAmountOfSeats = amountOfSeats;
+			}
+		}
+		
+		if(largestAmountOfSeats > 0) {
+			discountedPrice *= (1-this.seatsDiscount.get(largestAmountOfSeats));
+		}
+		
+		return (price*seats) - (discountedPrice * seats);
+	}
+	
 	
 	public Map<Integer, Double> getSeatsDiscount() {
 		return seatsDiscount;

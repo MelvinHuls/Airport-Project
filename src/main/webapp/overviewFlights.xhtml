@@ -15,7 +15,7 @@
 	<h1>Flights you can edit</h1>
 
 	<p:dataTable value="#{rAirBean.partnerService.obtainFlights()}"
-		var="flight" id="listOfFlights">
+		var="flight" id="listOfFlights" sortMode="multiple">
 		<p:column>
 			<f:facet name="header">Departure Airport</f:facet>
 			<p:outputLabel value="#{flight.departure.airport}" />

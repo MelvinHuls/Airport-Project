@@ -19,9 +19,9 @@ public class BookingTest extends JpaPersistenceTest {
 		em = entityManager();
 		Client client = new Client("iAmAUser", "thisIsMyPassword", "e@mail.com");
 		em.persist(client);
-		Location departure = new Location("Heathrow airport", "United Kingdom", "UK", GlobalRegion.Western_Europe);
+		Location departure = new Location("Heathrow airport", "United Kingdom", "UK", GlobalRegion.WESTERN_EUROPE);
 		Location destination = new Location("Dallas airport", "United States of America", "USA",
-				GlobalRegion.North_America);
+				GlobalRegion.NORTH_AMERICA);
 		em.persist(departure);
 		em.persist(destination);
 		Flight flight = new Flight("Flyan Air", 25, 200, 400, new Date(2016,11,30,10,0,0), new Date(2016,11,30,23,30,0), departure, destination);

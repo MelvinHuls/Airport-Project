@@ -6,8 +6,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.ejb.Stateless;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -23,9 +24,9 @@ import com.realdolmen.service.EmployeeService;
 import com.realdolmen.service.PartnerService;
 
 @SessionScoped
-@Stateful
+@Stateless
 @Remote
-@Named("rAirBean")
+@ManagedBean(name="rAirBean")
 public class RAirBean {
 	@PersistenceContext
 	private EntityManager em;

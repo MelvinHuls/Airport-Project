@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.realdolmen.enumerations.FlightClass;
+
 @Entity
 public class Flight {
 	@Id
@@ -225,25 +227,36 @@ public class Flight {
 
 		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
 	}
-	
-	public Double calculateTotalPriceEconomy() {
-		return this.calculateTotalPrice(this.priceEconomy, this.customMarginPriceEconomy, this.seatsEconomy);
+
+	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats) {
+		if (flightClass.equals(FlightClass.ECONOMY)) {
+			return calculateTotalPriceEconomy(seats);
+		} else if (flightClass.equals(FlightClass.BUSINESS)) {
+			return calculateTotalPriceBusiness(seats);
+		} else if (flightClass.equals(FlightClass.FIRST_CLASS)) {
+			return calculateTotalPriceFirstClass(seats);
+		}
+		return 0d;
 	}
 
-	public Double calculateTotalPriceBusiness() {
-		return this.calculateTotalPrice(this.priceBusiness, this.customMarginPriceBusiness, this.seatsBusiness);
+	public Double calculateTotalPriceEconomy(Integer seats) {
+		return this.calculateTotalPrice(this.priceEconomy, this.customMarginPriceEconomy, seats);
 	}
 
-	public Double calculateTotalPriceFirstClass() {
-		return this.calculateTotalPrice(this.priceFirstClass, this.customMarginPriceFirstClass, this.seatsFirstClass);
+	public Double calculateTotalPriceBusiness(Integer seats) {
+		return this.calculateTotalPrice(this.priceBusiness, this.customMarginPriceBusiness, seats);
 	}
-	
+
+	public Double calculateTotalPriceFirstClass(Integer seats) {
+		return this.calculateTotalPrice(this.priceFirstClass, this.customMarginPriceFirstClass, seats);
+	}
+
 	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats) {
 		if (seats == null || seats == 0)
 			return 0d;
 
 		if (customMarginPrice != null) {
-			if (this.departureTime != null) {
+			if (this.departureTime != null && discounts != null) {
 				return discounts.calculatePrice(customMarginPrice, this.departureTime, seats);
 			} else {
 				return customMarginPrice * seats;
@@ -255,7 +268,48 @@ public class Flight {
 		}
 
 		return discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats);
+	}
 
+	public Double calculateDiscountClass(FlightClass flightClass, Integer seats) {
+		if (flightClass.equals(FlightClass.ECONOMY)) {
+			return calculateDiscountEconomy(seats);
+		} else if (flightClass.equals(FlightClass.BUSINESS)) {
+			return calculateDiscountBusiness(seats);
+		} else if (flightClass.equals(FlightClass.FIRST_CLASS)) {
+			return calculateDiscountFirstClass(seats);
+		}
+		return 0d;
+	}
+
+	public Double calculateDiscountEconomy(Integer seats) {
+		return this.calculateDiscount(this.priceEconomy, this.customMarginPriceEconomy, seats);
+	}
+
+	public Double calculateDiscountBusiness(Integer seats) {
+		return this.calculateDiscount(this.priceBusiness, this.customMarginPriceBusiness, seats);
+	}
+
+	public Double calculateDiscountFirstClass(Integer seats) {
+		return this.calculateDiscount(this.priceFirstClass, this.customMarginPriceFirstClass, seats);
+	}
+
+	private Double calculateDiscount(Double basePrice, Double customMarginPrice, Integer seats) {
+		if (seats == null || seats == 0)
+			return 0d;
+
+		if (customMarginPrice != null) {
+			if (this.departureTime != null && discounts != null) {
+				return discounts.calculateDiscount(customMarginPrice, this.departureTime, seats);
+			} else {
+				return 0d;
+			}
+		} else if (basePrice == null) {
+			return 0d;
+		} else if (discounts == null || this.getDepartureTime() == null) {
+			return 0d;
+		}
+
+		return discounts.calculateDiscount(basePrice * 1.1, this.departureTime, seats);
 	}
 
 	public Double getCustomMarginPriceEconomy() {
@@ -280,5 +334,27 @@ public class Flight {
 
 	public void setCustomMarginPriceFirstClass(Double customMarginPriceFirstClass) {
 		this.customMarginPriceFirstClass = customMarginPriceFirstClass;
+	}
+
+	@Override
+	public String toString() {
+		String string = "";
+		string += "company name: " + this.company + "\n";
+		string += "id: " + this.id + "\n";
+		string += "seatsEconomy: " + this.seatsEconomy + "\n";
+		string += "seatsBusiness: " + this.seatsBusiness + "\n";
+		string += "seatsFirstClass: " + this.seatsFirstClass + "\n";
+		string += "priceEconomy: " + this.priceEconomy + "\n";
+		string += "priceBusiness: " + this.priceBusiness + "\n";
+		string += "priceFirstClass: " + this.priceFirstClass + "\n";
+		string += "customMarginPriceEconomy: " + this.customMarginPriceEconomy + "\n";
+		string += "customMarginPriceBusiness: " + this.customMarginPriceBusiness + "\n";
+		string += "customMarginPriceFirstClass: " + this.customMarginPriceFirstClass + "\n";
+		string += "departure: " + this.departure + "\n";
+		string += "destination: " + this.destination + "\n";
+		string += "departureTime: " + this.departureTime + "\n";
+		string += "duration: " + this.duration + "\n";
+		
+		return string;
 	}
 }

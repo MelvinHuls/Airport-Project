@@ -38,12 +38,16 @@
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}" />
+					value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup id="discPanEco">
 				<p:outputLabel value="Discount Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatEconomy()}" />
+					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatEconomy()}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
@@ -57,12 +61,16 @@
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}" />
+					value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup id="discPanBuss">
 				<p:outputLabel value="Discount Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatBusiness()}" />
+					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatBusiness()}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
@@ -77,12 +85,16 @@
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}" />
+					value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup id="discPanFC">
 				<p:outputLabel value="Discount Price:  " />
 				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatFirstClass()}" />
+					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatFirstClass()}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 

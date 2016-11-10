@@ -16,13 +16,12 @@
 
 	<h:form id="formA">
 		<p:panelGrid id="panelA" columns="2" layout="grid">
-			<p:outputLabel value="Amount of seats*" id="seatslabel" />
+			<p:outputLabel value="Amount of seats*" id="seatslabel" for="seats"/>
 			<h:panelGroup>
-				<p:inputText value="#{flightSearchBean.flight.seats}" id="seats">
-					<f:convertNumber />
+				<p:inputMask value="#{flightSearchBean.flight.seats}" id="seats" mask="9?999999999" maxlength="10">
 					<p:ajax process="@this" event="change" update="formA:seats"
 						partialSubmit="true" />
-				</p:inputText>
+				</p:inputMask>				
 				<p:message for="seats" />
 			</h:panelGroup>
 
@@ -132,7 +131,7 @@
 			</p:calendar>
 		</p:panelGrid>
 
-		<p:commandButton value="Search flights" action="searchFlights" />
+		<p:commandButton value="Search flights" action="searchFlights" update="panelA"/>
 	</h:form>
 
 </h:body>

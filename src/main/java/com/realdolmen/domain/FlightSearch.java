@@ -21,8 +21,6 @@ public class FlightSearch {
 	@NotNull
 	private Integer seats;
 	private String airlineCompany;
-	@Min(1)
-	@Max(2)
 	private int setAirport; //desides in what way the user will search, 0 is empty, 1 is airports, 2 is general region
 	private Location departure;
 	private Location destination;
@@ -112,5 +110,21 @@ public class FlightSearch {
 		this.destination.setCountry(null);
 		this.departure.setCountry(null);
 	}	
+	
+	@Override
+	public String toString() {
+		String string = "";
+		string += "flightclass: " + this.flightclass + "\n";
+		string += "seats: " + this.seats + "\n";
+		string += "airlineCompany: " + this.airlineCompany + "\n";
+		string += "setAirport: " + this.setAirport + "\n";
+		string += "departure: " + this.departure + "\n";
+		string += "destination: " + this.destination + "\n";
+		string += "region: " + this.region + "\n";
+		string += "dateDeparture: " + this.dateDeparture + "\n";
+		string += "dateReturn: " + this.dateReturn + "\n";
+		
+		return string;		
+	}
 	
 }
