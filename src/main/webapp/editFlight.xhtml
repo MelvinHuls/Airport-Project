@@ -31,20 +31,14 @@
 
 			<h:panelGroup>
 				<p:outputLabel value="Economy seat base Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.priceEconomy}"
-					rendered="#{rAirBean.partnerService.editFlight}" />
-				<p:inputText value="#{rAirBean.partnerService.flight.priceEconomy}"
-					rendered="#{not rAirBean.partnerService.editFlight}">
+				<p:inputText value="#{rAirBean.partnerService.flight.priceEconomy}">
 					<p:ajax event="change" update="discPanEco" />
 				</p:inputText>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
-				<p:inputText
-					value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}">
-					<p:ajax event="change" update="discPanEco" />
-				</p:inputText>
+				<p:outputLabel
+					value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}" />
 			</h:panelGroup>
 			<h:panelGroup id="discPanEco">
 				<p:outputLabel value="Discount Price:  " />
@@ -56,20 +50,14 @@
 
 			<h:panelGroup>
 				<p:outputLabel value="Business seat base Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.priceBusiness}"
-					rendered="#{rAirBean.partnerService.editFlight}" />
-				<p:inputText value="#{rAirBean.partnerService.flight.priceBusiness}"
-					rendered="#{not rAirBean.partnerService.editFlight}">
+				<p:inputText value="#{rAirBean.partnerService.flight.priceBusiness}">
 					<p:ajax event="change" update="discPanBuss" />
 				</p:inputText>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
-				<p:inputText
-					value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}">
-					<p:ajax event="change" update="discPanBuss" />
-				</p:inputText>
+				<p:outputLabel
+					value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}" />
 			</h:panelGroup>
 			<h:panelGroup id="discPanBuss">
 				<p:outputLabel value="Discount Price:  " />
@@ -81,27 +69,21 @@
 
 			<h:panelGroup>
 				<p:outputLabel value="First class seat base Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.priceFirstClass}"
-					rendered="#{rAirBean.partnerService.editFlight}" />
 				<p:inputText
-					value="#{rAirBean.partnerService.flight.priceFirstClass}"
-					rendered="#{not rAirBean.partnerService.editFlight}">
+					value="#{rAirBean.partnerService.flight.priceFirstClass}">
 					<p:ajax event="change" update="discPanFC" />
 				</p:inputText>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
 				<p:outputLabel value="Margin Price:  " />
-				<p:inputText
-					value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}">
-					<p:ajax event="change" update="discPanFC" />
-				</p:inputText>
+				<p:outputLabel
+					value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}" />
 			</h:panelGroup>
 			<h:panelGroup id="discPanFC">
 				<p:outputLabel value="Discount Price:  " />
 				<p:outputLabel
 					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatFirstClass()}" />
-			</h:panelGroup>			
+			</h:panelGroup>
 			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
 
