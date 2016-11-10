@@ -22,6 +22,8 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	private Partner partner;
 
 	private Flight flight;
+	
+	private Boolean editFlight;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -98,8 +100,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		this.flight = flight;
 	}
 
-	public String storeFlight(Flight flight) {
+	public String editFlight(Flight flight) {
 		this.flight = flight;
+		this.editFlight = true;
 		return "edit";
 	}
 
@@ -107,8 +110,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		this.flight = new Flight();
 		flight.setDeparture(new Location());
 		flight.setDestination(new Location());
+		editFlight = false;
 		System.out.println("new flight");
-		return "add";
+		return "edit";
 	}
 
 	public String addFlight() {
@@ -148,4 +152,14 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		em.remove(em.find(Flight.class, flight.getId()));
 		return "deleted";
 	}
+
+	public Boolean getEditFlight() {
+		return editFlight;
+	}
+
+	public void setEditFlight(Boolean editFlight) {
+		this.editFlight = editFlight;
+	}
+	
+	
 }
