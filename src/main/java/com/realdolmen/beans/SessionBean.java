@@ -10,6 +10,7 @@ import java.io.Serializable;
 @SessionScoped
 @Named
 public class SessionBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	public HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);

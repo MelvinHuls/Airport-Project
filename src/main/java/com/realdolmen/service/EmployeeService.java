@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import com.realdolmen.repository.EmployeeRepository;
 import com.realdolmen.repository.LocationRepository;
 
 //@EJB(name="java:global/RAir/EmployeeService", beanInterface = SessionRemote.class, beanName="EmployeeService")
+@Remote
 @Stateful
 @LocalBean
 public class EmployeeService implements SessionRemote, AbstractService<Employee> {
@@ -115,5 +117,9 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	public String deleteLocation() {
 		em.remove(em.find(Location.class, location.getId()));
 		return "deleted";
+	}
+
+	public Employee findByEmail(String email) {
+		return eRepo.findByEmail(email);
 	}
 }

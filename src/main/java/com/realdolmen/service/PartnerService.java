@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -17,6 +18,7 @@ import com.realdolmen.repository.FlightRepository;
 import com.realdolmen.repository.LocationRepository;
 import com.realdolmen.repository.PartnerRepository;
 
+@Remote
 @Stateful
 @LocalBean
 // @EJB(name="java:global/RAir/PartnerService", beanInterface =
@@ -28,7 +30,6 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 	@PersistenceContext
 	private EntityManager em;
-
 
 	@EJB
 	private PartnerRepository pRepo;
@@ -62,7 +63,7 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		return pRepo.findAll();
 	}
 
-	protected PartnerService() {
+	public PartnerService() {
 	}
 
 	public PartnerService(Partner partner) {
@@ -141,5 +142,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	public String deleteFlight() {
 		em.remove(em.find(Flight.class, flight.getId()));
 		return "deleted";
+	}
+
+	public Partner findByEmail(String email) {
+		return pRepo.findByEmail(email);
 	}
 }

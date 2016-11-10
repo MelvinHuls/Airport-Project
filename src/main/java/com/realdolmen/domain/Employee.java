@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Employee extends User {
-	protected Employee() {
+	public Employee() {
 		super();
 	}
 	public Employee(String un, String pw, String em){

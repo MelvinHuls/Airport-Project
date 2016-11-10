@@ -13,7 +13,7 @@ import com.realdolmen.domain.Booking;
 import com.realdolmen.domain.Client;
 import com.realdolmen.service.ClientService;
 
-@Named("cBean")
+@Named
 @SessionScoped
 public class ClientBean implements Serializable {
 	private static final long serialVersionUID = 5733569327636548324L;

@@ -8,7 +8,7 @@ public class Partner extends User {
 	@NotNull
 	private String company;
 
-	protected Partner() {
+	public Partner() {
 		super();
 	}
 

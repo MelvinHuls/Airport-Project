@@ -40,9 +40,18 @@ public class PartnerRepository {
 
 	public List<Partner> findAll() {
 		try {
-			return em.createNamedQuery("SELECT p FROM Partner p", Partner.class).getResultList();
+			return em.createNamedQuery("SELECT p FROM User p", Partner.class).getResultList();
 		} catch (NoResultException e) {
 			return Collections.emptyList();
+		}
+	}
+
+	public Partner findByEmail(String email) {
+		try {
+			return em.createNamedQuery("SELECT p from User p WHERE p.email LIKE :email", Partner.class)
+					.setParameter("email", email).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 }

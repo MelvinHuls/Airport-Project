@@ -34,7 +34,7 @@ public class ClientRepository {
 
 	public Client findByEmail(String email) {
 		try {
-			return em.createNamedQuery("SELECT c from Client c WHERE c.email LIKE :email", Client.class)
+			return em.createNamedQuery("SELECT c from User c WHERE c.email LIKE :email", Client.class)
 					.setParameter("email", email).getSingleResult();
 		} catch (NoResultException e) {
 			return null;
@@ -43,11 +43,10 @@ public class ClientRepository {
 
 	public List<Client> findAll() {
 		try {
-			return em.createNamedQuery("SELECT c FROM Client c", Client.class).getResultList();
+			return em.createNamedQuery("SELECT c FROM User c", Client.class).getResultList();
 		} catch (NoResultException e) {
 			return Collections.emptyList();
 		}
 	}
-	
-	
+
 }

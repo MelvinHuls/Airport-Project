@@ -34,9 +34,18 @@ public class EmployeeRepository {
 
 	public List<Employee> findAll() {
 		try {
-			return em.createNamedQuery("SELECT e FROM Employee e", Employee.class).getResultList();
+			return em.createNamedQuery("SELECT e FROM User e", Employee.class).getResultList();
 		} catch (NoResultException e) {
 			return Collections.emptyList();
+		}
+	}
+
+	public Employee findByEmail(String email) {
+		try {
+			return em.createNamedQuery("SELECT e from User e WHERE e.email LIKE :email", Employee.class)
+					.setParameter("email", email).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 }

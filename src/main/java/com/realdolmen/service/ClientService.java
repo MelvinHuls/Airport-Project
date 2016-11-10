@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import com.realdolmen.domain.Client;
 import com.realdolmen.repository.ClientRepository;
 
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
+@Remote
 @Stateless
 @LocalBean
 public class ClientService implements SessionRemote, AbstractService<Client> {
