@@ -115,9 +115,32 @@ public class Discounts {
 		
 		System.out.println("returning " + discountedPrice);
 		
+		return discountedPrice * seats;
+	}
+	
+	public Double calculateSeatPrice(Double price, Date date) {	
+		Double discountedPrice = price;
+		 Calendar c = Calendar.getInstance();
+		c.set(date.getYear(), date.getMonth(), date.getDay());
+		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				discountedPrice *= (1-weekendDiscount);
+		}
+		
+		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
+				discountedPrice *= (1-nightlyDiscount);
+		}
+		
+		Iterator<Discount> iterator = discounts.iterator();
+		while(iterator.hasNext()) {
+			Discount discount = iterator.next();
+			if(discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
+					discountedPrice *= (1-discount.getPercentage());
+			}
+		}
+		
 		return discountedPrice;
 	}
-
+	
 	public Map<Integer, Double> getSeatsDiscount() {
 		return seatsDiscount;
 	}

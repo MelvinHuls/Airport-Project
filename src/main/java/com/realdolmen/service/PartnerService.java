@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Remote;
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,11 +12,8 @@ import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
-import com.realdolmen.repository.FlightRepository;
-import com.realdolmen.repository.LocationRepository;
 import com.realdolmen.repository.PartnerRepository;
 
-@Remote
 @Stateful
 @LocalBean
 // @EJB(name="java:global/RAir/PartnerService", beanInterface =
@@ -27,16 +22,14 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	private Partner partner;
 
 	private Flight flight;
+	
+	private Boolean editFlight;
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@EJB
 	private PartnerRepository pRepo;
-	@RequestScoped
-	private FlightRepository fRepo;
-	@RequestScoped
-	private LocationRepository lRepo;
 
 	@Override
 	public void create(Partner partner) {
@@ -63,7 +56,7 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		return pRepo.findAll();
 	}
 
-	public PartnerService() {
+	protected PartnerService() {
 	}
 
 	public PartnerService(Partner partner) {
@@ -85,19 +78,18 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 	@Override
 	public List<Flight> obtainFlights() {
-		partner = new Partner("Gerald", "123", "Gerald@airliner.com", "airliner");
-		return fRepo.getFlightsByCompany(partner.getCompany(), partner);
+		return pRepo.getFlightsByCompany(partner.getCompany(), partner);
 	}
 
 	@Override
 	public Flight getFlight(Long id) throws AccessRightsException {
-		return fRepo.getFlight(partner, id);
+		return pRepo.getFlight(partner, id);
 	}
 
 	@Override
 	public String changeFlight() throws AccessRightsException {
 
-		return fRepo.changeFlight(flight, partner);
+		return pRepo.changeFlight(flight, partner);
 	}
 
 	public Flight getFlight() {
@@ -108,8 +100,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		this.flight = flight;
 	}
 
-	public String storeFlight(Flight flight) {
+	public String editFlight(Flight flight) {
 		this.flight = flight;
+		this.editFlight = true;
 		return "edit";
 	}
 
@@ -117,8 +110,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		this.flight = new Flight();
 		flight.setDeparture(new Location());
 		flight.setDestination(new Location());
+		editFlight = false;
 		System.out.println("new flight");
-		return "add";
+		return "edit";
 	}
 
 	public String addFlight() {
@@ -128,15 +122,30 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 			return "failed";
 		}
-		return fRepo.addFlight(flight, partner);
+
+		flight.setDeparture(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDeparture().getCountry())
+				.setParameter("airport", flight.getDeparture().getAirport()).getSingleResult());
+		flight.setDestination(em
+				.createQuery("select l from Location l where l.country = :country and l.airport = :airport",
+						Location.class)
+				.setParameter("country", flight.getDestination().getCountry())
+				.setParameter("airport", flight.getDestination().getAirport()).getSingleResult());
+		flight.setCompany(partner.getCompany());
+
+		em.persist(this.flight);
+		return "success";
 	}
 
 	public List<String> getCountries() {
-		return lRepo.getCountries();
+		return em.createQuery("select distinct c.country from Location c", String.class).getResultList();
 	}
 
 	public List<String> getAirportsCountry(String country) {
-		return lRepo.getAirportsCountry(country);
+		return em.createQuery("select distinct c.airport from Location c where c.country = :country", String.class)
+				.setParameter("country", country).getResultList();
 	}
 
 	public String deleteFlight() {
@@ -144,7 +153,13 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		return "deleted";
 	}
 
-	public Partner findByEmail(String email) {
-		return pRepo.findByEmail(email);
+	public Boolean getEditFlight() {
+		return editFlight;
 	}
+
+	public void setEditFlight(Boolean editFlight) {
+		this.editFlight = editFlight;
+	}
+	
+	
 }

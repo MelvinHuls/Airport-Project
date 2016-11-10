@@ -198,37 +198,64 @@ public class Flight {
 		this.discounts = discounts;
 	}
 
-	public Double calculatePriceEconomy() {
-		if (discounts == null) {
-			return this.priceEconomy * 1.1; 
-		}
-		if (this.customMarginPriceEconomy != null) {
-			return discounts.calculatePrice(this.customMarginPriceEconomy, this.departureTime, this.seatsEconomy);
-		}
-		System.out.println(this.priceEconomy);
-		System.out.println(this.departureTime);
-		System.out.println(this.seatsEconomy);
-		return discounts.calculatePrice(this.priceEconomy * 1.1, this.departureTime, this.seatsEconomy);
+	public Double calculatePriceOneSeatEconomy() {
+		return this.calculateSeatPrice(this.priceEconomy, this.customMarginPriceEconomy);
 	}
 
-	public Double calculatePriceBusiness() {
-		if (discounts == null) {
-			return this.priceBusiness * 1.1;
-		}
-		if (this.customMarginPriceBusiness != null) {
-			return discounts.calculatePrice(this.customMarginPriceBusiness, this.departureTime, this.seatsBusiness);
-		}
-		return discounts.calculatePrice(this.priceBusiness * 1.1, this.departureTime, this.seatsBusiness);
+	public Double calculatePriceOneSeatBusiness() {
+		return this.calculateSeatPrice(this.priceBusiness, this.customMarginPriceBusiness);
 	}
 
-	public Double calculatePriceFirstClass() {
-		if (discounts == null) {
-			return this.priceFirstClass * 1.1;
+	public Double calculatePriceOneSeatFirstClass() {
+		return this.calculateSeatPrice(this.priceFirstClass, this.customMarginPriceFirstClass);
+	}
+
+	private Double calculateSeatPrice(Double basePrice, Double customMarginPrice) {
+		if (customMarginPrice != null) {
+			if (this.departureTime != null && discounts != null) {
+				return discounts.calculateSeatPrice(customMarginPrice, this.departureTime);
+			} else {
+				return customMarginPrice;
+			}
+		} else if (basePrice == null) {
+			return null;
+		} else if (discounts == null || this.departureTime == null) {
+			return basePrice * 1.1;
 		}
-		if (this.customMarginPriceFirstClass != null) {
-			return discounts.calculatePrice(this.customMarginPriceFirstClass, this.departureTime, this.seatsFirstClass);
+
+		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
+	}
+	
+	public Double calculateTotalPriceEconomy() {
+		return this.calculateTotalPrice(this.priceEconomy, this.customMarginPriceEconomy, this.seatsEconomy);
+	}
+
+	public Double calculateTotalPriceBusiness() {
+		return this.calculateTotalPrice(this.priceBusiness, this.customMarginPriceBusiness, this.seatsBusiness);
+	}
+
+	public Double calculateTotalPriceFirstClass() {
+		return this.calculateTotalPrice(this.priceFirstClass, this.customMarginPriceFirstClass, this.seatsFirstClass);
+	}
+	
+	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats) {
+		if (seats == null || seats == 0)
+			return 0d;
+
+		if (customMarginPrice != null) {
+			if (this.departureTime != null) {
+				return discounts.calculatePrice(customMarginPrice, this.departureTime, seats);
+			} else {
+				return customMarginPrice * seats;
+			}
+		} else if (basePrice == null) {
+			return null;
+		} else if (discounts == null || this.getDepartureTime() == null) {
+			return basePrice * 1.1 * seats;
 		}
-		return discounts.calculatePrice(this.priceFirstClass * 1.1, this.departureTime, this.seatsFirstClass);
+
+		return discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats);
+
 	}
 
 	public Double getCustomMarginPriceEconomy() {
