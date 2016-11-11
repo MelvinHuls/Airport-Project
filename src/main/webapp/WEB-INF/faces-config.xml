@@ -127,7 +127,7 @@
 			<to-view-id>/overviewLocations.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/searchFlights.xhtml</from-view-id>
 		<navigation-case>
@@ -135,15 +135,19 @@
 			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/flightDetails.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>return</from-outcome>
 			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>booking</from-outcome>
+			<to-view-id>/bookFlight.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/resultSearchedFlights.xhtml</from-view-id>
 		<navigation-case>
@@ -151,4 +155,17 @@
 			<to-view-id>/flightDetails.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/bookFlight.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/bookingFailure.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/bookingSuccess.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>

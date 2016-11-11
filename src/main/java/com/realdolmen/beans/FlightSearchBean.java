@@ -13,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.realdolmen.Exceptions.LackingPricingInformationException;
 import com.realdolmen.Exceptions.LackingSearchCriteriaException;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.FlightSearch;
@@ -76,7 +77,8 @@ public class FlightSearchBean {
 				.setParameter("country", country).getResultList();
 	}
 
-	private List<Flight> portCompDestCriteriaQuery(Date dateDeparture, Location departure, Location destination) throws LackingSearchCriteriaException {
+	private List<Flight> portCompDestCriteriaQuery(Date dateDeparture, Location departure, Location destination)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -98,8 +100,7 @@ public class FlightSearchBean {
 						+ "and dep.country=:depcountryairport and dep.airport=:depairport "
 						+ "and dest.country=:destcountryairport and dest.airport=:destairport "
 						+ "and f.company=:airlineCompany", Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
 				.setParameter("depcountryairport", departure.getCountry())
 				.setParameter("depairport", departure.getAirport())
@@ -108,7 +109,8 @@ public class FlightSearchBean {
 				.setParameter("airlineCompany", this.flight.getAirlineCompany()).getResultList();
 	}
 
-	private List<Flight> portDestCriteriaQuery(Date dateDeparture, Location departure, Location destination) throws LackingSearchCriteriaException {
+	private List<Flight> portDestCriteriaQuery(Date dateDeparture, Location departure, Location destination)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -129,8 +131,7 @@ public class FlightSearchBean {
 						+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay "
 						+ "and dep.country=:depcountryairport and dep.airport=:depairport "
 						+ "and dest.country=:destcountryairport and dest.airport=:destairport ", Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
 				.setParameter("depcountryairport", departure.getCountry())
 				.setParameter("depairport", departure.getAirport())
@@ -138,7 +139,8 @@ public class FlightSearchBean {
 				.setParameter("destairport", destination.getAirport()).getResultList();
 	}
 
-	private List<Flight> portCompCriteriaQuery(Date dateDeparture, Location departure) throws LackingSearchCriteriaException {
+	private List<Flight> portCompCriteriaQuery(Date dateDeparture, Location departure)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -160,12 +162,12 @@ public class FlightSearchBean {
 				Flight.class).setParameter(seatsName, this.flight.getSeats())
 				.setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
-				.setParameter("countryairport", departure.getCountry())
-				.setParameter("airport", departure.getAirport())
+				.setParameter("countryairport", departure.getCountry()).setParameter("airport", departure.getAirport())
 				.setParameter("airlineCompany", this.flight.getAirlineCompany()).getResultList();
 	}
 
-	private List<Flight> portCriteriaQuery(Date dateDeparture, Location departure) throws LackingSearchCriteriaException {
+	private List<Flight> portCriteriaQuery(Date dateDeparture, Location departure)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -186,14 +188,14 @@ public class FlightSearchBean {
 								+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay "
 								+ "and dep.country=:countryairport and dep.airport=:airport ",
 						Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
-				.setParameter("countryairport", departure.getCountry())
-				.setParameter("airport", departure.getAirport()).getResultList();
+				.setParameter("countryairport", departure.getCountry()).setParameter("airport", departure.getAirport())
+				.getResultList();
 	}
 
-	private List<Flight> regionCompCriteriaQuery(Date dateDeparture, GlobalRegion region) throws LackingSearchCriteriaException {
+	private List<Flight> regionCompCriteriaQuery(Date dateDeparture, GlobalRegion region)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -214,11 +216,10 @@ public class FlightSearchBean {
 								+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay "
 								+ "and dep.region=:region " + "and f.company=:airlineCompany",
 						Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
-				.setParameter("region", region)
-				.setParameter("airlineCompany", this.flight.getAirlineCompany()).getResultList();
+				.setParameter("region", region).setParameter("airlineCompany", this.flight.getAirlineCompany())
+				.getResultList();
 	}
 
 	private List<Flight> minCompCriteriaQuery(Date dateDeparture) throws LackingSearchCriteriaException {
@@ -242,8 +243,7 @@ public class FlightSearchBean {
 								+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay "
 								+ "and f.company=:airlineCompany",
 						Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
 				.setParameter("airlineCompany", this.flight.getAirlineCompany()).getResultList();
 	}
@@ -268,13 +268,12 @@ public class FlightSearchBean {
 						"select f from Flight as f, Location as dep where " + classQuery + " and dep.id=f.departure"
 								+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay ",
 						Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
-				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
-				.getResultList();
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
+				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000)).getResultList();
 	}
 
-	private List<Flight> regionCriteriaQuery(Date dateDeparture, GlobalRegion region) throws LackingSearchCriteriaException {
+	private List<Flight> regionCriteriaQuery(Date dateDeparture, GlobalRegion region)
+			throws LackingSearchCriteriaException {
 		String seatsName;
 		String classQuery;
 		if (flight.getFlightclass().equals(FlightClass.ECONOMY)) {
@@ -295,8 +294,7 @@ public class FlightSearchBean {
 								+ /* id */" and f.departureTime > :departureDate and f.departureTime < :departureDateEndDay "
 								+ "and dep.region=:region",
 						Flight.class)
-				.setParameter(seatsName, this.flight.getSeats())
-				.setParameter("departureDate", dateDeparture)
+				.setParameter(seatsName, this.flight.getSeats()).setParameter("departureDate", dateDeparture)
 				.setParameter("departureDateEndDay", new Date(dateDeparture.getTime() + 86400000))
 				.setParameter("region", region).getResultList();
 	}
@@ -309,9 +307,11 @@ public class FlightSearchBean {
 				if (flight.getDestination().getAirport() != null && !flight.getDestination().getCountry().equals("")
 						&& !flight.getDestination().getAirport().equals("")) {
 					if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
-						return portCompDestCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture(), this.flight.getDestination());
+						return portCompDestCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture(),
+								this.flight.getDestination());
 					} else {
-						return portDestCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture(), this.flight.getDestination());
+						return portDestCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture(),
+								this.flight.getDestination());
 					}
 				} else if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
 					return portCompCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture());
@@ -346,49 +346,55 @@ public class FlightSearchBean {
 		}
 	}
 
-	public Double calculateTotalPrice(Flight actualFlight) {
+	public Double calculateTotalPrice(Flight actualFlight) throws LackingPricingInformationException {
 		return actualFlight.calculateTotalPriceClass(flight.getFlightclass(), flight.getSeats());
 	}
 
 	public Double calculateDiscount(Flight actualFlight) {
 		return actualFlight.calculateDiscountClass(flight.getFlightclass(), flight.getSeats());
 	}
-	
-	
-	public List<Flight> getReturnFlights(Flight outwardFlight) throws LackingSearchCriteriaException {
-		/*flight.getSeats()
-		flight.getDestination() = outwardFlight.getDestination()
-		flight.getDateDeparture() = flight.getDateReturn()
-		flight.getFlightclass()*/
-		if (flight.getFlightclass() != null && flight.getSeats() != null && flight.getDateReturn() != null) {
-			if (flight.getSetAirport() == 1 && outwardFlight.getDestination().getCountry() != null
-					&& outwardFlight.getDestination().getAirport() != null && !outwardFlight.getDestination().getCountry().equals("")
-					&& !outwardFlight.getDestination().getAirport().equals("")) {
-				if (flight.getDeparture().getAirport() != null && !flight.getDeparture().getCountry().equals("")
-						&& !flight.getDeparture().getAirport().equals("")) {
-					if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
-						return portCompDestCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination(), this.flight.getDeparture());
-					} else {
-						return portDestCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination(), this.flight.getDeparture());
-					}
-				} else if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
-					return portCompCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination());
-				} else {
-					return portCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination());
-				}
-			} else if (flight.getSetAirport() == 2 && flight.getRegion() != null) {
-				if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
-					return regionCompCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination().getRegion());
-				}
-				return regionCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination().getRegion());
-			} else if (flight.getSetAirport() == 0) {
-				if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
-					return minCompCriteriaQuery(flight.getDateReturn());
-				}
-				return minimalCriteriaQuery(flight.getDateReturn());
-			}
-		}
 
-		throw new LackingSearchCriteriaException("The search criteria were not properly filled in");
+	public List<Flight> getReturnFlights(Flight outwardFlight) throws LackingSearchCriteriaException {
+		/*
+		 * flight.getSeats() flight.getDestination() =
+		 * outwardFlight.getDestination() flight.getDateDeparture() =
+		 * flight.getDateReturn() flight.getFlightclass()
+		 */
+		if (flight.getDateReturn() != null) {
+			if (flight.getFlightclass() != null && flight.getSeats() != null) {
+				if (flight.getSetAirport() == 1 && outwardFlight.getDestination().getCountry() != null
+						&& outwardFlight.getDestination().getAirport() != null
+						&& !outwardFlight.getDestination().getCountry().equals("")
+						&& !outwardFlight.getDestination().getAirport().equals("")) {
+					if (flight.getDeparture().getAirport() != null && !flight.getDeparture().getCountry().equals("")
+							&& !flight.getDeparture().getAirport().equals("")) {
+						if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
+							return portCompDestCriteriaQuery(this.flight.getDateReturn(),
+									outwardFlight.getDestination(), this.flight.getDeparture());
+						} else {
+							return portDestCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination(),
+									this.flight.getDeparture());
+						}
+					} else if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
+						return portCompCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination());
+					} else {
+						return portCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination());
+					}
+				} else if (flight.getSetAirport() == 2 && flight.getRegion() != null) {
+					if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
+						return regionCompCriteriaQuery(this.flight.getDateReturn(),
+								outwardFlight.getDestination().getRegion());
+					}
+					return regionCriteriaQuery(this.flight.getDateReturn(), outwardFlight.getDestination().getRegion());
+				} else if (flight.getSetAirport() == 0) {
+					if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
+						return minCompCriteriaQuery(flight.getDateReturn());
+					}
+					return minimalCriteriaQuery(flight.getDateReturn());
+				}
+			}
+			throw new LackingSearchCriteriaException("The search criteria were not properly filled in");
+		}
+		return new ArrayList<Flight>();
 	}
 }

@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import com.realdolmen.Exceptions.LackingPricingInformationException;
+import com.realdolmen.Exceptions.NotEnoughSeatsException;
 import com.realdolmen.enumerations.FlightClass;
 
 @Entity
@@ -15,6 +18,9 @@ public class Flight {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private Integer version;
+
 	private Integer seatsEconomy;
 	private Integer seatsBusiness;
 	private Integer seatsFirstClass;
@@ -228,7 +234,7 @@ public class Flight {
 		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
 	}
 
-	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats) {
+	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats) throws LackingPricingInformationException {
 		if (flightClass.equals(FlightClass.ECONOMY)) {
 			return calculateTotalPriceEconomy(seats);
 		} else if (flightClass.equals(FlightClass.BUSINESS)) {
@@ -239,19 +245,19 @@ public class Flight {
 		return 0d;
 	}
 
-	public Double calculateTotalPriceEconomy(Integer seats) {
+	public Double calculateTotalPriceEconomy(Integer seats) throws LackingPricingInformationException {
 		return this.calculateTotalPrice(this.priceEconomy, this.customMarginPriceEconomy, seats);
 	}
 
-	public Double calculateTotalPriceBusiness(Integer seats) {
+	public Double calculateTotalPriceBusiness(Integer seats) throws LackingPricingInformationException {
 		return this.calculateTotalPrice(this.priceBusiness, this.customMarginPriceBusiness, seats);
 	}
 
-	public Double calculateTotalPriceFirstClass(Integer seats) {
+	public Double calculateTotalPriceFirstClass(Integer seats) throws LackingPricingInformationException {
 		return this.calculateTotalPrice(this.priceFirstClass, this.customMarginPriceFirstClass, seats);
 	}
 
-	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats) {
+	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats) throws LackingPricingInformationException {
 		if (seats == null || seats == 0)
 			return 0d;
 
@@ -262,7 +268,7 @@ public class Flight {
 				return customMarginPrice * seats;
 			}
 		} else if (basePrice == null) {
-			return null;
+			throw new LackingPricingInformationException();
 		} else if (discounts == null || this.getDepartureTime() == null) {
 			return basePrice * 1.1 * seats;
 		}
@@ -354,7 +360,34 @@ public class Flight {
 		string += "destination: " + this.destination + "\n";
 		string += "departureTime: " + this.departureTime + "\n";
 		string += "duration: " + this.duration + "\n";
-		
+
 		return string;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void bookSeats(FlightClass flightclass, Integer seats) throws NotEnoughSeatsException {
+		switch (flightclass) {
+		case ECONOMY:
+			if (this.seatsEconomy < seats) {
+				throw new NotEnoughSeatsException();
+			}
+			this.seatsEconomy -= seats;
+			break;
+		case BUSINESS:
+			if (this.seatsBusiness < seats) {
+				throw new NotEnoughSeatsException();
+			}
+			this.seatsBusiness -= seats;
+			break;
+		case FIRST_CLASS:
+			if (this.seatsFirstClass < seats) {
+				throw new NotEnoughSeatsException();
+			}
+			this.seatsFirstClass -= seats;
+			break;
+		}
 	}
 }

@@ -152,6 +152,7 @@
 
 	</h:form>
 
+	<h3>Details Second flight</h3>
 	<!--  DETAILS RETURN FLIGHT -->
 	<h:form id="formReturn">
 		<p:panelGrid columns="3" layout="grid"
@@ -291,8 +292,18 @@
 		</p:panelGrid>
 	</h:form>
 
+	<h:form>
+		<p:commandButton value="Book Flight"
+			rendered="#{checkFlightInfoService.returnFlightNotSelected()}"
+			action="booking" />
+		<p:commandButton value="Book Flights"
+			rendered="#{checkFlightInfoService.returnFlightSelected()}"
+			action="booking" />
+	</h:form>
 
 
+	<h2>Choose once of the following flights as your return flight or
+		click 'book now' to only book an outward flight</h2>
 	<!--  RETURN FLIGHTS  -->
 	<h:form>
 		<p:dataTable

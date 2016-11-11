@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 
 import org.junit.Test;
 
+import com.realdolmen.enumerations.FlightClass;
 import com.realdolmen.enumerations.GlobalRegion;
+import com.realdolmen.enumerations.PaymentStatus;
 import com.realdolmen.utilities.persistence.JpaPersistenceTest;
 
 public class BookingTest extends JpaPersistenceTest {
@@ -24,9 +26,10 @@ public class BookingTest extends JpaPersistenceTest {
 				GlobalRegion.NORTH_AMERICA);
 		em.persist(departure);
 		em.persist(destination);
-		Flight flight = new Flight("Flyan Air", 25, 200, 400, new Date(2016,11,30,10,0,0), new Date(2016,11,30,23,30,0), departure, destination);
+		Flight flight = new Flight("Flyan Air", 25, 200, 400, 250d, 300d, 500d, new Date(2016,11,30,10,0,0), new Date(2016,11,30,23,30,0), departure, destination);
 		em.persist(flight);
-		booking = new Booking(client, flight);
+		booking = new Booking(client, flight, PaymentStatus.PAYMENT_PENDING, FlightClass.ECONOMY, 5);
+		booking.calculateAndSetTotalPrice();
 		assertNull(booking.getId());
 		em.persist(booking);
 		assertNotNull(booking.getId());

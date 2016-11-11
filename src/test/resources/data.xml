@@ -19,5 +19,5 @@
 	<flight id="500" company="airliner" seatsEconomy="500"
 		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"
 		priceBusiness="300" priceFirstClass="500" departureTime="2017-01-19 15:00:00" duration="1992-01-01 08:30:00"
-		departure_id="501" destination_id="502" />
+		departure_id="501" destination_id="502" version="0"/>
 </dataset>

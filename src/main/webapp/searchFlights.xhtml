@@ -16,12 +16,13 @@
 
 	<h:form id="formA">
 		<p:panelGrid id="panelA" columns="2" layout="grid">
-			<p:outputLabel value="Amount of seats*" id="seatslabel" for="seats"/>
+			<p:outputLabel value="Amount of seats*" id="seatslabel" for="seats" />
 			<h:panelGroup>
-				<p:inputMask value="#{flightSearchBean.flight.seats}" id="seats" mask="9?999999999" maxlength="10">
+				<p:inputText value="#{flightSearchBean.flight.seats}" id="seats">
+					<p:keyFilter regEx="/[0-9]+/" />
 					<p:ajax process="@this" event="change" update="formA:seats"
 						partialSubmit="true" />
-				</p:inputMask>				
+				</p:inputText>
 				<p:message for="seats" />
 			</h:panelGroup>
 
@@ -52,7 +53,8 @@
 				value="What way would you like to input your locations?" />
 			<p:selectOneRadio id="console"
 				value="#{flightSearchBean.flight.setAirport}">
-				<p:ajax event="change" process="destdate depdate" partialSubmit="true" />
+				<p:ajax event="change" process="destdate depdate"
+					partialSubmit="true" />
 				<p:ajax event="change" update="panelA"
 					listener="#{flightSearchBean.flight.emptyCountrySelection()}" />
 				<f:selectItem itemLabel="Departure(and destination) airports"
@@ -126,12 +128,12 @@
 
 			<p:outputLabel for="destdate" value="Date of Return" />
 			<p:calendar id="destdate"
-				value="#{flightSearchBean.flight.dateReturn}"
-				pattern="MM/dd/yyyy">
+				value="#{flightSearchBean.flight.dateReturn}" pattern="MM/dd/yyyy">
 			</p:calendar>
 		</p:panelGrid>
 
-		<p:commandButton value="Search flights" action="searchFlights" update="panelA"/>
+		<p:commandButton value="Search flights" action="searchFlights"
+			update="panelA" />
 	</h:form>
 
 </h:body>
