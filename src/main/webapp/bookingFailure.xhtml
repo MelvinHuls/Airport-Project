@@ -7,14 +7,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>OMYGAWD NO!!!!</title>
-</h:head>
 
-<h:body>
-	<h1>The unthinkable has happened and your flight failed to be
-		booked</h1>
-	<h3>Lets hope this was intended in case this was your demo</h3>
-</h:body>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">OMYGAWD NO!!!!</ui:define>
+	<ui:define name="content">
+		<h1>The unthinkable has happened and your flight failed to be
+			booked</h1>
+		<h3>Lets hope this was intended in case this was your demo</h3>
+	</ui:define>
+</ui:composition>
 </html>
 

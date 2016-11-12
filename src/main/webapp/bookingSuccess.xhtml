@@ -7,12 +7,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Thank you come again!</title>
-</h:head>
-
-<h:body>
-	<h1>Your flight has been successfully booked</h1>
-</h:body>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Thank you come again!</ui:define>
+	<ui:define name="content">
+		<h1>Your flight has been successfully booked</h1>
+	</ui:define>
+</ui:composition>
 </html>
-

@@ -7,46 +7,44 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Overview Flights</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Overview Flights</ui:define>
+	<ui:define name="content">
+		<h1>Flights you can edit</h1>
 
-<h:body>
-	<h1>Flights you can edit</h1>
+		<p:dataTable value="#{rAirBean.partnerService.obtainFlights()}"
+			var="flight" id="listOfFlights" sortMode="multiple">
+			<p:column>
+				<f:facet name="header">Departure Airport</f:facet>
+				<p:outputLabel value="#{flight.departure.airport}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Departure Country</f:facet>
+				<p:outputLabel value="#{flight.departure.country}" />
+			</p:column>
 
-	<p:dataTable value="#{rAirBean.partnerService.obtainFlights()}"
-		var="flight" id="listOfFlights" sortMode="multiple">
-		<p:column>
-			<f:facet name="header">Departure Airport</f:facet>
-			<p:outputLabel value="#{flight.departure.airport}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Departure Country</f:facet>
-			<p:outputLabel value="#{flight.departure.country}" />
-		</p:column>
+			<p:column>
+				<f:facet name="header">Destination Airport</f:facet>
+				<p:outputLabel value="#{flight.destination.airport}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Destination Country</f:facet>
+				<p:outputLabel value="#{flight.destination.country}" />
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Destination Airport</f:facet>
-			<p:outputLabel value="#{flight.destination.airport}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Destination Country</f:facet>
-			<p:outputLabel value="#{flight.destination.country}" />
-		</p:column>
+			<p:column>
+				<h:form styleClass="forms">
+					<p:commandButton icon="ui-icon-search"
+						action="#{rAirBean.partnerService.editFlight(flight)}" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
 
-		<p:column>
-			<h:form>
-				<p:commandButton icon="ui-icon-search"
-					action="#{rAirBean.partnerService.editFlight(flight)}" />
-			</h:form>
-		</p:column>
-	</p:dataTable>
+		<h:form styleClass="forms">
+			<p:commandButton value="Add flight"
+				action="#{rAirBean.partnerService.newFlight()}" />
+		</h:form>
 
-	<h:form>
-		<p:commandButton value="Add flight"
-			action="#{rAirBean.partnerService.newFlight()}" />
-	</h:form>
-
-</h:body>
-
+	</ui:define>
+</ui:composition>
 </html>

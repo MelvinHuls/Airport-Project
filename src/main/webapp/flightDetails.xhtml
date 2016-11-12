@@ -7,354 +7,353 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Details of flight</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Details of flight</ui:define>
+	<ui:define name="content">
+		<h1>Here are the details of your flight</h1>
 
-<h:body>
-	<h1>Here are the details of your flight</h1>
+		<h:form styleClass="forms">
+			<p:panelGrid styleClass="panelGrids"  columns="3" layout="grid">
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in economy:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.seatsEconomy}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-	<h:form>
-		<p:panelGrid columns="3" layout="grid">
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in economy:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.seatsEconomy}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in business:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.seatsBusiness}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in business:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.seatsBusiness}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in first class:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.seatsFirstClass}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in first class:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.seatsFirstClass}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
-
-			<h:panelGroup>
-				<p:outputLabel value="Economy seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.priceEconomy}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.customMarginPriceEconomy}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanEco">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatEconomy()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Economy seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.priceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.customMarginPriceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanEco">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatEconomy()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-			<h:panelGroup>
-				<p:outputLabel value="Business seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.priceBusiness}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.customMarginPriceBusiness}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanBuss">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatBusiness()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Business seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.priceBusiness}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.customMarginPriceBusiness}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanBuss">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatBusiness()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-			<h:panelGroup>
-				<p:outputLabel value="First class seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.priceFirstClass}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.customMarginPriceFirstClass}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanFC">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatFirstClass()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="First class seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.priceFirstClass}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.customMarginPriceFirstClass}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanFC">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.calculatePriceOneSeatFirstClass()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-			<p:outputLabel value="Departure airport:  " />
-			<h:panelGroup>
-				<p:outputLabel value="Country airport:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.departure.country}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Airport Name:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.departure.airport}" />
-			</h:panelGroup>
+				<p:outputLabel value="Departure airport:  " />
+				<h:panelGroup>
+					<p:outputLabel value="Country airport:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.departure.country}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Airport Name:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.departure.airport}" />
+				</h:panelGroup>
 
-			<p:outputLabel value="Destination airport:  " />
-			<h:panelGroup>
-				<p:outputLabel value="Country airport:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.destination.country}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Airport Name:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.destination.airport}" />
-			</h:panelGroup>
+				<p:outputLabel value="Destination airport:  " />
+				<h:panelGroup>
+					<p:outputLabel value="Country airport:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.destination.country}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Airport Name:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.destination.airport}" />
+				</h:panelGroup>
 
-			<h:panelGroup>
-				<p:outputLabel value="Departure Time:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.departureTime}">
-					<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Duration:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.outwardFlight.duration}">
-					<f:convertDateTime pattern="HH:mm" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup />
-		</p:panelGrid>
+				<h:panelGroup>
+					<p:outputLabel value="Departure Time:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.departureTime}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Duration:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.outwardFlight.duration}">
+						<f:convertDateTime pattern="HH:mm" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup />
+			</p:panelGrid>
 
-	</h:form>
+		</h:form>
 
-	<h3>Details Second flight</h3>
-	<!--  DETAILS RETURN FLIGHT -->
-	<h:form id="formReturn">
-		<p:panelGrid columns="3" layout="grid"
-			rendered="#{checkFlightInfoService.returnFlightSelected()}">
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in economy:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.seatsEconomy}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
+		<h3>Details Second flight</h3>
+		<!--  DETAILS RETURN FLIGHT -->
+		<h:form id="formReturn" styleClass="forms">
+			<p:panelGrid styleClass="panelGrids"  columns="3" layout="grid"
+				rendered="#{checkFlightInfoService.returnFlightSelected()}">
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in economy:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.seatsEconomy}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in business:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.seatsBusiness}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in business:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.seatsBusiness}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-			<h:panelGroup>
-				<p:outputLabel value="Remaining seats in first class:   " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.seatsFirstClass}" />
-			</h:panelGroup>
-			<h:panelGroup />
-			<h:panelGroup />
+				<h:panelGroup>
+					<p:outputLabel value="Remaining seats in first class:   " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.seatsFirstClass}" />
+				</h:panelGroup>
+				<h:panelGroup />
+				<h:panelGroup />
 
-			<h:panelGroup>
-				<p:outputLabel value="Economy seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.priceEconomy}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.customMarginPriceEconomy}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatEconomy()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-
-
-			<h:panelGroup>
-				<p:outputLabel value="Business seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.priceBusiness}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.customMarginPriceBusiness}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatBusiness()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Economy seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.priceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.customMarginPriceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatEconomy()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-			<h:panelGroup>
-				<p:outputLabel value="First class seat base Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.priceFirstClass}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.customMarginPriceFirstClass}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatFirstClass()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Business seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.priceBusiness}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.customMarginPriceBusiness}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatBusiness()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-			<p:outputLabel value="Departure airport:  " />
-			<h:panelGroup>
-				<p:outputLabel value="Country airport:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.departure.country}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Airport Name:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.departure.airport}" />
-			</h:panelGroup>
-
-			<p:outputLabel value="Destination airport:  " />
-			<h:panelGroup>
-				<p:outputLabel value="Country airport:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.destination.country}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Airport Name:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.destination.airport}" />
-			</h:panelGroup>
-
-			<h:panelGroup>
-				<p:outputLabel value="Departure Time:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.departureTime}">
-					<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:outputLabel value="Duration:  " />
-				<p:outputLabel
-					value="#{checkFlightInfoService.returnFlight.duration}">
-					<f:convertDateTime pattern="HH:mm" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup />
-		</p:panelGrid>
-	</h:form>
-
-	<h:form>
-		<p:commandButton value="Book Flight"
-			rendered="#{checkFlightInfoService.returnFlightNotSelected()}"
-			action="booking" />
-		<p:commandButton value="Book Flights"
-			rendered="#{checkFlightInfoService.returnFlightSelected()}"
-			action="booking" />
-	</h:form>
+				<h:panelGroup>
+					<p:outputLabel value="First class seat base Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.priceFirstClass}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.customMarginPriceFirstClass}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.calculatePriceOneSeatFirstClass()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
 
 
-	<h2>Choose once of the following flights as your return flight or
-		click 'book now' to only book an outward flight</h2>
-	<!--  RETURN FLIGHTS  -->
-	<h:form>
-		<p:dataTable
-			value="#{flightSearchBean.getReturnFlights(checkFlightInfoService.outwardFlight)}"
-			var="flight" id="listOfFlights" sortMode="multiple">
-			<p:column sortBy="#{flightSearchBean.calculateTotalPrice(flight)}"
-				headerText="Total Price">
-				<p:outputLabel
-					value="#{flightSearchBean.calculateTotalPrice(flight)}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</p:column>
+				<p:outputLabel value="Departure airport:  " />
+				<h:panelGroup>
+					<p:outputLabel value="Country airport:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.departure.country}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Airport Name:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.departure.airport}" />
+				</h:panelGroup>
 
-			<p:column>
-				<f:facet name="header">Discount</f:facet>
-				<p:outputLabel value="#{flightSearchBean.calculateDiscount(flight)}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</p:column>
+				<p:outputLabel value="Destination airport:  " />
+				<h:panelGroup>
+					<p:outputLabel value="Country airport:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.destination.country}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Airport Name:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.destination.airport}" />
+				</h:panelGroup>
 
-			<p:column sortBy="departureTime" headerText="Departure Time">
-				<p:outputLabel value="#{flight.departureTime}">
-					<f:convertDateTime type="both" timeStyle="short" />
-				</p:outputLabel>
-			</p:column>
+				<h:panelGroup>
+					<p:outputLabel value="Departure Time:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.departureTime}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Duration:  " />
+					<p:outputLabel
+						value="#{checkFlightInfoService.returnFlight.duration}">
+						<f:convertDateTime pattern="HH:mm" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup />
+			</p:panelGrid>
+		</h:form>
 
-			<p:column>
-				<f:facet name="header">Arrival Time</f:facet>
-				<p:outputLabel value="#{flight.arrivalTime}">
-					<f:convertDateTime type="both" timeStyle="short" />
-				</p:outputLabel>
-			</p:column>
-
-			<p:column sortBy="company" headerText="Airline Company">
-				<p:outputLabel value="#{flight.company}" />
-			</p:column>
-
-			<p:column>
-				<h:form>
-					<p:commandButton icon="ui-icon-search"
-						action="#{checkFlightInfoService.setReturnFlight(flight)}"
-						update="formReturn" />
-				</h:form>
-			</p:column>
-		</p:dataTable>
+		<h:form id="bookFlightForm" styleClass="forms">
+			<p:commandButton value="Book Flight"
+				rendered="#{checkFlightInfoService.returnFlightNotSelected()}"
+				action="booking" />
+			<p:commandButton value="Book Flights"
+				rendered="#{checkFlightInfoService.returnFlightSelected()}"
+				action="booking" />
+		</h:form>
 
 
+		<h2>Choose once of the following flights as your return flight or
+			click 'book now' to only book an outward flight</h2>
+		<!--  RETURN FLIGHTS  -->
+		<h:form styleClass="forms">
+			<p:dataTable
+				value="#{flightSearchBean.getReturnFlights(checkFlightInfoService.outwardFlight)}"
+				var="flight" id="listOfFlights" sortMode="multiple">
+				<p:column sortBy="#{flightSearchBean.calculateTotalPrice(flight)}"
+					headerText="Total Price">
+					<p:outputLabel
+						value="#{flightSearchBean.calculateTotalPrice(flight)}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</p:column>
 
-		<p:commandButton value="Return" action="return" />
+				<p:column>
+					<f:facet name="header">Discount</f:facet>
+					<p:outputLabel
+						value="#{flightSearchBean.calculateDiscount(flight)}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</p:column>
 
-	</h:form>
-</h:body>
+				<p:column sortBy="departureTime" headerText="Departure Time">
+					<p:outputLabel value="#{flight.departureTime}">
+						<f:convertDateTime type="both" timeStyle="short" />
+					</p:outputLabel>
+				</p:column>
 
+				<p:column>
+					<f:facet name="header">Arrival Time</f:facet>
+					<p:outputLabel value="#{flight.arrivalTime}">
+						<f:convertDateTime type="both" timeStyle="short" />
+					</p:outputLabel>
+				</p:column>
+
+				<p:column sortBy="company" headerText="Airline Company">
+					<p:outputLabel value="#{flight.company}" />
+				</p:column>
+
+				<p:column>
+					<h:form styleClass="forms">
+						<p:commandButton icon="ui-icon-search"
+							action="#{checkFlightInfoService.setReturnFlight(flight)}"
+							update="formReturn bookFlightForm" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+
+
+
+			<p:commandButton value="Return" action="return" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

@@ -7,173 +7,179 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Edit A Flight</title>
-</h:head>
 
-<h:body>
-	<h1>You can edit the flight on this page</h1>
 
-	<h:form>
-		<p:panelGrid columns="3" layout="grid">
-			<p:outputLabel value="Remaining seats in economy" />
-			<p:inputText value="#{rAirBean.partnerService.flight.seatsEconomy}">
-				<p:keyFilter mask="/[0-9]+/" />
-			</p:inputText>
-			<h:panelGroup />
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Edit A Flight</ui:define>
+	<ui:define name="content">
+		<h:form rendered="#{rAirBean.partnerService.editFlight}">
+			<h1 id="headerEdit">You can edit your flight on this page</h1>
+		</h:form>
+		<h:form rendered="#{not rAirBean.partnerService.editFlight}">
+			<h1 id="headerAdd">You can add a flight on this page</h1>
+		</h:form>
 
-			<p:outputLabel value="Remaining seats in business" />
-			<p:inputText value="#{rAirBean.partnerService.flight.seatsBusiness}">
-				<p:keyFilter mask="/[0-9]+/" />
-			</p:inputText>
-			<h:panelGroup />
-
-			<p:outputLabel value="Remaining seats in first class" />
-			<p:inputText
-				value="#{rAirBean.partnerService.flight.seatsFirstClass}">
-				<p:keyFilter mask="/[0-9]+/" />
-			</p:inputText>
-			<h:panelGroup />
-
-			<h:panelGroup>
-				<p:outputLabel value="Economy seat base Price:  " />
-				<p:inputText value="#{rAirBean.partnerService.flight.priceEconomy}">
-					<p:keyFilter mask="/[0-9\.]+/" />
-					<p:ajax event="change" update="discPanEco" />
+		<h:form styleClass="forms">
+			<p:panelGrid styleClass="panelGrids" columns="3" layout="grid">
+				<p:outputLabel value="Remaining seats in economy" />
+				<p:inputText value="#{rAirBean.partnerService.flight.seatsEconomy}">
+					<p:keyFilter mask="/[0-9]+/" />
 				</p:inputText>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanEco">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatEconomy()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
+				<h:panelGroup />
 
-
-			<h:panelGroup>
-				<p:outputLabel value="Business seat base Price:  " />
-				<p:inputText value="#{rAirBean.partnerService.flight.priceBusiness}">
-					<p:keyFilter mask="/[0-9\.]+/" />
-					<p:ajax event="change" update="discPanBuss" />
+				<p:outputLabel value="Remaining seats in business" />
+				<p:inputText value="#{rAirBean.partnerService.flight.seatsBusiness}">
+					<p:keyFilter mask="/[0-9]+/" />
 				</p:inputText>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanBuss">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatBusiness()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
+				<h:panelGroup />
 
-
-			<h:panelGroup>
-				<p:outputLabel value="First class seat base Price:  " />
+				<p:outputLabel value="Remaining seats in first class" />
 				<p:inputText
-					value="#{rAirBean.partnerService.flight.priceFirstClass}">
-					<p:keyFilter mask="/[0-9\.]+/" />
-					<p:ajax event="change" update="discPanFC" />
+					value="#{rAirBean.partnerService.flight.seatsFirstClass}">
+					<p:keyFilter mask="/[0-9]+/" />
 				</p:inputText>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
-				<p:outputLabel value="Margin Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup id="discPanFC">
-				<p:outputLabel value="Discount Price:  " />
-				<p:outputLabel
-					value="#{rAirBean.partnerService.flight.calculatePriceOneSeatFirstClass()}">
-					<f:convertNumber maxFractionDigits="2" />
-				</p:outputLabel>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
+				<h:panelGroup />
+
+				<h:panelGroup>
+					<p:outputLabel value="Economy seat base Price:  " />
+					<p:inputText value="#{rAirBean.partnerService.flight.priceEconomy}">
+						<p:keyFilter mask="/[0-9\.]+/" />
+						<p:ajax event="change" update="discPanEco" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.customMarginPriceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanEco">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.calculatePriceOneSeatEconomy()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
 
-			<p:outputLabel value="Departure airport" />
-			<h:panelGroup>
-				<p:selectOneMenu
-					value="#{rAirBean.partnerService.flight.departure.country}">
-					<p:ajax event="change" update="airportdep" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
-				</p:selectOneMenu>
+				<h:panelGroup>
+					<p:outputLabel value="Business seat base Price:  " />
+					<p:inputText
+						value="#{rAirBean.partnerService.flight.priceBusiness}">
+						<p:keyFilter mask="/[0-9\.]+/" />
+						<p:ajax event="change" update="discPanBuss" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.customMarginPriceBusiness}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanBuss">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.calculatePriceOneSeatBusiness()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
-				<p:selectOneMenu id="airportdep"
-					value="#{rAirBean.partnerService.flight.departure.airport}">
-					<f:selectItem itemLabel="Select Airport" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems
-						value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.departure.country)}" />
-				</p:selectOneMenu>
-			</h:panelGroup>
-			<h:panelGroup />
 
-			<p:outputLabel value="Destination airport" />
-			<h:panelGroup>
-				<p:selectOneMenu
-					value="#{rAirBean.partnerService.flight.destination.country}">
-					<p:ajax event="change" update="airportdest" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
-				</p:selectOneMenu>
+				<h:panelGroup>
+					<p:outputLabel value="First class seat base Price:  " />
+					<p:inputText
+						value="#{rAirBean.partnerService.flight.priceFirstClass}">
+						<p:keyFilter mask="/[0-9\.]+/" />
+						<p:ajax event="change" update="discPanFC" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{rAirBean.partnerService.editFlight}">
+					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.customMarginPriceFirstClass}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup id="discPanFC">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.partnerService.flight.calculatePriceOneSeatFirstClass()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{not rAirBean.partnerService.editFlight}" />
 
-				<p:selectOneMenu id="airportdest"
-					value="#{rAirBean.partnerService.flight.destination.airport}">
-					<f:selectItem itemLabel="Select Airport" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems
-						value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.destination.country)}" />
-				</p:selectOneMenu>
-			</h:panelGroup>
-			<h:panelGroup />
 
-			<p:outputLabel value="Departure Time" />
-			<p:calendar id="deptime"
-				value="#{rAirBean.partnerService.flight.departureTime}"
-				pattern="MM/dd/yyyy HH:mm:ss" />
-			<h:panelGroup />
+				<p:outputLabel value="Departure airport" />
+				<h:panelGroup>
+					<p:selectOneMenu
+						value="#{rAirBean.partnerService.flight.departure.country}">
+						<p:ajax event="change" update="airportdep" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+					</p:selectOneMenu>
 
-			<p:outputLabel value="Duration" />
-			<p:calendar id="duration"
-				value="#{rAirBean.partnerService.flight.duration}" pattern="HH:mm"
-				timeOnly="true" />
-			<h:panelGroup />
+					<p:selectOneMenu id="airportdep"
+						value="#{rAirBean.partnerService.flight.departure.airport}">
+						<f:selectItem itemLabel="Select Airport" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems
+							value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.departure.country)}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:panelGroup />
 
-		</p:panelGrid>
+				<p:outputLabel value="Destination airport" />
+				<h:panelGroup>
+					<p:selectOneMenu
+						value="#{rAirBean.partnerService.flight.destination.country}">
+						<p:ajax event="change" update="airportdest" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{rAirBean.partnerService.getCountries()}" />
+					</p:selectOneMenu>
 
-		<p:commandButton value="Add flight"
-			action="#{rAirBean.partnerService.addFlight()}"
-			rendered="#{not rAirBean.partnerService.editFlight}" />
-		<p:commandButton value="Save changes"
-			action="#{rAirBean.partnerService.changeFlight()}"
-			rendered="#{rAirBean.partnerService.editFlight}" />
-		<p:commandButton value="Return" action="return" />
-		<p:commandButton value="Delete"
-			action="#{rAirBean.partnerService.deleteFlight()}"
-			rendered="#{rAirBean.partnerService.editFlight}" />
+					<p:selectOneMenu id="airportdest"
+						value="#{rAirBean.partnerService.flight.destination.airport}">
+						<f:selectItem itemLabel="Select Airport" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems
+							value="#{rAirBean.partnerService.getAirportsCountry(rAirBean.partnerService.flight.destination.country)}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:panelGroup />
 
-	</h:form>
-</h:body>
+				<p:outputLabel value="Departure Time" />
+				<p:calendar id="deptime"
+					value="#{rAirBean.partnerService.flight.departureTime}"
+					pattern="MM/dd/yyyy HH:mm:ss" />
+				<h:panelGroup />
 
+				<p:outputLabel value="Duration" />
+				<p:calendar id="duration"
+					value="#{rAirBean.partnerService.flight.duration}" pattern="HH:mm"
+					timeOnly="true" />
+				<h:panelGroup />
+
+			</p:panelGrid>
+
+			<p:commandButton value="Add flight"
+				action="#{rAirBean.partnerService.addFlight()}"
+				rendered="#{not rAirBean.partnerService.editFlight}" />
+			<p:commandButton value="Save changes"
+				action="#{rAirBean.partnerService.changeFlight()}"
+				rendered="#{rAirBean.partnerService.editFlight}" />
+			<p:commandButton value="Return" action="return" />
+			<p:commandButton value="Delete"
+				action="#{rAirBean.partnerService.deleteFlight()}"
+				rendered="#{rAirBean.partnerService.editFlight}" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

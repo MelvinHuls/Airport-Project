@@ -7,134 +7,132 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Flights! Get your fresh Flights here!</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Flights! Get your fresh Flights here!</ui:define>
+	<ui:define name="content">
+		<h2>Search your flight(s) using the following criteria</h2>
 
-<h:body>
-	<h2>Search you flight using the following criteria</h2>
+		<h:form id="formA" styleClass="forms">
+			<p:panelGrid styleClass="panelGrids"  id="panelA" columns="2" layout="grid">
+				<p:outputLabel value="Amount of seats*" id="seatslabel" for="seats" />
+				<h:panelGroup>
+					<p:inputText value="#{flightSearchBean.flight.seats}" id="seats">
+						<p:keyFilter regEx="/[0-9]+/" />
+						<p:ajax process="@this" event="change" update="formA:seats"
+							partialSubmit="true" />
+					</p:inputText>
+					<p:message for="seats" />
+				</h:panelGroup>
 
-	<h:form id="formA">
-		<p:panelGrid id="panelA" columns="2" layout="grid">
-			<p:outputLabel value="Amount of seats*" id="seatslabel" for="seats" />
-			<h:panelGroup>
-				<p:inputText value="#{flightSearchBean.flight.seats}" id="seats">
-					<p:keyFilter regEx="/[0-9]+/" />
-					<p:ajax process="@this" event="change" update="formA:seats"
-						partialSubmit="true" />
-				</p:inputText>
-				<p:message for="seats" />
-			</h:panelGroup>
+				<p:outputLabel value="Traveling class*" />
+				<h:panelGroup>
+					<p:selectOneMenu value="#{flightSearchBean.flight.flightclass}"
+						id="flightclass">
+						<f:selectItem itemLabel="Select Class" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{flightSearchBean.getFlightClasses()}" />
+						<p:ajax process="@this" event="change" update="flightclass"
+							partialSubmit="true" />
+					</p:selectOneMenu>
+					<p:message for="flightclass" />
+				</h:panelGroup>
 
-			<p:outputLabel value="Traveling class*" />
-			<h:panelGroup>
-				<p:selectOneMenu value="#{flightSearchBean.flight.flightclass}"
-					id="flightclass">
-					<f:selectItem itemLabel="Select Class" itemValue=""
+				<p:outputLabel value="Airline Company" />
+				<p:selectOneMenu value="#{flightSearchBean.flight.airlineCompany}"
+					id="company">
+					<f:selectItem itemLabel="Select Company" itemValue=""
 						noSelectionOption="true" />
-					<f:selectItems value="#{flightSearchBean.getFlightClasses()}" />
-					<p:ajax process="@this" event="change" update="flightclass"
+					<f:selectItems value="#{flightSearchBean.getCompanies()}" />
+					<p:ajax process="@this" event="change" update="company"
 						partialSubmit="true" />
 				</p:selectOneMenu>
-				<p:message for="flightclass" />
-			</h:panelGroup>
 
-			<p:outputLabel value="Airline Company" />
-			<p:selectOneMenu value="#{flightSearchBean.flight.airlineCompany}"
-				id="company">
-				<f:selectItem itemLabel="Select Company" itemValue=""
-					noSelectionOption="true" />
-				<f:selectItems value="#{flightSearchBean.getCompanies()}" />
-				<p:ajax process="@this" event="change" update="company"
-					partialSubmit="true" />
-			</p:selectOneMenu>
+				<p:outputLabel
+					value="What way would you like to input your locations?" />
+				<p:selectOneRadio id="console"
+					value="#{flightSearchBean.flight.setAirport}">
+					<p:ajax event="change" process="destdate depdate"
+						partialSubmit="true" />
+					<p:ajax event="change" update="panelA"
+						listener="#{flightSearchBean.flight.emptyCountrySelection()}" />
+					<f:selectItem itemLabel="Departure(and destination) airports"
+						itemValue="1" />
+					<f:selectItem itemLabel="General region" itemValue="2" />
+				</p:selectOneRadio>
 
-			<p:outputLabel
-				value="What way would you like to input your locations?" />
-			<p:selectOneRadio id="console"
-				value="#{flightSearchBean.flight.setAirport}">
-				<p:ajax event="change" process="destdate depdate"
-					partialSubmit="true" />
-				<p:ajax event="change" update="panelA"
-					listener="#{flightSearchBean.flight.emptyCountrySelection()}" />
-				<f:selectItem itemLabel="Departure(and destination) airports"
-					itemValue="1" />
-				<f:selectItem itemLabel="General region" itemValue="2" />
-			</p:selectOneRadio>
+				<p:outputLabel value="Departure airport" id="airdeplabel"
+					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}" />
+				<h:panelGroup>
+					<p:selectOneMenu id="countrydep"
+						value="#{flightSearchBean.flight.departure.country}"
+						rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
+						<p:ajax event="change" update="airportdep" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{flightSearchBean.getCountries()}" />
+					</p:selectOneMenu>
 
-			<p:outputLabel value="Departure airport" id="airdeplabel"
-				rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}" />
-			<h:panelGroup>
-				<p:selectOneMenu id="countrydep"
-					value="#{flightSearchBean.flight.departure.country}"
-					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
-					<p:ajax event="change" update="airportdep" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{flightSearchBean.getCountries()}" />
-				</p:selectOneMenu>
+					<p:selectOneMenu id="airportdep"
+						value="#{flightSearchBean.flight.departure.airport}"
+						rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
+						<f:selectItem itemLabel="Select Airport" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems
+							value="#{flightSearchBean.getAirportsCountry(flightSearchBean.flight.departure.country)}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
 
-				<p:selectOneMenu id="airportdep"
-					value="#{flightSearchBean.flight.departure.airport}"
-					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
-					<f:selectItem itemLabel="Select Airport" itemValue=""
+				<p:outputLabel value="Destination airport" id="airdestlabel"
+					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}" />
+				<h:panelGroup>
+					<p:selectOneMenu id="countrydest"
+						value="#{flightSearchBean.flight.destination.country}"
+						rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
+						<p:ajax event="change" update="airportdest" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{flightSearchBean.getCountries()}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu id="airportdest"
+						value="#{flightSearchBean.flight.destination.airport}"
+						rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
+						<f:selectItem itemLabel="Select Airport" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems
+							value="#{flightSearchBean.getAirportsCountry(flightSearchBean.flight.destination.country)}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
+
+				<p:outputLabel value="Global Region"
+					rendered="#{flightSearchBean.flight.inputLocationThroughGlobalRegion()}" />
+				<p:selectOneMenu value="#{flightSearchBean.flight.region}"
+					rendered="#{flightSearchBean.flight.inputLocationThroughGlobalRegion()}"
+					id="globalregion">
+					<f:selectItem itemLabel="Select Region" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems
-						value="#{flightSearchBean.getAirportsCountry(flightSearchBean.flight.departure.country)}" />
-				</p:selectOneMenu>
-			</h:panelGroup>
-
-			<p:outputLabel value="Destination airport" id="airdestlabel"
-				rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}" />
-			<h:panelGroup>
-				<p:selectOneMenu id="countrydest"
-					value="#{flightSearchBean.flight.destination.country}"
-					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
-					<p:ajax event="change" update="airportdest" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{flightSearchBean.getCountries()}" />
+						value="#{flightSearchBean.flight.destination.getRegions()}" />
 				</p:selectOneMenu>
 
-				<p:selectOneMenu id="airportdest"
-					value="#{flightSearchBean.flight.destination.airport}"
-					rendered="#{flightSearchBean.flight.inputLocationThroughAirport()}">
-					<f:selectItem itemLabel="Select Airport" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems
-						value="#{flightSearchBean.getAirportsCountry(flightSearchBean.flight.destination.country)}" />
-				</p:selectOneMenu>
-			</h:panelGroup>
+				<p:outputLabel for="depdate" value="Departure date*" />
+				<h:panelGroup>
+					<p:calendar id="depdate"
+						value="#{flightSearchBean.flight.dateDeparture}"
+						pattern="MM/dd/yyyy">
+					</p:calendar>
+					<p:message for="depdate" />
+				</h:panelGroup>
 
-			<p:outputLabel value="Global Region"
-				rendered="#{flightSearchBean.flight.inputLocationThroughGlobalRegion()}" />
-			<p:selectOneMenu value="#{flightSearchBean.flight.region}"
-				rendered="#{flightSearchBean.flight.inputLocationThroughGlobalRegion()}"
-				id="globalregion">
-				<f:selectItem itemLabel="Select Region" itemValue=""
-					noSelectionOption="true" />
-				<f:selectItems
-					value="#{flightSearchBean.flight.destination.getRegions()}" />
-			</p:selectOneMenu>
-
-			<p:outputLabel for="depdate" value="Departure date*" />
-			<h:panelGroup>
-				<p:calendar id="depdate"
-					value="#{flightSearchBean.flight.dateDeparture}"
-					pattern="MM/dd/yyyy">
+				<p:outputLabel for="destdate" value="Date of Return" />
+				<p:calendar id="destdate"
+					value="#{flightSearchBean.flight.dateReturn}" pattern="MM/dd/yyyy">
 				</p:calendar>
-				<p:message for="depdate" />
-			</h:panelGroup>
+			</p:panelGrid>
 
-			<p:outputLabel for="destdate" value="Date of Return" />
-			<p:calendar id="destdate"
-				value="#{flightSearchBean.flight.dateReturn}" pattern="MM/dd/yyyy">
-			</p:calendar>
-		</p:panelGrid>
-
-		<p:commandButton value="Search flights" action="searchFlights"
-			update="panelA" />
-	</h:form>
-
-</h:body>
+			<p:commandButton value="Search flights" action="searchFlights"
+				update="panelA" />
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

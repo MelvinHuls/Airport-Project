@@ -7,25 +7,24 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Welcome page!!! Feeling welcome is not an obligation but
-		a requirement</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Welcome page!!! Feeling welcome is not an obligation but
+		a requirement</ui:define>
+	<ui:define name="content">
+		<h1>Welcome page filler</h1>
 
-<h:body>
-	<h1>Welcome page filler</h1>
+		<h:form styleClass="forms">
+			<h3>
+				<p:inputText binding="#{name}" />
+				<p:inputText binding="#{password}" />
+			</h3>
 
-	<h:form>
-		<h3>
-			<p:inputText binding="#{name}" />
-			<p:inputText binding="#{password}" />
-		</h3>
+			<p:commandButton value="Log in" icon="ui-icon-check"
+				action="#{rAirBean.logOn(name.value, password.value)}" />
 
-		<p:commandButton value="Log in" icon="ui-icon-check"
-			action="#{rAirBean.logOn(name.value, password.value)}" />
+			<p:commandButton value="Search Flight" action="searchFlight" />
 
-		<p:commandButton value="Search Flight" action="searchFlight" />
-
-	</h:form>
-</h:body>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

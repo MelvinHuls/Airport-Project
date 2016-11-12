@@ -7,41 +7,42 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Add A Location</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Add A Location</ui:define>
+	<ui:define name="content">
+		<h1>You can add a new location on this page</h1>
+		<h:form styleClass="forms" >
+			<p:panelGrid styleClass="panelGrids" columns="2" layout="grid">
+				<p:outputLabel value="Country" />
+				<p:inputText value="#{rAirBean.employeeService.location.country}">
+					<p:keyFilter
+						regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
+				</p:inputText>
 
-<h:body>
-	<h1>You can add a new location on this page</h1>
-	<h:form>
-		<p:panelGrid columns="2" layout="grid">
-			<p:outputLabel value="Country" />
-			<p:inputText value="#{rAirBean.employeeService.location.country}">
-				<p:keyFilter regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
-			</p:inputText>
+				<p:outputLabel value="Airport" />
+				<p:inputText value="#{rAirBean.employeeService.location.airport}">
+					<p:keyFilter
+						regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
+				</p:inputText>
 
-			<p:outputLabel value="Airport" />
-			<p:inputText value="#{rAirBean.employeeService.location.airport}" >
-				<p:keyFilter regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
-			</p:inputText>
+				<p:outputLabel value="Code" />
+				<p:inputText value="#{rAirBean.employeeService.location.code}">
+					<p:keyFilter mask="/[0-9]+/" />
+				</p:inputText>
 
-			<p:outputLabel value="Code" />
-			<p:inputText value="#{rAirBean.employeeService.location.code}" >
-				<p:keyFilter mask="/[0-9]+/" />
-			</p:inputText>
+				<p:outputLabel value="Global region" />
+				<p:selectOneMenu value="#{rAirBean.employeeService.location.region}">
+					<f:selectItem itemLabel="Select Region" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems
+						value="#{rAirBean.employeeService.location.getRegions()}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
 
-			<p:outputLabel value="Global region" />
-			<p:selectOneMenu value="#{rAirBean.employeeService.location.region}">
-				<f:selectItem itemLabel="Select Region" itemValue=""
-					noSelectionOption="true" />
-				<f:selectItems
-					value="#{rAirBean.employeeService.location.getRegions()}" />
-			</p:selectOneMenu>
-		</p:panelGrid>
-
-		<p:commandButton value="Add Location"
-			action="#{rAirBean.employeeService.addLocation()}" />
-		<p:commandButton value="Return" action="return" />
-	</h:form>
-</h:body>
+			<p:commandButton value="Add Location"
+				action="#{rAirBean.employeeService.addLocation()}" />
+			<p:commandButton value="Return" action="return" />
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
