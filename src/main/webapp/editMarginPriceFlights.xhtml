@@ -12,7 +12,7 @@
 	<ui:define name="content">
 		<h1>Flights you can edit</h1>
 
-		<p:dataTable value="#{flightService.getFlightsByCompany(rAirBean.partnerService.partner)}"
+		<p:dataTable value="#{flightService.findAll()}"
 			var="flight" id="listOfFlights" sortMode="multiple">
 			<p:column>
 				<f:facet name="header">Departure Airport</f:facet>
@@ -35,14 +35,14 @@
 			<p:column>
 				<h:form styleClass="forms">
 					<p:commandButton icon="ui-icon-search"
-						action="#{rAirBean.partnerService.editFlight(flight)}" />
+						action="#{rAirBean.employeeService.editFlight(flight)}" />
 				</h:form>
 			</p:column>
 		</p:dataTable>
 
 		<h:form styleClass="forms">
-			<p:commandButton value="Add flight"
-				action="#{rAirBean.partnerService.newFlight()}" />
+			<p:commandButton value="Return"
+				action="return" />
 		</h:form>
 
 	</ui:define>

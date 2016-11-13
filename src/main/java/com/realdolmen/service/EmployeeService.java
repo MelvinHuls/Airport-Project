@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.realdolmen.domain.Employee;
+import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 import com.realdolmen.repository.EmployeeRepository;
 
@@ -19,6 +20,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	private Employee employee;
 
 	private Location location;
+	private Flight flight;
 
 	@PersistenceContext
 	EntityManager em;
@@ -37,8 +39,8 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	@Override
-	public void update(Employee employee) {
-		eRepo.update(employee);
+	public String update(Employee employee) {
+		return eRepo.update(employee);
 	}
 
 	@Override
@@ -110,5 +112,18 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	public String deleteLocation() {
 		em.remove(em.find(Location.class, location.getId()));
 		return "deleted";
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+	
+	public String editFlight(Flight flight) {
+		this.flight = flight;
+		return "edit";
 	}
 }

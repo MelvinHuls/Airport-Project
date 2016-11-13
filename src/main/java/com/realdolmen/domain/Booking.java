@@ -176,4 +176,11 @@ public class Booking {
 		
 		return out;
 	}
+	
+	public Boolean returnFlightBooked() {
+		if(this.returnFlight == null) {
+			return false;
+		}
+		return true;
+	}
 }

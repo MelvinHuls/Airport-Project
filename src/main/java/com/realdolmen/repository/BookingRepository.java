@@ -24,8 +24,9 @@ public class BookingRepository {
 		return em.find(Booking.class, id);
 	}
 
-	public void update(Booking o) {
+	public String update(Booking o) {
 		em.merge(o);
+		return "success";
 	}
 
 	public void delete(Booking o) {

@@ -158,5 +158,13 @@ public class BookFlightBean {
 	public void setCreditCard(Boolean creditCard) {
 		this.creditCard = creditCard;
 	}
+	
+	public String getUrl() {
+		String url = "http://localhost:8080/project-exercise-1/detailsBooking.xhtml?bookingId=";
+		url += booking.getId();
+		url += "&userId=";
+		url += booking.getClient().getId();
+		return url;
+	}
 
 }

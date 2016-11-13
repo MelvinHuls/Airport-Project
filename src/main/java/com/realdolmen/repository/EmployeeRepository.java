@@ -24,8 +24,9 @@ public class EmployeeRepository {
 		return em.find(Employee.class, id);
 	}
 
-	public void update(Employee o) {
+	public String update(Employee o) {
 		em.merge(o);
+		return "success";
 	}
 
 	public void delete(Employee o) {

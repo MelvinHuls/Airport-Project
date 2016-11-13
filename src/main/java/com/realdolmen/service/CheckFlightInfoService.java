@@ -100,5 +100,5 @@ public class CheckFlightInfoService {
 			return this.bookFlight.bookFlightEndorsement(outwardFlight, returnFlight, flightclass,
 					seats);
 		}
-	}
+	}	
 }

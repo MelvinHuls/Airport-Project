@@ -13,10 +13,6 @@ public interface SessionRemote {
 		System.out.println("error");
 	}
 
-	public default List<Flight> obtainFlights() throws AccessRightsException {
-		throw new AccessRightsException("Not enough access rights to edit flights");
-	}
-
 	public default Flight getFlight(Long id) throws AccessRightsException {
 		throw new AccessRightsException("Not enough access rights to request data flight");
 	}

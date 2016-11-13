@@ -43,8 +43,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	}
 
 	@Override
-	public void update(Partner partner) {
+	public String update(Partner partner) {
 		pRepo.update(partner);
+		return "success";
 	}
 
 	@Override
@@ -75,11 +76,6 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 	public void setPartner(Partner partner) {
 		this.partner = partner;
-	}
-
-	@Override
-	public List<Flight> obtainFlights() {
-		return pRepo.getFlightsByCompany(partner.getCompany(), partner);
 	}
 
 	@Override

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
+
+
+
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Edit the Flight</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h1 id="headerEdit">You can edit your flight on this page</h1>
+		</h:form>
+
+		<h:form styleClass="forms">
+			<p:panelGrid styleClass="panelGrids" columns="3" layout="grid">
+				<p:outputLabel value="Remaining seats in economy" />
+				<p:outputLabel
+					value="#{rAirBean.employeeService.flight.seatsEconomy}" />
+				<h:panelGroup />
+
+				<p:outputLabel value="Remaining seats in business" />
+				<p:outputLabel
+					value="#{rAirBean.employeeService.flight.seatsBusiness}" />
+				<h:panelGroup />
+
+				<p:outputLabel value="Remaining seats in first class" />
+				<p:outputLabel
+					value="#{rAirBean.employeeService.flight.seatsFirstClass}" />
+				<h:panelGroup />
+
+				<h:panelGroup>
+					<p:outputLabel value="Economy seat base Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.priceEconomy}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:inputText
+						value="#{rAirBean.employeeService.flight.customMarginPriceEconomy}">
+						<f:convertNumber maxFractionDigits="2" />
+						<p:ajax event="change" update="discPanEco" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup id="discPanEco">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatEconomy()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+
+
+				<h:panelGroup>
+					<p:outputLabel value="Business seat base Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.priceBusiness}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:inputText
+						value="#{rAirBean.employeeService.flight.customMarginPriceBusiness}">
+						<p:ajax event="change" update="discPanBuss" />
+						<f:convertNumber maxFractionDigits="2" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup id="discPanBuss">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatBusiness()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+
+
+				<h:panelGroup>
+					<p:outputLabel value="First class seat base Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.priceFirstClass}" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<p:outputLabel value="Margin Price:  " />
+					<p:inputText
+						value="#{rAirBean.employeeService.flight.customMarginPriceFirstClass}">
+						<p:ajax event="change" update="discPanFC" />
+						<f:convertNumber maxFractionDigits="2" />
+					</p:inputText>
+				</h:panelGroup>
+				<h:panelGroup id="discPanFC">
+					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel
+						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatFirstClass()}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</h:panelGroup>
+
+
+				<p:outputLabel value="Departure airport" />
+				<p:outputLabel
+					value="#{rAirBean.employeeService.flight.departure.country}" />
+				<p:outputLabel id="airportdep"
+					value="#{rAirBean.employeeService.flight.departure.airport}" />
+
+				<p:outputLabel value="Destination airport" />
+				<p:outputLabel
+					value="#{rAirBean.employeeService.flight.destination.country}" />
+				<p:outputLabel id="airportdest"
+					value="#{rAirBean.employeeService.flight.destination.airport}" />
+
+				<p:outputLabel value="Departure Time" />
+				<p:outputLabel id="deptime"
+					value="#{rAirBean.employeeService.flight.departureTime}">
+					<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+				</p:outputLabel>
+				<h:panelGroup />
+
+				<p:outputLabel value="Duration" />
+				<p:outputLabel id="duration"
+					value="#{rAirBean.employeeService.flight.duration}">
+					<f:convertDateTime pattern="HH:mm" />
+				</p:outputLabel>
+				<h:panelGroup />
+
+			</p:panelGrid>
+
+			<p:commandButton value="Save changes"
+				action="#{flightService.update(rAirBean.employeeService.flight)}" />
+			<p:commandButton value="Return" action="return" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

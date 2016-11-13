@@ -11,7 +11,7 @@ public interface AbstractService<T> {
 
 	T findById(Long id);
 
-	void update(T param);
+	String update(T param);
 
 	void delete(T param);
 
