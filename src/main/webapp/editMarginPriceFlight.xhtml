@@ -13,33 +13,33 @@
 	<ui:define name="pageTitle">Edit the Flight</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<h1 id="headerEdit">You can edit your flight on this page</h1>
+			<h1 id="headerEdit"><p:outputLabel value="#{empl['employee.marginPrice.edit.header']}"/></h1>
 		</h:form>
 
 		<h:form styleClass="forms">
 			<p:panelGrid styleClass="panelGrids" columns="3" layout="grid">
-				<p:outputLabel value="Remaining seats in economy" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.seatsLeftEco']}" />
 				<p:outputLabel
 					value="#{rAirBean.employeeService.flight.seatsEconomy}" />
 				<h:panelGroup />
 
-				<p:outputLabel value="Remaining seats in business" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.seatsLeftBuss']}" />
 				<p:outputLabel
 					value="#{rAirBean.employeeService.flight.seatsBusiness}" />
 				<h:panelGroup />
 
-				<p:outputLabel value="Remaining seats in first class" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.seatsLeftFC']}" />
 				<p:outputLabel
 					value="#{rAirBean.employeeService.flight.seatsFirstClass}" />
 				<h:panelGroup />
 
 				<h:panelGroup>
-					<p:outputLabel value="Economy seat base Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.basePriceEco']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.priceEconomy}" />
 				</h:panelGroup>
 				<h:panelGroup>
-					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.marginPrice']}" />
 					<p:inputText
 						value="#{rAirBean.employeeService.flight.customMarginPriceEconomy}">
 						<f:convertNumber maxFractionDigits="2" />
@@ -47,7 +47,7 @@
 					</p:inputText>
 				</h:panelGroup>
 				<h:panelGroup id="discPanEco">
-					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.discountPrice']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatEconomy()}">
 						<f:convertNumber maxFractionDigits="2" />
@@ -56,12 +56,12 @@
 
 
 				<h:panelGroup>
-					<p:outputLabel value="Business seat base Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.basePriceBuss']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.priceBusiness}" />
 				</h:panelGroup>
 				<h:panelGroup>
-					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.marginPrice']}" />
 					<p:inputText
 						value="#{rAirBean.employeeService.flight.customMarginPriceBusiness}">
 						<p:ajax event="change" update="discPanBuss" />
@@ -69,7 +69,7 @@
 					</p:inputText>
 				</h:panelGroup>
 				<h:panelGroup id="discPanBuss">
-					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.discountPrice']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatBusiness()}">
 						<f:convertNumber maxFractionDigits="2" />
@@ -78,12 +78,12 @@
 
 
 				<h:panelGroup>
-					<p:outputLabel value="First class seat base Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.basePriceFC']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.priceFirstClass}" />
 				</h:panelGroup>
 				<h:panelGroup>
-					<p:outputLabel value="Margin Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.marginPrice']}" />
 					<p:inputText
 						value="#{rAirBean.employeeService.flight.customMarginPriceFirstClass}">
 						<p:ajax event="change" update="discPanFC" />
@@ -91,7 +91,7 @@
 					</p:inputText>
 				</h:panelGroup>
 				<h:panelGroup id="discPanFC">
-					<p:outputLabel value="Discount Price:  " />
+					<p:outputLabel value="#{empl['employee.marginPrice.edit.discountPrice']}" />
 					<p:outputLabel
 						value="#{rAirBean.employeeService.flight.calculatePriceOneSeatFirstClass()}">
 						<f:convertNumber maxFractionDigits="2" />
@@ -99,26 +99,26 @@
 				</h:panelGroup>
 
 
-				<p:outputLabel value="Departure airport" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.dep.airport']}" />
 				<p:outputLabel
 					value="#{rAirBean.employeeService.flight.departure.country}" />
 				<p:outputLabel id="airportdep"
 					value="#{rAirBean.employeeService.flight.departure.airport}" />
 
-				<p:outputLabel value="Destination airport" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.dest.airport']}" />
 				<p:outputLabel
 					value="#{rAirBean.employeeService.flight.destination.country}" />
 				<p:outputLabel id="airportdest"
 					value="#{rAirBean.employeeService.flight.destination.airport}" />
 
-				<p:outputLabel value="Departure Time" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.dep.depTime']}" />
 				<p:outputLabel id="deptime"
 					value="#{rAirBean.employeeService.flight.departureTime}">
 					<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
 				</p:outputLabel>
 				<h:panelGroup />
 
-				<p:outputLabel value="Duration" />
+				<p:outputLabel value="#{empl['employee.marginPrice.edit.dep.duration']}" />
 				<p:outputLabel id="duration"
 					value="#{rAirBean.employeeService.flight.duration}">
 					<f:convertDateTime pattern="HH:mm" />
@@ -127,9 +127,9 @@
 
 			</p:panelGrid>
 
-			<p:commandButton value="Save changes"
+			<p:commandButton value="#{empl['employee.marginPrice.edit.button.save']}"
 				action="#{flightService.update(rAirBean.employeeService.flight)}" />
-			<p:commandButton value="Return" action="return" />
+			<p:commandButton value="#{empl['employee.marginPrice.edit.button.return']}" action="return" />
 
 		</h:form>
 	</ui:define>

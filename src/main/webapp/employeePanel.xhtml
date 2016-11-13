@@ -12,11 +12,11 @@
 		Employee control panel
 	</ui:define>
 	<ui:define name="content">
-		<h2>Choose your action</h2>
+		<h2><p:outputLabel value="#{empl['employee.panel.header']}"/></h2>
 
 		<h:form>
-			<p:commandButton value="Add or Edit Locations" action="overview" />
-			<p:commandButton value="Edit Margin Price Flights" action="flights" />
+			<p:commandButton value="#{empl['employee.panel.addOrEdit']}" action="overview" />
+			<p:commandButton value="#{empl['employee.panel.editMarginPrice']}" action="flights" />
 		</h:form>
 
 	</ui:define>

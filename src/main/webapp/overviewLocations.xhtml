@@ -10,27 +10,23 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Overview Locations</ui:define>
 	<ui:define name="content">
-		<h1>All the current existing locations</h1>
+		<h1><p:outputLabel value="#{empl['employee.locations.overview.header']}" /></h1>
 
 		<p:dataTable value="#{rAirBean.employeeService.obtainLocations()}"
 			var="location" id="listOfLocations">
-			<p:column>
-				<f:facet name="header">Country</f:facet>
+			<p:column header="#{empl['employee.locations.overview.country']}">
 				<p:outputLabel value="#{location.country}" />
 			</p:column>
 
-			<p:column>
-				<f:facet name="header">Airport</f:facet>
+			<p:column header="#{empl['employee.locations.overview.airport']}">
 				<p:outputLabel value="#{location.airport}" />
 			</p:column>
 
-			<p:column>
-				<f:facet name="header">Code</f:facet>
+			<p:column header="#{empl['employee.locations.overview.code']}">
 				<p:outputLabel value="#{location.code}" />
 			</p:column>
 
-			<p:column>
-				<f:facet name="header">Global Region</f:facet>
+			<p:column header="#{empl['employee.locations.overview.region']}">
 				<p:outputLabel value="#{location.region}" />
 			</p:column>
 
@@ -43,9 +39,9 @@
 		</p:dataTable>
 
 		<h:form styleClass="forms">
-			<p:commandButton value="Add location"
+			<p:commandButton value="#{empl['employee.locations.button.addLocation']}"
 				action="#{rAirBean.employeeService.newLocation()}" />
-			<p:commandButton value="Return" action="return" />
+			<p:commandButton value="#{empl['employee.marginPrice.overview.return']}" action="return" />
 		</h:form>
 	</ui:define>
 </ui:composition>
