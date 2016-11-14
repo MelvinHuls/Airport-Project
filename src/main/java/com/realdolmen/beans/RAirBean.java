@@ -32,13 +32,90 @@ public class RAirBean {
 
 	@EJB
 	private PartnerService partnerService;
-	
+
 	@EJB
 	private ClientService clientService;
-	
+
 	@EJB
 	private EmployeeService employeeService;
-		
+	
+	private User user = new User();
+
+//	private boolean aClient = true;
+//	private boolean anEmployee = false;
+//	private boolean aPartner = false;
+//
+//	public void setAClient() {
+//		this.aClient = true;
+//		this.anEmployee = false;
+//		this.aPartner = false;
+//	}
+//
+//	public void setAnEmployee() {
+//		this.aClient = false;
+//		this.anEmployee = true;
+//		this.aPartner = false;
+//	}
+//
+//	public void setAPartner() {
+//		this.aClient = false;
+//		this.anEmployee = false;
+//		this.aPartner = true;
+//	}
+//
+//	public boolean isAClient() {
+//		return aClient;
+//	}
+//
+//	public boolean isAnEmployee() {
+//		return anEmployee;
+//	}
+//
+//	public boolean isAPartner() {
+//		return aPartner;
+//	}
+
+	public String registerClient(String email, String password) {
+		if (!existingUser(email)) {
+			clientService.create(new Client(email, password, email));
+			return "Success";
+		} else {
+			return "Failure";
+		}
+	}
+
+	public String registerEmployee(String email, String password) {
+		if (!existingUser(email)) {
+			employeeService.create(new Employee(email, password, email));
+			return "Success";
+		} else {
+			return "Failure";
+		}
+	}
+
+	public String registerPartner(String email, String password, String company) {
+		if (!existingUser(email)) {
+			Partner client = new Partner(email, password, email, company);
+			partnerService.create(client);
+			return "Success";
+		} else {
+			return "Failure";
+		}
+	}
+
+	private boolean existingUser(String email) throws NonUniqueResultException {
+		Partner partner = partnerService.findByEmail(email);
+		Employee employee = employeeService.findByEmail(email);
+		Client client = clientService.findByEmail(email);
+		if (partner == null && employee == null && client == null) {
+			System.out.println("does not exists");
+			return false;
+		} else {
+			System.out.println("allready exists");
+			return true;
+		}
+	}
+
 	public String logOn(String username, String password) throws NonUniqueResultException {
 		try {
 			Class<? extends User> kind = Partner.class;
@@ -73,17 +150,15 @@ public class RAirBean {
 		} catch (NoResultException ex) {
 			System.out.println("No user found with username " + username);
 		}
-		
+
 		return "failedtoLogIn";
 	}
 
-	/*public void testingFunctionality() {
-		if (session == null) {
-			System.out.println("user has not logged in");
-		} else {
-			session.testFunctionality();
-		}
-	}*/
+	/*
+	 * public void testingFunctionality() { if (session == null) {
+	 * System.out.println("user has not logged in"); } else {
+	 * session.testFunctionality(); } }
+	 */
 
 	public <T extends User> T searchUser(Class<T> kind, String username, String password)
 			throws NonUniqueResultException {
@@ -110,8 +185,8 @@ public class RAirBean {
 	public EmployeeService getEmployeeService() {
 		return employeeService;
 	}
-	
+
 	public List<String> getRegions() {
 		return Arrays.asList(GlobalRegion.values().toString());
-	}	
+	}
 }

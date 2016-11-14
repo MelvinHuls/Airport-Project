@@ -25,6 +25,7 @@ import com.realdolmen.service.PartnerService;
 public class RegistrationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	@EJB
 	ClientService clientService;
 
@@ -37,6 +38,8 @@ public class RegistrationBean implements Serializable {
 	private Partner partner;
 	private Employee employee;
 	private Client client;
+	private String email= "dummy@mail.com";
+	private String password= "dummyPassword";	
 
 	@PostConstruct
 	public void init() {
@@ -118,5 +121,21 @@ public class RegistrationBean implements Serializable {
 
 	public EmployeeService getEmployeeService() {
 		return employeeService;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

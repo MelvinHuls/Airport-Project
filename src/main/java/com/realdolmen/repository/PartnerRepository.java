@@ -88,4 +88,13 @@ public class PartnerRepository {
 		}
 		throw new AccessRightsException("This flight does not belong to your company");
 	}
+
+	public Partner findByEmail(String email) {
+		try {
+			return em.createNamedQuery("SELECT c from User c WHERE c.email LIKE :email", Partner.class)
+					.setParameter("email", email).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }

@@ -19,7 +19,7 @@ public class User {
 	@NotNull
 	private String email;
 
-	protected User() {
+	public User() {
 	}
 
 	public User(String username, String password, String email) {

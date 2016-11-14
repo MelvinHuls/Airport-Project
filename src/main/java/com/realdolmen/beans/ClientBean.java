@@ -24,7 +24,7 @@ public class ClientBean implements Serializable {
 	Booking booking;
 
 	private Client client;
-	private String password;
+	private String password= "123456";
 	private Client loggedInClient;
 	private String loginErrorMessage;
 	private String registerErrorMessage;
