@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.realdolmen.enumerations.GlobalRegion;
 
@@ -22,10 +24,13 @@ public class Location {
 	@GeneratedValue
 	private Long id;
 	@NotNull
+	@NotEmpty
 	private String airport;
 	@NotNull
+	@NotEmpty
 	private String country;
 	@NotNull
+	@NotEmpty
 	private String code;
 	@NotNull
 	@Enumerated(EnumType.STRING)

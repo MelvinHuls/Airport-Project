@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.constraints.NotNull;
 
 import com.realdolmen.Exceptions.LackingPaymentInformationException;
 import com.realdolmen.Exceptions.LackingPricingInformationException;

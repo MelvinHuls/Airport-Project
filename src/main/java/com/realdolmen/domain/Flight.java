@@ -21,12 +21,18 @@ public class Flight {
 	@Version
 	private Integer version;
 
+	@NotNull
 	private Integer seatsEconomy;
+	@NotNull
 	private Integer seatsBusiness;
+	@NotNull
 	private Integer seatsFirstClass;
 
+	@NotNull
 	private Double priceEconomy;
+	@NotNull
 	private Double priceBusiness;
+	@NotNull
 	private Double priceFirstClass;
 	private Double customMarginPriceEconomy;
 	private Double customMarginPriceBusiness;
@@ -203,7 +209,9 @@ public class Flight {
 	}
 
 	public void setDiscounts(Discounts discounts) {
-		this.discounts = discounts;
+		if (discounts.getCompany() == this.company) {
+			this.discounts = discounts;
+		}
 	}
 
 	public Double calculatePriceOneSeatEconomy() {
@@ -234,7 +242,8 @@ public class Flight {
 		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
 	}
 
-	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats) throws LackingPricingInformationException {
+	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats)
+			throws LackingPricingInformationException {
 		if (flightClass.equals(FlightClass.ECONOMY)) {
 			return calculateTotalPriceEconomy(seats);
 		} else if (flightClass.equals(FlightClass.BUSINESS)) {
@@ -257,7 +266,8 @@ public class Flight {
 		return this.calculateTotalPrice(this.priceFirstClass, this.customMarginPriceFirstClass, seats);
 	}
 
-	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats) throws LackingPricingInformationException {
+	private Double calculateTotalPrice(Double basePrice, Double customMarginPrice, Integer seats)
+			throws LackingPricingInformationException {
 		if (seats == null || seats == 0)
 			return 0d;
 

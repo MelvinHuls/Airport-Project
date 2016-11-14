@@ -10,24 +10,32 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Almost ready to go meet the clouds!</ui:define>
 	<ui:define name="content">
-		<h2><p:outputLabel value="#{user['user.bookFlight.header']}"/></h2>
+		<h2>
+			<p:outputLabel value="#{user['user.bookFlight.header']}" />
+		</h2>
 
 		<h:form styleClass="forms">
 			<p:selectOneRadio
 				value="#{checkFlightInfoService.bookFlight.creditCard}">
 				<p:ajax event="change" update="formA" />
-				<f:selectItem itemLabel="#{user['user.bookFlight.creditcard']}" itemValue="true" />
-				<f:selectItem itemLabel="#{user['user.bookFlight.endorsement']}" itemValue="false" />
+				<f:selectItem itemLabel="#{user['user.bookFlight.creditcard']}"
+					itemValue="true" />
+				<f:selectItem itemLabel="#{user['user.bookFlight.endorsement']}"
+					itemValue="false" />
 			</p:selectOneRadio>
 		</h:form>
 
 		<h:form id="formA" styleClass="forms">
 			<p>
-				<p:outputLabel for="creditNumber" value="#{user['user.bookFlight.creditcardNum']}"
+				<p:outputLabel for="creditNumber"
+					value="#{user['user.bookFlight.creditcardNum']}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}" />
-				<p:inputText value="#{creditCardNumber}"
+				<p:inputMask value="#{creditCardNumber}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}"
-					id="creditNumber" />
+					id="creditNumber" mask="aa99-9999-9999-9999">
+					<f:validateLength minimum="1" />
+				</p:inputMask>
+				<p:message for="creditNumber" id="msgCreditNumber"/>
 			</p>
 			<p>
 				<p:outputLabel for="expDate"
@@ -36,14 +44,19 @@
 				<p:inputMask value="#{expirationDate}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}"
 					mask="99/99/9999" id="expDate">
+					<f:validateLength minimum="1" />
 					<f:convertDateTime pattern="MM/dd/yyyy" />
 				</p:inputMask>
+				<p:message for="expDate" id="msgexpDate"/>
 			</p>
 
-			<p:commandButton value="#{user['user.bookFlight.button.finalizeBooking']}"
+			<p:commandButton
+				value="#{user['user.bookFlight.button.finalizeBooking']}"
 				rendered="#{checkFlightInfoService.bookFlight.creditCard}"
-				action="#{checkFlightInfoService.BookFlightCreditCard(flightSearchBean.flight.flightclass, flightSearchBean.flight.seats, creditCardNumber, expirationDate)}" />
-			<p:commandButton value="#{user['user.bookFlight.button.finalizeBooking']}"
+				action="#{checkFlightInfoService.BookFlightCreditCard(flightSearchBean.flight.flightclass, flightSearchBean.flight.seats, creditCardNumber, expirationDate)}" 
+				update="msgexpDate msgCreditNumber"/>
+			<p:commandButton
+				value="#{user['user.bookFlight.button.finalizeBooking']}"
 				rendered="#{not checkFlightInfoService.bookFlight.creditCard}"
 				action="#{checkFlightInfoService.BookFlightEndorsement(flightSearchBean.flight.flightclass, flightSearchBean.flight.seats)}" />
 		</h:form>

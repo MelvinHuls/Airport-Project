@@ -10,41 +10,62 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Edit A Location</ui:define>
 	<ui:define name="content">
-		<h1><p:outputLabel value="#{empl['employee.locations.edit.header']}"/></h1>
+		<h1>
+			<p:outputLabel value="#{empl['employee.locations.edit.header']}" />
+		</h1>
 
 		<h:form styleClass="forms">
-			<p:panelGrid styleClass="panelGrids"  columns="2" layout="grid">
+			<p:panelGrid styleClass="panelGrids" columns="2" layout="grid">
 				<p:outputLabel value="#{empl['employee.locations.addEdit.country']}" />
-				<p:inputText value="#{rAirBean.employeeService.location.country}">
-					<p:keyFilter
-						regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
-				</p:inputText>
+				<h:panelGroup>
+					<p:inputText id="country" value="#{rAirBean.employeeService.location.country}">
+						<p:keyFilter
+							regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
+					</p:inputText>
+					<p:message for="country" id="msgcountry" />
+				</h:panelGroup>
 
 				<p:outputLabel value="#{empl['employee.locations.addEdit.airport']}" />
-				<p:inputText value="#{rAirBean.employeeService.location.airport}">
-					<p:keyFilter
-						regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
-				</p:inputText>
+				<h:panelGroup>
+					<p:inputText id="airport" value="#{rAirBean.employeeService.location.airport}">
+						<p:keyFilter
+							regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
+					</p:inputText>
+					<p:message for="airport" id="msgairport" />
+				</h:panelGroup>
 
 				<p:outputLabel value="#{empl['employee.locations.addEdit.code']}" />
-				<p:inputText value="#{rAirBean.employeeService.location.code}">
-					<p:keyFilter
-						regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
-				</p:inputText>
+				<h:panelGroup>
+					<p:inputText id="code" value="#{rAirBean.employeeService.location.code}">
+						<p:keyFilter
+							regEx="/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ \-]+/" />
+					</p:inputText>
+					<p:message for="code" id="msgcode" />
+				</h:panelGroup>
 
 				<p:outputLabel value="#{empl['employee.locations.addEdit.region']}" />
-				<p:selectOneMenu value="#{rAirBean.employeeService.location.region}">
-					<f:selectItem itemLabel="#{empl['employee.locations.addEdit.selectRegion']}" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems
-						value="#{rAirBean.employeeService.location.getRegions()}" />
-				</p:selectOneMenu>
+				<h:panelGroup>
+					<p:selectOneMenu id="region"
+						value="#{rAirBean.employeeService.location.region}">
+						<f:selectItem
+							itemLabel="#{empl['employee.locations.addEdit.selectRegion']}"
+							itemValue="" noSelectionOption="true" />
+						<f:selectItems
+							value="#{rAirBean.employeeService.location.getRegions()}" />
+					</p:selectOneMenu>
+					<p:message for="region" id="msgregion" />
+				</h:panelGroup>
 			</p:panelGrid>
 
-			<p:commandButton value="#{empl['employee.locations.addEdit.button.save']}"
-				action="#{rAirBean.employeeService.changeLocation()}" />
-			<p:commandButton value="#{empl['employee.locations.addEdit.button.return']}" action="return" />
-			<p:commandButton value="#{empl['employee.locations.addEdit.button.delete']}"
+			<p:commandButton
+				value="#{empl['employee.locations.addEdit.button.save']}"
+				action="#{rAirBean.employeeService.changeLocation()}"
+				update="msgcountry msgairport msgcode msgregion" />
+			<p:button
+				value="#{empl['employee.locations.addEdit.button.return']}"
+				outcome="return" />
+			<p:commandButton
+				value="#{empl['employee.locations.addEdit.button.delete']}"
 				action="#{rAirBean.employeeService.deleteLocation()}" />
 		</h:form>
 	</ui:define>

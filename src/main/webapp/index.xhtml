@@ -22,7 +22,7 @@
 			<p:commandButton value="#{user['user.index.button.login']}" icon="ui-icon-check"
 				action="#{rAirBean.logOn(name.value, password.value)}" />
 
-			<p:commandButton value="#{user['user.index.button.searchFlights']}" action="searchFlight" />
+			<p:button value="#{user['user.index.button.searchFlights']}" outcome="searchFlight" />
 
 		</h:form>
 	</ui:define>

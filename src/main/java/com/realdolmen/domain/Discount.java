@@ -15,24 +15,26 @@ public class Discount {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private Date begin;
 	private Date end;
 	private Double percentage;
-	
-	 @ManyToOne(fetch=FetchType.LAZY, cascade =CascadeType.ALL)
-	  @JoinColumn(name="DISCOUNT_ID")
-	  private Discounts discounts;
-	
-	protected Discount() {
-		
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "DISCOUNT_ID")
+	private Discounts discounts;
+
+	public Discount() {
+
 	}
+
 	public Discount(Date begin, Date end, Double percentage) {
 		super();
 		this.begin = begin;
 		this.end = end;
 		this.percentage = percentage;
 	}
+
 	public Discount(Discounts discounts, Date begin, Date end, Double percentage) {
 		super();
 		this.begin = begin;
@@ -40,21 +42,34 @@ public class Discount {
 		this.percentage = percentage;
 		this.discounts = discounts;
 	}
+
+	public Discount(Discount discount) {
+		this.begin = discount.getBegin();
+		this.end = discount.getEnd();
+		this.percentage = discount.getPercentage();
+		this.discounts = discount.getDiscounts();
+	}
+
 	public Date getBegin() {
 		return begin;
 	}
+
 	public void setBegin(Date begin) {
 		this.begin = begin;
 	}
+
 	public Date getEnd() {
 		return end;
 	}
+
 	public void setEnd(Date end) {
 		this.end = end;
 	}
+
 	public Double getPercentage() {
 		return percentage;
 	}
+
 	public void setPercentage(Double percentage) {
 		this.percentage = percentage;
 	}
@@ -70,6 +85,5 @@ public class Discount {
 	public Long getId() {
 		return id;
 	}
-	
-	
+
 }
