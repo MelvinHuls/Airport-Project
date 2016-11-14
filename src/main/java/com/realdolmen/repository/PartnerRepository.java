@@ -26,16 +26,6 @@ public class PartnerRepository {
 	 * .setParameter("company", partner.getCompany()).getResultList();
 	 */
 
-	public List<Flight> getFlightsByCompany(String company, Partner partner) {
-		List<Flight> flights = em.createQuery("select f from Flight f where f.company = :company", Flight.class)
-				.setParameter("company", partner.getCompany()).getResultList();
-		if (flights == null || flights.isEmpty()) {
-			return new ArrayList<Flight>();
-		} else {
-			return flights;
-		}
-	}
-
 	public void create(Partner o) {
 		em.persist(o);
 	}

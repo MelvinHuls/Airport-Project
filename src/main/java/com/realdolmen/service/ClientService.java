@@ -54,8 +54,8 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 	}
 
 	@Override
-	public void update(Client client) {
-		cRepo.update(client);
+	public String update(Client client) {
+		return cRepo.update(client);
 	}
 
 	@Override

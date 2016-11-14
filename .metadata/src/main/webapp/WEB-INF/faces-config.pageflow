@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14787802804220" configfile="/Airport-Project/src/main/webapp/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="editFlight.xhtml" x="122" y="178" id="pf14787803064661" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14787803064662 pf14787803064663 pf14787803064664" path="/editFlight.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="overviewFlights" x="338" y="178" id="pf14787803064665" referenceLink="//@navigationRule.6/@navigationCase.4/@toViewId|" inlinks="pf14787803064662 pf14787803064663 pf14787803064664 pf14787803064666 pf14787803064667 pf14787803064668" path="/overviewFlights"/>
@@ -39,4 +40,78 @@
   <links id="pf14787803064668" target="pf14787803064665" source="pf147878030646630" outcome="partnerLoggedIn"/>
   <links id="pf147878030646618" target="pf147878030646615" source="pf147878030646636" outcome="goHome"/>
   <links id="pf147878030646639" target="pf147878030646640" source="pf147878030646638" outcome="searchFlights"/>
+=======
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14782020793410" configfile="/project-exercise-1/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="editFlight.xhtml" x="122" y="1138" id="pf147845316793024" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14786839718230 pf14786839718231 pf14786839718232" path="/editFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewFlights" x="122" y="754" id="pf147845316793026" referenceLink="//@navigationRule.6/@navigationCase.4/@toViewId|" path="overviewFlights"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewFlights.xhtml" x="122" y="370" id="pf147845322461527" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14786839718233 pf14786839718234" path="/overviewFlights.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editFlight" x="122" y="1906" id="pf147845322461529" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" path="editFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="addFlight" x="122" y="2290" id="pf147846219784432" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" path="addFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="ediFlight.xhtml" x="122" y="1522" id="pf147846227897835" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14786839718235 pf14786839718236" path="/addFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Flight.xhtml" x="338" y="4401" id="pf14785095407750" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" outlinks="pf14786839718237 pf14786839718238 pf14790376407602" inlinks="pf14786839718239" path="/overviewLocations.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editLocation" x="122" y="2674" id="pf14785095407754" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" path="editLocation"/>
+  <nodes xsi:type="pageflow:PFPage" name="editFight.xhtml" x="122" y="3058" id="pf14785224150755" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf147868397182310 pf147868397182311 pf147868397182312" path="/editLocation.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewLocations" x="122" y="3826" id="pf14785224150758" referenceLink="//@navigationRule.6/@navigationCase.2/@toViewId|" path="overviewLocations"/>
+  <nodes xsi:type="pageflow:PFPage" name="edtLocation.xhtml" x="122" y="3442" id="pf147852254124011" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf147868397182313 pf147868397182314" path="/addLocation.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addLocation" x="122" y="4210" id="pf147852299745113" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" path="addLocation"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="4978" id="pf147853048537019" referenceLink="//@navigationRule.15/@navigationCase.0/@toViewId|" outlinks="pf147868397182315 pf147868397182317 pf147868397182318 pf147868397182319 pf14790376042300" inlinks="pf14789803476594" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="searchFlight" x="122" y="5364" id="pf147853048537021" referenceLink="//@navigationRule.6/@navigationCase.4/@toViewId|" path="searchFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="index" x="122" y="5749" id="pf14785950695084" referenceLink="//@navigationRule.6/@navigationCase.3/@toViewId|" path="index"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewFlights" x="338" y="1522" id="pf147868397182320" referenceLink="//@navigationRule.9/@navigationCase.4/@toViewId|" inlinks="pf14786839718230 pf14786839718231 pf14786839718232 pf14786839718235 pf14786839718236 pf147868397182318" path="/overviewFlights"/>
+  <nodes xsi:type="pageflow:PFPage" name="editFlight" x="338" y="178" id="pf147868397182321" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14786839718233" path="/editFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="addFlight" x="338" y="562" id="pf147868397182322" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf14786839718234" path="/addFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="editLocation" x="554" y="4209" id="pf147868397182323" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf14786839718237" path="/editLocation"/>
+  <nodes xsi:type="pageflow:PFPage" name="addLocation" x="554" y="4593" id="pf147868397182324" referenceLink="//@navigationRule.6/@navigationCase.1/@toViewId|" inlinks="pf14786839718238" path="/addLocation"/>
+  <nodes xsi:type="pageflow:PFPage" name="overviewLocations" x="338" y="3442" id="pf147868397182325" referenceLink="//@navigationRule.8/@navigationCase.1/@toViewId|" inlinks="pf147868397182310 pf147868397182311 pf147868397182312 pf147868397182313 pf147868397182314 pf14790379340943" path="/overviewLocations"/>
+  <nodes xsi:type="pageflow:PFPage" name="index" x="338" y="5169" id="pf147868397182326" referenceLink="//@navigationRule.9/@navigationCase.3/@toViewId|" inlinks="pf147868397182315 pf147868397182317" path="/index"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="122" y="4594" id="pf147868397182327" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf14786839718239" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="searchFlights.xhtml" x="122" y="6133" id="pf147868397182328" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf147868397182329" path="/searchFlights.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="resultSearchedFlights.xhtml" x="338" y="6133" id="pf147868397182330" referenceLink="//@navigationRule.13/@fromViewId|" outlinks="pf14787728028870" inlinks="pf147868397182329 pf14787728028871" path="/resultSearchedFlights.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="searchFlights" id="pf147868397182331" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf147868397182319" path="/searchFlights"/>
+  <nodes xsi:type="pageflow:PFPage" name="flightDetails.xhtml" id="pf14787728028872" referenceLink="//@navigationRule.13/@navigationCase.0/@toViewId|" outlinks="pf14787728028871 pf14788749646204" inlinks="pf14787728028870" path="/flightDetails.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="bookFlight.xhtml" id="pf14788749646205" referenceLink="//@navigationRule.14/@fromViewId|" outlinks="pf14788771370466 pf14788771370467" inlinks="pf14788749646204" path="/bookFlight.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="bookingFailure.xhtml" id="pf14788771370468" referenceLink="//@navigationRule.14/@navigationCase.0/@toViewId|" inlinks="pf14788771370466" path="/bookingFailure.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="bookingSuccess.xhtml" id="pf14788771370469" referenceLink="//@navigationRule.14/@navigationCase.1/@toViewId|" inlinks="pf14788771370467" path="/bookingSuccess.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="WEB-INF/templates/template_temp.xhtml" id="pf14789803476595" referenceLink="//@navigationRule.15/@fromViewId|" outlinks="pf14789803476594" path="/WEB-INF/templates/template_temp.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="employeePanel" id="pf14790376042301" referenceLink="//@navigationRule.9/@navigationCase.2/@toViewId|" inlinks="pf14790376042300 pf14790376407602 pf14790398931199" path="/employeePanel"/>
+  <nodes xsi:type="pageflow:PFPage" name="employeePanel.xhtml" id="pf14790379340944" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14790379340943 pf14790379654687" path="/employeePanel.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editMarginPriceFlights" id="pf14790379654688" referenceLink="//@navigationRule.5/@navigationCase.1/@toViewId|" inlinks="pf14790379654687 pf147903989311910 pf147903989311911" path="/editMarginPriceFlights"/>
+  <nodes xsi:type="pageflow:PFPage" name="editMarginPriceFlights.xhtml" id="pf147903989311912" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf14790398931199 pf147903989311913" path="/editMarginPriceFlights.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editMarginPriceFlight" id="pf147903989311914" referenceLink="//@navigationRule.4/@navigationCase.1/@toViewId|" inlinks="pf147903989311913" path="/editMarginPriceFlight"/>
+  <nodes xsi:type="pageflow:PFPage" name="editMarginPriceFlight.xhtml" id="pf147903989311915" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf147903989311910 pf147903989311911" path="/editMarginPriceFlight.xhtml"/>
+  <links id="pf14786839718230" target="pf147868397182320" source="pf147845316793024" outcome="success"/>
+  <links id="pf14786839718231" target="pf147868397182320" source="pf147845316793024" outcome="return"/>
+  <links id="pf14786839718232" target="pf147868397182320" source="pf147845316793024" outcome="deleted"/>
+  <links id="pf14786839718233" target="pf147868397182321" source="pf147845322461527" outcome="edit"/>
+  <links id="pf14786839718234" target="pf147868397182322" source="pf147845322461527" outcome="add"/>
+  <links id="pf14786839718235" target="pf147868397182320" source="pf147846227897835" outcome="success"/>
+  <links id="pf14786839718236" target="pf147868397182320" source="pf147846227897835" outcome="return"/>
+  <links id="pf14786839718237" target="pf147868397182323" source="pf14785095407750" outcome="edit"/>
+  <links id="pf14786839718238" target="pf147868397182324" source="pf14785095407750" outcome="add"/>
+  <links id="pf147868397182310" target="pf147868397182325" source="pf14785224150755" outcome="success"/>
+  <links id="pf147868397182311" target="pf147868397182325" source="pf14785224150755" outcome="return"/>
+  <links id="pf147868397182312" target="pf147868397182325" source="pf14785224150755" outcome="deleted"/>
+  <links id="pf147868397182313" target="pf147868397182325" source="pf147852254124011" outcome="success"/>
+  <links id="pf147868397182314" target="pf147868397182325" source="pf147852254124011" outcome="return"/>
+  <links id="pf147868397182315" target="pf147868397182326" source="pf147853048537019" outcome="failedtoLogIn"/>
+  <links id="pf147868397182317" target="pf147868397182326" source="pf147853048537019" outcome="clientLoggedIn"/>
+  <links id="pf147868397182318" target="pf147868397182320" source="pf147853048537019" outcome="partnerLoggedIn"/>
+  <links id="pf14786839718239" target="pf14785095407750" source="pf147868397182327" outcome="goHome"/>
+  <links id="pf147868397182329" target="pf147868397182330" source="pf147868397182328" outcome="searchFlights"/>
+  <links id="pf147868397182319" target="pf147868397182331" source="pf147853048537019" outcome="searchFlight"/>
+  <links id="pf14787728028871" target="pf147868397182330" source="pf14787728028872" outcome="return"/>
+  <links id="pf14787728028870" target="pf14787728028872" source="pf147868397182330" outcome="details"/>
+  <links id="pf14788749646204" target="pf14788749646205" source="pf14787728028872" outcome="booking"/>
+  <links id="pf14788771370466" target="pf14788771370468" source="pf14788749646205" outcome="failure"/>
+  <links id="pf14788771370467" target="pf14788771370469" source="pf14788749646205" outcome="success"/>
+  <links id="pf14789803476594" target="pf147853048537019" source="pf14789803476595" outcome="home"/>
+  <links id="pf14790376042300" target="pf14790376042301" source="pf147853048537019" outcome="employeeLoggedIn"/>
+  <links id="pf14790376407602" target="pf14790376042301" source="pf14785095407750" outcome="return"/>
+  <links id="pf14790379340943" target="pf147868397182325" source="pf14790379340944" outcome="overview"/>
+  <links id="pf14790379654687" target="pf14790379654688" source="pf14790379340944" outcome="flights"/>
+  <links id="pf14790398931199" target="pf14790376042301" source="pf147903989311912" outcome="return"/>
+  <links id="pf147903989311913" target="pf147903989311914" source="pf147903989311912" outcome="edit"/>
+  <links id="pf147903989311910" target="pf14790379654688" source="pf147903989311915" outcome="return"/>
+  <links id="pf147903989311911" target="pf14790379654688" source="pf147903989311915" outcome="success"/>
+>>>>>>> 469778309343683b1d17f05f9aa6ee1c164e1b68
 </pageflow:Pageflow>

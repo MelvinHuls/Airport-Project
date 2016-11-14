@@ -19,8 +19,8 @@ public class BookingService implements AbstractService<Booking> {
 	}
 
 	@Override
-	public void update(Booking booking) {
-		bRepo.update(booking);
+	public String update(Booking booking) {
+		return bRepo.update(booking);
 	}
 
 	@Override

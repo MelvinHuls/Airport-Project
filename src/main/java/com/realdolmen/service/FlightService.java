@@ -2,10 +2,18 @@ package com.realdolmen.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.faces.bean.ManagedBean;
+
 import com.realdolmen.domain.Flight;
+import com.realdolmen.domain.Partner;
 import com.realdolmen.repository.FlightRepository;
 
+@Stateless
+@ManagedBean(name="flightService")
 public class FlightService implements AbstractService<Flight> {
+	@EJB
 	private FlightRepository fRepo;
 
 	@Override
@@ -19,8 +27,8 @@ public class FlightService implements AbstractService<Flight> {
 	}
 
 	@Override
-	public void update(Flight flight) {
-		fRepo.update(flight);
+	public String update(Flight flight) {
+		return fRepo.update(flight);
 	}
 
 	@Override
@@ -30,6 +38,10 @@ public class FlightService implements AbstractService<Flight> {
 
 	@Override
 	public List<Flight> findAll() {
-		return fRepo.findAll();
+		return fRepo.findAllFlights();
+	}
+	
+	public List<Flight> getFlightsByCompany(Partner partner) {
+		return fRepo.getFlightsByCompany(partner);
 	}
 }

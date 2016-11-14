@@ -24,8 +24,9 @@ public class ClientRepository {
 		return em.find(Client.class, id);
 	}
 
-	public void update(Client o) {
+	public String update(Client o) {
 		em.merge(o);
+		return "success";
 	}
 
 	public void delete(Client o) {

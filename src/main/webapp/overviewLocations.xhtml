@@ -7,49 +7,42 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Overview Locations</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Overview Locations</ui:define>
+	<ui:define name="content">
+		<h1><p:outputLabel value="#{empl['employee.locations.overview.header']}" /></h1>
 
-<h:body>
-	<h1>All the current existing locations</h1>
+		<p:dataTable value="#{rAirBean.employeeService.obtainLocations()}"
+			var="location" id="listOfLocations">
+			<p:column header="#{empl['employee.locations.overview.country']}">
+				<p:outputLabel value="#{location.country}" />
+			</p:column>
 
-	<p:dataTable value="#{rAirBean.employeeService.obtainLocations()}"
-		var="location" id="listOfLocations">
-		<p:column>
-			<f:facet name="header">Country</f:facet>
-			<p:outputLabel value="#{location.country}" />
-		</p:column>
+			<p:column header="#{empl['employee.locations.overview.airport']}">
+				<p:outputLabel value="#{location.airport}" />
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Airport</f:facet>
-			<p:outputLabel value="#{location.airport}" />
-		</p:column>
+			<p:column header="#{empl['employee.locations.overview.code']}">
+				<p:outputLabel value="#{location.code}" />
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Code</f:facet>
-			<p:outputLabel value="#{location.code}" />
-		</p:column>
+			<p:column header="#{empl['employee.locations.overview.region']}">
+				<p:outputLabel value="#{location.region}" />
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Global Region</f:facet>
-			<p:outputLabel value="#{location.region}" />
-		</p:column>
+			<p:column>
+				<h:form styleClass="forms">
+					<p:commandButton icon="ui-icon-search"
+						action="#{rAirBean.employeeService.storeLocation(location)}" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
 
-		<p:column>
-			<h:form>
-				<p:commandButton icon="ui-icon-search"
-					action="#{rAirBean.employeeService.storeLocation(location)}" />
-			</h:form>
-		</p:column>
-	</p:dataTable>
-	
-	<h:form>
-		<p:commandButton value="Add location"
-			action="#{rAirBean.employeeService.newLocation()}" />
-	</h:form>
-	
-
-
-</h:body>
+		<h:form styleClass="forms">
+			<p:commandButton value="#{empl['employee.locations.button.addLocation']}"
+				action="#{rAirBean.employeeService.newLocation()}" />
+			<p:commandButton value="#{empl['employee.marginPrice.overview.return']}" action="return" />
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

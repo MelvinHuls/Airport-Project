@@ -7,49 +7,52 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Here you go, right of the chopping board</title>
-</h:head>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Here you go, right of the chopping board</ui:define>
+	<ui:define name="content">
+		<h2>Your resulting flights</h2>
 
-<h:body>
-	<h2>Your resulting flights</h2>
+		<p:dataTable value="#{flightSearchBean.getFlightsUsingCriteria()}"
+			var="flight" id="listOfFlights" sortMode="multiple">
+			<p:column sortBy="#{flightSearchBean.calculateTotalPrice(flight)}"
+				headerText="Total Price">
+				<p:outputLabel
+					value="#{flightSearchBean.calculateTotalPrice(flight)}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
+			</p:column>
 
-	<p:dataTable value="#{flightSearchBean.getFlightsUsingCriteria()}"
-		var="flight" id="listOfFlights">
-		<p:column>
-			<f:facet name="header">Price</f:facet>
-			<p:outputLabel
-				value="#{flightSearchBean.getPriceFlightClass(flight)}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Discount</f:facet>
-			<p:outputLabel value="Filler" />
-		</p:column>
+			<p:column>
+				<f:facet name="header">Discount</f:facet>
+				<p:outputLabel value="#{flightSearchBean.calculateDiscount(flight)}">
+					<f:convertNumber maxFractionDigits="2" />
+				</p:outputLabel>
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Departure Time</f:facet>
-			<p:outputLabel value="#{flight.departureTime}">
-				<f:convertDateTime type="both" timeStyle="short" />
-			</p:outputLabel>
-		</p:column>
+			<p:column sortBy="departureTime" headerText="Departure Time">
+				<p:outputLabel value="#{flight.departureTime}">
+					<f:convertDateTime type="both" timeStyle="short" />
+				</p:outputLabel>
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Arrival Time</f:facet>
-			<p:outputLabel value="#{flight.arrivalTime}">
-				<f:convertDateTime type="both" timeStyle="short"/>
-			</p:outputLabel>
-		</p:column>
+			<p:column>
+				<f:facet name="header">Arrival Time</f:facet>
+				<p:outputLabel value="#{flight.arrivalTime}">
+					<f:convertDateTime type="both" timeStyle="short" />
+				</p:outputLabel>
+			</p:column>
 
-		<p:column>
-			<f:facet name="header">Airline Company</f:facet>
-			<p:outputLabel value="#{flight.company}"/>
-		</p:column>
+			<p:column sortBy="company" headerText="Airline Company">
+				<p:outputLabel value="#{flight.company}" />
+			</p:column>
 
-		<p:column>
-			<h:form>
-				<p:commandButton icon="ui-icon-search" />
-			</h:form>
-		</p:column>
-	</p:dataTable>
-</h:body>
+			<p:column>
+				<h:form styleClass="forms">
+					<p:commandButton icon="ui-icon-search"
+						action="#{checkFlightInfoService.checkDetailsFlight(flight)}" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
 </html>

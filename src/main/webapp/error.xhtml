@@ -7,14 +7,13 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-<h:head>
-	<title>Edit A Flight</title>
-</h:head>
-<h:body>
-	<p:outputLabel>404 Error - Something went wrong. Click on the button below to get back to the website.</p:outputLabel>
-	<h:form>
-		<p:commandButton action="goHome" value="Go to website" />
-
-	</h:form>
-</h:body>
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Edit A Flight</ui:define>
+	<ui:define name="content">
+		<p:outputLabel>404 Error - Something went wrong. Click on the button below to get back to the website.</p:outputLabel>
+		<h:form styleClass="forms">
+			<p:commandButton action="goHome" value="Go to website" />
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

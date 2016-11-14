@@ -57,6 +57,42 @@
 	</navigation-rule>
 
 	<navigation-rule>
+		<from-view-id>/employeePanel.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>overview</from-outcome>
+			<to-view-id>/overviewLocations</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>flights</from-outcome>
+			<to-view-id>/editMarginPriceFlights</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/editMarginPriceFlights.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/employeePanel</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/editMarginPriceFlight</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/editMarginPriceFlight.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/editMarginPriceFlights</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/editMarginPriceFlights</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/overviewLocations.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
@@ -65,6 +101,10 @@
 		<navigation-case>
 			<from-outcome>add</from-outcome>
 			<to-view-id>/addLocation</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/employeePanel</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -108,7 +148,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>employeeLoggedIn</from-outcome>
-			<to-view-id>/overviewLocations</to-view-id>
+			<to-view-id>/employeePanel</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>clientLoggedIn</from-outcome>
@@ -127,7 +167,7 @@
 			<to-view-id>/overviewLocations.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/searchFlights.xhtml</from-view-id>
 		<navigation-case>
@@ -135,4 +175,70 @@
 			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/flightDetails.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/resultSearchedFlights.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>booking</from-outcome>
+			<to-view-id>/bookFlight.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/resultSearchedFlights.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>details</from-outcome>
+			<to-view-id>/flightDetails.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/bookFlight.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/bookingFailure.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/bookingSuccess.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/WEB-INF/templates/template_temp.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<managed-bean>
+		<managed-bean-name>bookingDetails</managed-bean-name>
+		<managed-bean-class>com.realdolmen.beans.BookingDetails</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>bookingId</property-name>
+			<value>#{param.bookingId}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>userId</property-name>
+			<value>#{param.userId}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>nl</supported-locale>
+		</locale-config>
+		
+		<resource-bundle>
+			<base-name>Employee</base-name>
+			<var>empl</var>
+		</resource-bundle>
+	</application>
 </faces-config>

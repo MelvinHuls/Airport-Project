@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +15,7 @@ import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
 import com.realdolmen.repository.PartnerRepository;
 
-@Stateful
+@Stateless
 @LocalBean
 // @EJB(name="java:global/RAir/PartnerService", beanInterface =
 // SessionRemote.class, beanName="PartnerService")
@@ -42,8 +43,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	}
 
 	@Override
-	public void update(Partner partner) {
+	public String update(Partner partner) {
 		pRepo.update(partner);
+		return "success";
 	}
 
 	@Override
@@ -74,11 +76,6 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 
 	public void setPartner(Partner partner) {
 		this.partner = partner;
-	}
-
-	@Override
-	public List<Flight> obtainFlights() {
-		return pRepo.getFlightsByCompany(partner.getCompany(), partner);
 	}
 
 	@Override
