@@ -130,8 +130,7 @@
 				</p:calendar>
 			</p:panelGrid>
 
-			<p:button value="#{user['user.flights.button.searchFlights']}" outcome="searchFlights"
-				update="panelA" />
+			<p:commandButton value="#{user['user.flights.button.searchFlights']}" action="searchFlights" update="panelA" />
 		</h:form>
 	</ui:define>
 </ui:composition>

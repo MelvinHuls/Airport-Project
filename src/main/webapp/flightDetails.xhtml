@@ -158,7 +158,8 @@
 		<h:form id="formReturn" styleClass="forms">
 			<h3>
 				<p:outputLabel
-					value="#{user['user.flightDetails.header.secFlight']}" rendered="#{checkFlightInfoService.returnFlightSelected()}" />
+					value="#{user['user.flightDetails.header.secFlight']}"
+					rendered="#{checkFlightInfoService.returnFlightSelected()}" />
 			</h3>
 			<p:panelGrid styleClass="panelGrids" columns="3" layout="grid"
 				rendered="#{checkFlightInfoService.returnFlightSelected()}">
@@ -361,11 +362,10 @@
 					</p:column>
 				</p:dataTable>
 			</h:form>
-
-
+		</h:form>
+		<h:form>
 			<p:button value="#{user['user.flightDetails.button.return']}"
 				outcome="return" />
-
 		</h:form>
 	</ui:define>
 </ui:composition>
