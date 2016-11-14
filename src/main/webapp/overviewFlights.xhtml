@@ -10,25 +10,21 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Overview Flights</ui:define>
 	<ui:define name="content">
-		<h1>Flights you can edit</h1>
+		<h1><p:outputLabel value="#{part['partner.overview.header']}"/></h1>
 
 		<p:dataTable value="#{flightService.getFlightsByCompany(rAirBean.partnerService.partner)}"
 			var="flight" id="listOfFlights" sortMode="multiple">
-			<p:column>
-				<f:facet name="header">Departure Airport</f:facet>
+			<p:column header="#{part['partner.overview.dep.airport']}">
 				<p:outputLabel value="#{flight.departure.airport}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">Departure Country</f:facet>
+			<p:column header="#{part['partner.overview.dep.country']}">
 				<p:outputLabel value="#{flight.departure.country}" />
 			</p:column>
 
-			<p:column>
-				<f:facet name="header">Destination Airport</f:facet>
+			<p:column header="#{part['partner.overview.dest.airport']}">
 				<p:outputLabel value="#{flight.destination.airport}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">Destination Country</f:facet>
+			<p:column header="#{part['partner.overview.dest.country']}">
 				<p:outputLabel value="#{flight.destination.country}" />
 			</p:column>
 
@@ -41,8 +37,7 @@
 		</p:dataTable>
 
 		<h:form styleClass="forms">
-			<p:commandButton value="Add flight"
-				action="#{rAirBean.partnerService.newFlight()}" />
+			<p:commandButton value="#{part['partner.overview.button.add']}" action="#{rAirBean.partnerService.newFlight()}" />
 		</h:form>
 
 	</ui:define>

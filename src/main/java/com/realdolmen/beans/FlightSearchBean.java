@@ -397,4 +397,8 @@ public class FlightSearchBean {
 		}
 		return new ArrayList<Flight>();
 	}
+	
+	public Boolean returnFlightPlanned() {
+		return (this.flight.getDateReturn() != null);
+	}
 }

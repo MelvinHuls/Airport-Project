@@ -10,20 +10,20 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Almost ready to go meet the clouds!</ui:define>
 	<ui:define name="content">
-		<h2>Choose your payment method</h2>
+		<h2><p:outputLabel value="#{user['user.bookFlight.header']}"/></h2>
 
 		<h:form styleClass="forms">
 			<p:selectOneRadio
 				value="#{checkFlightInfoService.bookFlight.creditCard}">
 				<p:ajax event="change" update="formA" />
-				<f:selectItem itemLabel="Credit Card" itemValue="true" />
-				<f:selectItem itemLabel="Endorsement" itemValue="false" />
+				<f:selectItem itemLabel="#{user['user.bookFlight.creditcard']}" itemValue="true" />
+				<f:selectItem itemLabel="#{user['user.bookFlight.endorsement']}" itemValue="false" />
 			</p:selectOneRadio>
 		</h:form>
 
 		<h:form id="formA" styleClass="forms">
 			<p>
-				<p:outputLabel for="creditNumber" value="Creditcard Number:   "
+				<p:outputLabel for="creditNumber" value="#{user['user.bookFlight.creditcardNum']}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}" />
 				<p:inputText value="#{creditCardNumber}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}"
@@ -31,7 +31,7 @@
 			</p>
 			<p>
 				<p:outputLabel for="expDate"
-					value="Expiration date (mm/dd/yyyy):   "
+					value="#{user['user.bookFlight.expDate']}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}" />
 				<p:inputMask value="#{expirationDate}"
 					rendered="#{checkFlightInfoService.bookFlight.creditCard}"
@@ -40,10 +40,10 @@
 				</p:inputMask>
 			</p>
 
-			<p:commandButton value="Finalize Booking"
+			<p:commandButton value="#{user['user.bookFlight.button.finalizeBooking']}"
 				rendered="#{checkFlightInfoService.bookFlight.creditCard}"
 				action="#{checkFlightInfoService.BookFlightCreditCard(flightSearchBean.flight.flightclass, flightSearchBean.flight.seats, creditCardNumber, expirationDate)}" />
-			<p:commandButton value="Finalize Booking"
+			<p:commandButton value="#{user['user.bookFlight.button.finalizeBooking']}"
 				rendered="#{not checkFlightInfoService.bookFlight.creditCard}"
 				action="#{checkFlightInfoService.BookFlightEndorsement(flightSearchBean.flight.flightclass, flightSearchBean.flight.seats)}" />
 		</h:form>

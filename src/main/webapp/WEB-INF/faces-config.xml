@@ -40,7 +40,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>add</from-outcome>
-			<to-view-id>/addFlight</to-view-id>
+			<to-view-id>/editFlight</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -239,6 +239,14 @@
 		<resource-bundle>
 			<base-name>Employee</base-name>
 			<var>empl</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>User</base-name>
+			<var>user</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>Partner</base-name>
+			<var>part</var>
 		</resource-bundle>
 	</application>
 </faces-config>

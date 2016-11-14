@@ -11,9 +11,8 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">OMYGAWD NO!!!!</ui:define>
 	<ui:define name="content">
-		<h1>The unthinkable has happened and your flight failed to be
-			booked</h1>
-		<h3>Lets hope this was intended in case this was your demo</h3>
+		<h1><p:outputLabel value="#{user['user.booking.failure.header']}"/></h1>
+		<h3><p:outputLabel value="#{user['user.booking.failure.subheader']}"/></h3>
 	</ui:define>
 </ui:composition>
 </html>

@@ -12,28 +12,28 @@
 	<ui:define name="pageTitle">Booking Details</ui:define>
 	<ui:define name="content">
 		<h:form id="bookingInfo">
-			<h1>Here are the details of your booking</h1>
+			<h1><p:outputLabel value="#{user['user.bookingDetails.header']}"/></h1>
 
 
 			<p>
-				<p:outputLabel value="You booked " />
+				<p:outputLabel value="#{user['user.bookingDetails.partOne']}" />
 				<p:outputLabel value="#{bookingDetails.booking.seats}" />
-				<p:outputLabel value=" seats in " />
+				<p:outputLabel value="#{user['user.bookingDetails.partTwo']}" />
 				<p:outputLabel value="#{bookingDetails.booking.flightclass}" />
 			</p>
 
 
-			<h2>Outgoing Flight</h2>
+			<h2><p:outputLabel value="#{user['user.bookingDetails.header.outgoingFlight']}"/></h2>
 			<p:panelGrid styleClass="panelGrids" columns="1" layout="grid" id="outgoingFlight">
 
 				<h:panelGroup>
-					<p:outputLabel value="Company: " />
+					<p:outputLabel value="#{user['user.bookingDetails.company']}" />
 					<p:outputLabel
 						value="#{bookingDetails.booking.outgoingFlight.company}" />
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:outputLabel value="Departure Time: " />
+					<p:outputLabel value="#{user['user.bookingDetails.dep.time']}" />
 					<p:outputLabel
 						value="#{bookingDetails.booking.outgoingFlight.departureTime}">
 						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -41,7 +41,7 @@
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:outputLabel value="Duration: " />
+					<p:outputLabel value="#{user['user.bookingDetails.duration']}" />
 					<p:outputLabel
 						value="#{bookingDetails.booking.outgoingFlight.duration}">
 						<f:convertDateTime pattern="HH:mm:ss" />
@@ -49,65 +49,65 @@
 				</h:panelGroup>
 
 				<h:panelGroup>
-					<p:outputLabel value="Arrival Time: " />
+					<p:outputLabel value="#{user['user.bookingDetails.arr.time']}" />
 					<p:outputLabel
 						value="#{bookingDetails.booking.outgoingFlight.getArrivalTime()}">
 						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
 					</p:outputLabel>
 				</h:panelGroup>
 
-				<h3>Departure Airport</h3>
+				<h3><p:outputLabel value="#{user['user.bookingDetails.depAirport']}"/></h3>
 				<p:panelGrid styleClass="panelGrids" columns="1" layout="grid">
 
 					<h:panelGroup>
-						<p:outputLabel value="Region: " />
+						<p:outputLabel value="#{user['user.bookingDetails.region']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.departure.region}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Country: " />
+						<p:outputLabel value="#{user['user.bookingDetails.country']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.departure.country}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Code: " />
+						<p:outputLabel value="#{user['user.bookingDetails.code']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.departure.code}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Airport: " />
+						<p:outputLabel value="#{user['user.bookingDetails.airport']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.departure.airport}" />
 					</h:panelGroup>
 				</p:panelGrid>
 
 
-				<h3>Destination Airport</h3>
+				<h3><p:outputLabel value="#{user['user.bookingDetails.destAirport']}" /></h3>
 				<p:panelGrid styleClass="panelGrids" columns="1" layout="grid">
 
 					<h:panelGroup>
-						<p:outputLabel value="Region: " />
+						<p:outputLabel value="#{user['user.bookingDetails.region']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.destination.region}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Country: " />
+						<p:outputLabel value="#{user['user.bookingDetails.country']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.destination.country}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Code: " />
+						<p:outputLabel value="#{user['user.bookingDetails.code']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.destination.code}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Airport: " />
+						<p:outputLabel value="#{user['user.bookingDetails.airport']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.outgoingFlight.destination.airport}" />
 					</h:panelGroup>
@@ -115,17 +115,17 @@
 			</p:panelGrid>
 
 			<h:form rendered="#{bookingDetails.booking.returnFlightBooked()}">
-				<h2>Return Flight</h2>
+				<h2><p:outputLabel value="#{user['user.bookingDetails.returnFlight']}" /></h2>
 				<p:panelGrid styleClass="panelGrids" columns="1" layout="grid">
 
 					<h:panelGroup>
-						<p:outputLabel value="Company: " />
+						<p:outputLabel value="#{user['user.bookingDetails.company']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.returnFlight.company}" />
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Departure Time: " />
+						<p:outputLabel value="#{user['user.bookingDetails.dep.time']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.returnFlight.departureTime}">
 							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -133,7 +133,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Duration: " />
+						<p:outputLabel value="#{user['user.bookingDetails.duration']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.returnFlight.duration}">
 							<f:convertDateTime pattern="HH:mm:ss" />
@@ -141,65 +141,65 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:outputLabel value="Arrival Time: " />
+						<p:outputLabel value="#{user['user.bookingDetails.arr.time']}" />
 						<p:outputLabel
 							value="#{bookingDetails.booking.returnFlight.getArrivalTime()}">
 							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
 						</p:outputLabel>
 					</h:panelGroup>
 
-					<h3>Departure Airport</h3>
+					<h3><p:outputLabel value="#{user['user.bookingDetails.arr.time']}" /></h3>
 					<p:panelGrid styleClass="panelGrids" columns="1" layout="grid">
 
 						<h:panelGroup>
-							<p:outputLabel value="Region: " />
+							<p:outputLabel value="#{user['user.bookingDetails.region']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.departure.region}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Country: " />
+							<p:outputLabel value="#{user['user.bookingDetails.country']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.departure.country}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Code: " />
+							<p:outputLabel value="#{user['user.bookingDetails.code']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.departure.code}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Airport: " />
+							<p:outputLabel value="#{user['user.bookingDetails.airport']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.departure.airport}" />
 						</h:panelGroup>
 					</p:panelGrid>
 
 
-					<h3>Destination Airport</h3>
+					<h3><p:outputLabel value="#{user['user.bookingDetails.destAirport']}" /></h3>
 					<p:panelGrid styleClass="panelGrids" columns="1" layout="grid">
 
 						<h:panelGroup>
-							<p:outputLabel value="Region: " />
+							<p:outputLabel value="#{user['user.bookingDetails.region']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.destination.region}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Country: " />
+							<p:outputLabel value="#{user['user.bookingDetails.country']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.destination.country}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Code: " />
+							<p:outputLabel value="#{user['user.bookingDetails.code']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.destination.code}" />
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel value="Airport: " />
+							<p:outputLabel value="#{user['user.bookingDetails.airport']}" />
 							<p:outputLabel
 								value="#{bookingDetails.booking.returnFlight.destination.airport}" />
 						</h:panelGroup>
@@ -208,13 +208,13 @@
 			</h:form>
 
 			<p>
-				<p:outputLabel value="Payment Method: " />
+				<p:outputLabel value="#{user['user.bookingDetails.payment.method']}" />
 				<p:outputLabel
 					value="#{bookingDetails.booking.paymentMethod.toString()}" />
 			</p>
 
 			<p>
-				<p:outputLabel value="Total Price: " />
+				<p:outputLabel value="#{user['user.bookingDetails.totalPrice']}" />
 				<p:outputLabel value="#{bookingDetails.booking.totalPrice}">
 					<f:convertNumber maxFractionDigits="2" />
 				</p:outputLabel>

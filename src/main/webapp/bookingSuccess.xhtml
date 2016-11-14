@@ -11,11 +11,11 @@
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
 	<ui:define name="pageTitle">Thank you come again!</ui:define>
 	<ui:define name="content">
-		<h1>Your flight has been successfully booked</h1>
+		<h1><p:outputLabel value="#{user['user.booking.success.header']}"/></h1>
 		
 		<pe:qrCode id="qrCodeElem" renderMethod="canvas" renderMode="2"
 			text="#{checkFlightInfoService.bookFlight.getUrl()}"
-			label="RAir Booking" size="200" fillColor="000000" fontName="Ubuntu"
+			label="#{user['user.qr.label']}" size="200" fillColor="000000" fontName="Ubuntu"
 			fontColor="#079115" ecLevel="H" radius="0.5" />
 
 	</ui:define>
