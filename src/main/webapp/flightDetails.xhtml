@@ -310,59 +310,57 @@
 				action="booking" />
 		</h:form>
 
-		<h:form rendered="#{flightSearchBean.returnFlightPlanned()}">
+		<!--  RETURN FLIGHTS  -->
+		<h:form styleClass="forms"
+			rendered="#{flightSearchBean.returnFlightPlanned()}"
+			id="possibleReturnFlights">
 			<h2>
 				<p:outputLabel
-					value="#{user['user.flightDetails.header.chooseReturnFlight']}" />
+					value="#{user['user.flightDetails.header.chooseReturnFlight']}"
+					rendered="#{checkFlightInfoService.returnFlightNotSelected()}" />
 			</h2>
-			<!--  RETURN FLIGHTS  -->
-			<h:form styleClass="forms">
-				<p:dataTable
-					value="#{flightSearchBean.getReturnFlights(checkFlightInfoService.outwardFlight)}"
-					var="flight" id="listOfFlights" sortMode="multiple">
-					<p:column sortBy="#{flightSearchBean.calculateTotalPrice(flight)}"
-						headerText="#{user['user.flightDetails.totalPrice']}">
-						<p:outputLabel
-							value="#{flightSearchBean.calculateTotalPrice(flight)}">
-							<f:convertNumber maxFractionDigits="2" />
-						</p:outputLabel>
-					</p:column>
 
-					<p:column header="#{user['user.flightDetails.discount']}">
-						<p:outputLabel
-							value="#{flightSearchBean.calculateDiscount(flight)}">
-							<f:convertNumber maxFractionDigits="2" />
-						</p:outputLabel>
-					</p:column>
+			<p:dataTable
+				value="#{flightSearchBean.getReturnFlights(checkFlightInfoService.outwardFlight)}"
+				var="flight" id="listOfFlights" sortMode="multiple">
+				<p:column headerText="#{user['user.flightDetails.totalPrice']}">
+					<p:outputLabel
+						value="#{flightSearchBean.calculateTotalPrice(flight)}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</p:column>
 
-					<p:column sortBy="departureTime"
-						headerText="#{user['user.flightDetails.depTime']}">
-						<p:outputLabel value="#{flight.departureTime}">
-							<f:convertDateTime type="both" timeStyle="short" />
-						</p:outputLabel>
-					</p:column>
+				<p:column headerText="#{user['user.flightDetails.discount']}">
+					<p:outputLabel
+						value="#{flightSearchBean.calculateDiscount(flight)}">
+						<f:convertNumber maxFractionDigits="2" />
+					</p:outputLabel>
+				</p:column>
 
-					<p:column header="#{user['user.flightDetails.depTime']}">
-						<p:outputLabel value="#{flight.arrivalTime}">
-							<f:convertDateTime type="both" timeStyle="short" />
-						</p:outputLabel>
-					</p:column>
+				<p:column headerText="#{user['user.flightDetails.depTime']}">
+					<p:outputLabel value="#{flight.departureTime}">
+						<f:convertDateTime type="both" timeStyle="short" />
+					</p:outputLabel>
+				</p:column>
 
-					<p:column sortBy="company"
-						headerText="#{user['user.flightDetails.company']}Airline Company">
-						<p:outputLabel value="#{flight.company}" />
-					</p:column>
+				<p:column headerText="#{user['user.flightDetails.arrTime']}">
+					<p:outputLabel value="#{flight.arrivalTime}">
+						<f:convertDateTime type="both" timeStyle="short" />
+					</p:outputLabel>
+				</p:column>
 
-					<p:column>
-						<h:form styleClass="forms">
-							<p:commandButton icon="ui-icon-search"
-								action="#{checkFlightInfoService.setReturnFlight(flight)}"
-								update="formReturn bookFlightForm" />
-						</h:form>
-					</p:column>
-				</p:dataTable>
-			</h:form>
+				<p:column headerText="#{user['user.flightDetails.company']}">
+					<p:outputLabel value="#{flight.company}" />
+				</p:column>
+
+				<p:column>
+						<p:commandButton icon="ui-icon-arrowreturnthick-1-n"
+							action="#{checkFlightInfoService.setReturnFlight(flight)}"
+							update="formReturn bookFlightForm possibleReturnFlights" />
+				</p:column>
+			</p:dataTable>
 		</h:form>
+		
 		<h:form>
 			<p:button value="#{user['user.flightDetails.button.return']}"
 				outcome="return" />

@@ -229,19 +229,18 @@ public class Flight {
 	private Double calculateSeatPrice(Double basePrice, Double customMarginPrice) {
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculateSeatPrice(customMarginPrice, this.departureTime);
+				
+				return Math.round(discounts.calculateSeatPrice(customMarginPrice, this.departureTime) * 100D) / 100D;
 			} else {
-				System.out.println("discounts " + discounts);
-				System.out.println("dep time " + this.departureTime);
-				return customMarginPrice;
+				return Math.round(customMarginPrice * 100D) / 100D;
 			}
 		} else if (basePrice == null) {
 			return null;
 		} else if (discounts == null || this.departureTime == null) {
-			return basePrice * 1.1;
+			return Math.round(basePrice * 1.1 * 100D) / 100D;
 		}
 
-		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
+		return Math.round(discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime) * 1.1 * 100D) / 100D;
 	}
 
 	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats)
@@ -275,17 +274,17 @@ public class Flight {
 
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculatePrice(customMarginPrice, this.departureTime, seats);
+				return Math.round(discounts.calculatePrice(customMarginPrice, this.departureTime, seats) * 100D) / 100D;
 			} else {
-				return customMarginPrice * seats;
+				return Math.round(customMarginPrice * seats * 100D) / 100D;
 			}
 		} else if (basePrice == null) {
 			throw new LackingPricingInformationException();
 		} else if (discounts == null || this.getDepartureTime() == null) {
-			return basePrice * 1.1 * seats;
+			return Math.round(basePrice * 1.1 * seats * 100D) / 100D;
 		}
 
-		return discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats);
+		return Math.round(discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats) * 100D) / 100D;
 	}
 
 	public Double calculateDiscountClass(FlightClass flightClass, Integer seats) {
@@ -317,7 +316,7 @@ public class Flight {
 
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculateDiscount(customMarginPrice, this.departureTime, seats);
+				return Math.round(discounts.calculateDiscount(customMarginPrice, this.departureTime, seats) * 100D) / 100D;
 			} else {
 				return 0d;
 			}
@@ -327,7 +326,7 @@ public class Flight {
 			return 0d;
 		}
 
-		return discounts.calculateDiscount(basePrice * 1.1, this.departureTime, seats);
+		return Math.round(discounts.calculateDiscount(basePrice * 1.1, this.departureTime, seats) * 100D) / 100D;
 	}
 
 	public Double getCustomMarginPriceEconomy() {

@@ -14,17 +14,17 @@
 
 		<p:dataTable value="#{flightService.getFlightsByCompany(rAirBean.partnerService.partner)}"
 			var="flight" id="listOfFlights" sortMode="multiple">
-			<p:column header="#{part['partner.overview.dep.airport']}">
+			<p:column headerText="#{part['partner.overview.dep.airport']}">
 				<p:outputLabel value="#{flight.departure.airport}" />
 			</p:column>
-			<p:column header="#{part['partner.overview.dep.country']}">
+			<p:column headerText="#{part['partner.overview.dep.country']}">
 				<p:outputLabel value="#{flight.departure.country}" />
 			</p:column>
 
-			<p:column header="#{part['partner.overview.dest.airport']}">
+			<p:column headerText="#{part['partner.overview.dest.airport']}">
 				<p:outputLabel value="#{flight.destination.airport}" />
 			</p:column>
-			<p:column header="#{part['partner.overview.dest.country']}">
+			<p:column headerText="#{part['partner.overview.dest.country']}">
 				<p:outputLabel value="#{flight.destination.country}" />
 			</p:column>
 

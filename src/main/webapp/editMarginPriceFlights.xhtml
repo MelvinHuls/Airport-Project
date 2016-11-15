@@ -14,17 +14,17 @@
 
 		<p:dataTable value="#{flightService.findAll()}"
 			var="flight" id="listOfFlights" sortMode="multiple">
-			<p:column header="#{empl['employee.marginPrice.overview.dep.airport']}">
+			<p:column headerText="#{empl['employee.marginPrice.overview.dep.airport']}">
 				<p:outputLabel value="#{flight.departure.airport}" />
 			</p:column>
-			<p:column header="#{empl['employee.marginPrice.overview.dep.country']}">
+			<p:column headerText="#{empl['employee.marginPrice.overview.dep.country']}">
 				<p:outputLabel value="#{flight.departure.country}" />
 			</p:column>
 
-			<p:column header="#{empl['employee.marginPrice.overview.dest.airport']}">
+			<p:column headerText="#{empl['employee.marginPrice.overview.dest.airport']}">
 				<p:outputLabel value="#{flight.destination.airport}" />
 			</p:column>
-			<p:column header="#{empl['employee.marginPrice.overview.dest.country']}">
+			<p:column headerText="#{empl['employee.marginPrice.overview.dest.country']}">
 				<p:outputLabel value="#{flight.destination.country}" />
 			</p:column>
 

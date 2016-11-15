@@ -12,28 +12,27 @@
 		Overview discounts
 	</ui:define>
 	<ui:define name="content">
-
 		<h1>
 			<p:outputLabel value="#{part['partner.discounts.overview.header']}" />
 		</h1>
 
 		<p:dataTable value="#{discountService.getAllDiscounts()}"
 			var="discount" id="listOfDiscounts">
-			<p:column header="#{part['partner.discounts.overview.begin']}">
+			<p:column headerText="#{part['partner.discounts.overview.begin']}">
 				<p:outputLabel value="#{discount.begin}">
 					<f:convertDateTime partern="MM/dd/yyyy HH:mm:ss" />
 				</p:outputLabel>
 			</p:column>
 
-			<p:column header="#{part['partner.discounts.overview.end']}">
+			<p:column headerText="#{part['partner.discounts.overview.end']}">
 				<p:outputLabel value="#{discount.end}">
 					<f:convertDateTime partern="MM/dd/yyyy HH:mm:ss" />
 				</p:outputLabel>
 			</p:column>
 
-			<p:column header="#{part['partner.discounts.overview.percentage']}">
+			<p:column headerText="#{part['partner.discounts.overview.percentage']}">
 				<p:outputLabel value="#{discount.percentage}">
-					<f:convertNumber type="percentage" />
+					<f:converter converterId="percentageConverter" />
 				</p:outputLabel>
 			</p:column>
 
@@ -46,7 +45,7 @@
 		</p:dataTable>
 
 		<h:form styleClass="forms">
-			<h3>Add a new Discount</h3>
+			<h3><p:outputLabel value="#{part['partner.discounts.overview.header.addDiscount']}"/></h3>
 			<p>
 				<p:outputLabel value="Start period:   " />
 				<p:calendar id="start" value="#{discountService.discount.begin}"
@@ -60,13 +59,15 @@
 			<p>
 				<p:outputLabel value="Percentage discount:   " />
 				<p:inputText value="#{discountService.discount.percentage}">
-					<f:convertNumber type="percentage" />
+					<f:converter converterId="percentageConverter" />
 				</p:inputText>
 			</p>
-			<p:commandButton value="Add discount" update="listOfDiscounts" action="#{discountService.addDiscount()}" >
+			<p:commandButton value="Add discount" update="listOfDiscounts"
+				action="#{discountService.addDiscount()}">
 				<f:param name="company" value="#{discountService.company}" />
 			</p:commandButton>
-			<p:commandButton value="Test" update="listOfDiscounts" action="#{discountService.test()}" >
+			<p:commandButton value="Test" update="listOfDiscounts"
+				action="#{discountService.test()}">
 				<f:param name="company" value="#{discountService.company}" />
 			</p:commandButton>
 		</h:form>

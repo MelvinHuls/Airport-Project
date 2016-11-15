@@ -49,7 +49,7 @@ public class FlightTest extends JpaPersistenceTest {
 		discounts.setNightlyDiscount(0.05);
 		discounts.setWeekendDiscount(0.025);
 		flight.setDiscounts(discounts);	
-		assertEquals((Double) (250d*0.95*0.975*0.9),flight.calculatePriceOneSeatEconomy());	
+		assertEquals((Double)(Math.round((250d*0.95*0.975*0.9) * 100D) / 100D),flight.calculatePriceOneSeatEconomy());	
 	}
 	
 	@Test
@@ -69,10 +69,10 @@ public class FlightTest extends JpaPersistenceTest {
 		discounts.setNightlyDiscount(0.05);
 		discounts.setWeekendDiscount(0.025);
 		flight.setDiscounts(discounts);	
-		assertEquals((Double) ((250d*0.95*0.975*0.9)*2),flight.calculateTotalPriceEconomy(2));	
+		assertEquals((Double) (Math.round(250d*0.95*0.975*0.9*2 * 100D) / 100D),flight.calculateTotalPriceEconomy(2));	
 		discounts.addSeatsDiscount(2, 0.05);
 		flight.setDiscounts(discounts);
-		assertEquals((Double) ((250d*0.95*0.975*0.9*0.95)*5),flight.calculateTotalPriceEconomy(5));	
+		assertEquals((Double) (Math.round(250d*0.95*0.975*0.9*0.95*5 *100D) / 100D),flight.calculateTotalPriceEconomy(5));	
 	}
 	
 	@Test
@@ -92,9 +92,9 @@ public class FlightTest extends JpaPersistenceTest {
 		discounts.setNightlyDiscount(0.05);
 		discounts.setWeekendDiscount(0.025);
 		flight.setDiscounts(discounts);	
-		assertEquals((Double) ((250-(250d*0.95*0.975*0.9))*2),flight.calculateDiscountEconomy(2));	
+		assertEquals((Double) (Math.round(((250-(250d*0.95*0.975*0.9))*2) * 100D) / 100D),flight.calculateDiscountEconomy(2));	
 		discounts.addSeatsDiscount(2, 0.05);
 		flight.setDiscounts(discounts);
-		assertEquals((Double) ((250-(250d*0.95*0.975*0.9*0.95))*5),flight.calculateDiscountEconomy(5));	
+		assertEquals((Double) (Math.round(((250-(250d*0.95*0.975*0.9*0.95))*5) * 100D) / 100D),flight.calculateDiscountEconomy(5));	
 	}
 }

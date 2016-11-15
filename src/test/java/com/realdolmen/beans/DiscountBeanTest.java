@@ -24,14 +24,14 @@ public class DiscountBeanTest extends JpaPersistenceTest {
 		Location destination = new Location("New York", "United States of America", "USA", GlobalRegion.NORTH_AMERICA);
 		em.persist(departure);
 		em.persist(destination);
-		Flight flight = new Flight("airliner", 300, 200, 10, 300d, 400d, 600d, new Date(2016, 12, 01, 8, 30), new Date(2016, 12, 01, 23, 00), departure, destination);
+		Flight flight = new Flight("testLine", 300, 200, 10, 300d, 400d, 600d, new Date(2016, 12, 01, 8, 30), new Date(2016, 12, 01, 23, 00), departure, destination);
 		Discounts discounts = new Discounts();
-		discounts.setCompany("airliner");
+		discounts.setCompany("testLine");
 		em.persist(discounts);
 		DiscountBean discountsBean = new DiscountBean();
 		discountsBean.setEm(em);
 		flight = discountsBean.linkDiscounts(flight);
-		assertEquals("airliner", flight.getDiscounts().getCompany());
+		assertEquals("testLine", flight.getDiscounts().getCompany());
 	}
 	
 	@Test
@@ -41,7 +41,7 @@ public class DiscountBeanTest extends JpaPersistenceTest {
 		discountsBean.setEm(em);
 		
 		Discounts discounts = new Discounts();
-		discounts.setCompany("airliner");
+		discounts.setCompany("TestingAir");
 		
 		Discount discount = new Discount(new Date(2016,10,10), new Date(2016,11,10), 0.1);
 		em.persist(discount);
@@ -51,10 +51,10 @@ public class DiscountBeanTest extends JpaPersistenceTest {
 		discounts.addDiscount(discount);
 		em.persist(discounts);
 		
-		Discounts retreivedDiscounts = discountsBean.getDiscounts("airliner");
+		Discounts retreivedDiscounts = discountsBean.getDiscounts("TestingAir");
 		assertNotNull(retreivedDiscounts);
 		assertEquals(discounts.getId(), retreivedDiscounts.getId());
-		List<Discount> discountList = discountsBean.getAllDiscounts("airliner");
+		List<Discount> discountList = discountsBean.getAllDiscounts("TestingAir");
 		assertNotNull(discountList);
 		discount = discountList.get(0);
 		assertEquals((Double)0.1, discount.getPercentage());

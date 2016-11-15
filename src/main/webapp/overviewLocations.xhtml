@@ -14,19 +14,19 @@
 
 		<p:dataTable value="#{rAirBean.employeeService.obtainLocations()}"
 			var="location" id="listOfLocations">
-			<p:column header="#{empl['employee.locations.overview.country']}">
+			<p:column headerText="#{empl['employee.locations.overview.country']}">
 				<p:outputLabel value="#{location.country}" />
 			</p:column>
 
-			<p:column header="#{empl['employee.locations.overview.airport']}">
+			<p:column headerText="#{empl['employee.locations.overview.airport']}">
 				<p:outputLabel value="#{location.airport}" />
 			</p:column>
 
-			<p:column header="#{empl['employee.locations.overview.code']}">
+			<p:column headerText="#{empl['employee.locations.overview.code']}">
 				<p:outputLabel value="#{location.code}" />
 			</p:column>
 
-			<p:column header="#{empl['employee.locations.overview.region']}">
+			<p:column headerText="#{empl['employee.locations.overview.region']}">
 				<p:outputLabel value="#{location.region}" />
 			</p:column>
 
