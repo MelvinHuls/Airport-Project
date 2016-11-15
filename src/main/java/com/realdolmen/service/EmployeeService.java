@@ -133,4 +133,8 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 		this.flight = flight;
 		return "edit";
 	}
+
+	public Employee findByEmail(String email) {
+		return eRepo.findByEmail(email);
+	}
 }

@@ -16,13 +16,19 @@
 		<h:form styleClass="forms">
 			<h3>
 				<p:inputText binding="#{name}" />
-				<p:inputText binding="#{password}" />
+				<p:password binding="#{password}" />
 			</h3>
 
 			<p:commandButton value="Log in" icon="ui-icon-check"
-				action="#{rAirBean.logOn(name.value, password.value)}" />
+				action="#{rAirBean.logOn(name.value, password.value)}"
+				update="l1 l2" />
+
+			<p:commandButton value="New user" icon="ui-icon-check"
+				action="register" />
 
 			<p:commandButton value="Search Flight" action="searchFlight" />
+				<p:outputLabel id="l1" value="#{rAirBean.loggedIn.password}"></p:outputLabel>
+				<p:outputLabel id="l2" value="#{rAirBean.loggedIn.username}"></p:outputLabel>
 
 		</h:form>
 	</ui:define>

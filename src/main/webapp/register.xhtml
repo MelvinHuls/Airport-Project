@@ -5,61 +5,53 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-	<title>Registration</title>
-</h:head>
-<h:body>
-	<h1>Please register</h1>
-	<p:gmap center="41.381542, 2.122893" zoom="20" type="HYBRID" style="width:100%;height:400px" rendered="true" />
-	<h:form>
-		<h:panelGrid columns="3">
-			<h:panelGroup>
-				<p:commandButton value="new client">
-					<p:ajax event="click" update="b2" />
-				</p:commandButton>
-				<p:panelGrid columns="2" id="d1">
-					<p:outputLabel value="email: " />
-					<p:inputText value="1" />
 
-					<p:outputLabel value="password: " />
-					<p:password value="2" />
+<ui:composition template="/WEB-INF/templates/template_temp.xhtml">
+	<ui:define name="pageTitle">Register</ui:define>
+	<ui:define name="content">
+		<h1>Please register</h1>
+		<h:form>
+			<h:panelGrid columns="3">
+				<f:event listener="#{rAirBean.validatePassword}" type="postValidate" />
 
-					<p:outputLabel value="company:  " />
-					<p:inputText value="3" />
-				</p:panelGrid>
-				<p:commandButton id="b2" value="RegisterC"
-					action="#{registrationBean.registerClient()}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:commandButton value="new partner">
-					<p:ajax event="click" update="b3" />
-				</p:commandButton>
-				<p:panelGrid columns="2" id="d2">
-					<p:outputLabel value="email: " />
-					<p:inputText value="1" />
+				<p:outputLabel value="username (optional):" />
+				<p:inputText id="inputUsername" value="#{rAirBean.user.username}"
+					requiredMessage="Please enter your username">
+				</p:inputText>
+				<h:message id="m1" for="inputUsername" display="text" />
 
-					<p:outputLabel value="password: " />
-					<p:password value="2" />
-				</p:panelGrid>
+				<p:outputLabel value="email: " />
+				<p:inputText id="inputEmail" required="true"
+					requiredMessage="Please enter your email"
+					value="#{rAirBean.user.email}">
+					<f:validator validatorId="com.realdolmen.validators.emailValidator" />
+				</p:inputText>
+				<h:message id="m2" for="inputEmail" display="text" />
 
-				<p:commandButton id="b3" value="RegisterP"
-					action="#{registrationBean.registerPartner()}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<p:commandButton value="new employee">
-					<p:ajax event="click" update="b4" />
-				</p:commandButton>
-				<p:panelGrid columns="2" id="d3">
-					<p:outputLabel value="email: " />
-					<p:inputText value="1" />
+				<p:outputLabel value="password: " />
+				<p:password id="inputPassword" required="true"
+					requiredMessage="Please enter your password"
+					value="#{rAirBean.user.password}">
+					<f:validator
+						validatorId="com.realdolmen.validators.passwordValidator" />
+				</p:password>
+				<h:message id="m3" for="inputPassword" display="text" />
 
-					<p:outputLabel value="password: " />
-					<p:password value="2" />
-				</p:panelGrid>
-				<p:commandButton id="b4" value="RegisterE"
-					action="#{registrationBean.registerEmployee()}" />
-			</h:panelGroup>
-		</h:panelGrid>
-	</h:form>
-</h:body>
+				<p:outputLabel value="repeat password: " />
+				<p:password id="inputPassword2" required="true"
+					requiredMessage="Please enter your password again"
+					value="#{rAirBean.user.password}">
+					<f:validator
+						validatorId="com.realdolmen.validators.passwordValidator" />
+				</p:password>
+				<h:message id="m4" for="inputPassword2" display="text" />
+				<p:commandButton value="Register"
+					action="#{rAirBean.registerClient()}" update="m1 m2 m3 m4" />
+			</h:panelGrid>
+		</h:form>
+		<h:form>
+			<p:commandButton value="home" action="index" />
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

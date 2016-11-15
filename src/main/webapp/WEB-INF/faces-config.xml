@@ -229,13 +229,13 @@
 			<value>#{param.userId}</value>
 		</managed-property>
 	</managed-bean>
-	
+
 	<application>
 		<locale-config>
 			<default-locale>en</default-locale>
 			<supported-locale>nl</supported-locale>
 		</locale-config>
-		
+
 		<resource-bundle>
 			<base-name>Employee</base-name>
 			<var>empl</var>

@@ -62,7 +62,7 @@ public class ClientBean implements Serializable {
 				loggedInClient = client;
 				loginErrorMessage = "";
 				registerErrorMessage = "";
-				if (booking.getOutgoing() != null) {
+				if (booking.getOutgoingFlight()!= null) {
 					return "flights";
 				} else {
 					return "success";

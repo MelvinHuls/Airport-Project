@@ -7,8 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.realdolmen.domain.Client;
+import com.realdolmen.domain.User;
 
 @Stateless
 public class ClientRepository {
@@ -34,11 +36,12 @@ public class ClientRepository {
 	}
 
 	public Client findByEmail(String email) {
-		try {
-			return em.createNamedQuery("SELECT c from User c WHERE c.email LIKE :email", Client.class)
-					.setParameter("email", email).getSingleResult();
-		} catch (NoResultException e) {
+		TypedQuery<User> query = em.createQuery("Select u from User u where u.email = :email AND dtype like Client", User.class)
+				.setParameter("email", email);
+		if (query.getResultList().isEmpty()) {
 			return null;
+		} else {
+			return (Client) query.getSingleResult();
 		}
 	}
 

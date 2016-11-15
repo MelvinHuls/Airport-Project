@@ -1,13 +1,19 @@
 package com.realdolmen.domain;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-//@MappedSuperclass
 @Entity
+@Table(name = "USER")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +40,17 @@ public class User {
 	}
 
 	public String getUsername() {
-		return username;
+		if (username != null)
+			return username;
+		return email;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		if (username.length() == 0) {
+			this.username = this.getEmail();
+		} else {
+			this.username = username;
+		}
 	}
 
 	public String getPassword() {

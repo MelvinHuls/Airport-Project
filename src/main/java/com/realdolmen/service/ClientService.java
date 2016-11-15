@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NonUniqueResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -86,18 +87,17 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 	}
 
 	private boolean clientExistsCheck(String email) {
-		Client customerByEmail = findByEmail(email);
-		if (customerByEmail == null) {
+		Client client = findByEmail(email);
+		if (client == null) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean validate(String email, String password) {
-
-		Client c = cRepo.findByEmail(email);
-		if (c.getId() != null) {
-			if (checkPassword(password, c.getPassword())) {
+		Client client = cRepo.findByEmail(email);
+		if (client.getId() != null) {
+			if (checkPassword(password, client.getPassword())) {
 				return true;
 			}
 		}

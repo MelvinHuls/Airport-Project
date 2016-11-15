@@ -3,12 +3,17 @@ package com.realdolmen.beans;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -26,7 +31,7 @@ import com.realdolmen.service.PartnerService;
 @SessionScoped
 @Stateless
 @Remote
-@ManagedBean(name="rAirBean")
+@ManagedBean(name = "rAirBean")
 public class RAirBean {
 	@PersistenceContext
 	private EntityManager em;
@@ -39,64 +44,37 @@ public class RAirBean {
 
 	@EJB
 	private EmployeeService employeeService;
-	
-	private User user = new User();
 
-//	private boolean aClient = true;
-//	private boolean anEmployee = false;
-//	private boolean aPartner = false;
-//
-//	public void setAClient() {
-//		this.aClient = true;
-//		this.anEmployee = false;
-//		this.aPartner = false;
-//	}
-//
-//	public void setAnEmployee() {
-//		this.aClient = false;
-//		this.anEmployee = true;
-//		this.aPartner = false;
-//	}
-//
-//	public void setAPartner() {
-//		this.aClient = false;
-//		this.anEmployee = false;
-//		this.aPartner = true;
-//	}
-//
-//	public boolean isAClient() {
-//		return aClient;
-//	}
-//
-//	public boolean isAnEmployee() {
-//		return anEmployee;
-//	}
-//
-//	public boolean isAPartner() {
-//		return aPartner;
-//	}
+	private User user;
 
-	public String registerClient(String email, String password) {
-		if (!existingUser(email)) {
-			clientService.create(new Client(email, password, email));
+	private User loggedIn;
+
+	@PostConstruct
+	public void setup() {
+		user = new User();
+	}
+
+	public String registerClient() {
+		if (!existingUser(user.getEmail())) {
+			clientService.create(new Client(user.getUsername(), user.getPassword(), user.getEmail()));
+			return "index";
+		} else {
+			return "register";
+		}
+	}
+
+	public String registerEmployee() {
+		if (!existingUser(user.getEmail())) {
+			employeeService.create(new Employee(user.getEmail(), user.getPassword(), user.getEmail()));
 			return "Success";
 		} else {
 			return "Failure";
 		}
 	}
 
-	public String registerEmployee(String email, String password) {
-		if (!existingUser(email)) {
-			employeeService.create(new Employee(email, password, email));
-			return "Success";
-		} else {
-			return "Failure";
-		}
-	}
-
-	public String registerPartner(String email, String password, String company) {
-		if (!existingUser(email)) {
-			Partner client = new Partner(email, password, email, company);
+	public String registerPartner() {
+		if (!existingUser(user.getEmail())) {
+			Partner client = new Partner(user.getEmail(), user.getPassword(), user.getEmail());
 			partnerService.create(client);
 			return "Success";
 		} else {
@@ -105,11 +83,11 @@ public class RAirBean {
 	}
 
 	private boolean existingUser(String email) throws NonUniqueResultException {
-		Partner partner = partnerService.findByEmail(email);
-		Employee employee = employeeService.findByEmail(email);
-		Client client = clientService.findByEmail(email);
-		if (partner == null && employee == null && client == null) {
-			System.out.println("does not exists");
+		Partner p = partnerService.findByEmail(email);
+		Employee e = employeeService.findByEmail(email);
+		Client c = clientService.findByEmail(email);
+		if (p == null && e == null && c == null) {
+			System.out.println("does not exist");
 			return false;
 		} else {
 			System.out.println("allready exists");
@@ -126,6 +104,8 @@ public class RAirBean {
 				clientService.setClient(null);
 				employeeService.setEmployee(null);
 				System.out.println("partner session made");
+				loggedIn.setEmail(partner.getEmail());
+				loggedIn.setPassword(partner.getPassword());
 				return "partnerLoggedIn";
 			} else {
 				kind = Client.class;
@@ -189,5 +169,53 @@ public class RAirBean {
 
 	public List<String> getRegions() {
 		return Arrays.asList(GlobalRegion.values().toString());
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void validatePassword(ComponentSystemEvent event) {
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		UIComponent components = event.getComponent();
+
+		// get password
+		UIInput uiInputPassword = (UIInput) components.findComponent("inputPassword");
+		String password = uiInputPassword.getLocalValue() == null ? "" : uiInputPassword.getLocalValue().toString();
+		String passwordId = uiInputPassword.getClientId();
+
+		// get confirm password
+		UIInput uiInputConfirmPassword = (UIInput) components.findComponent("inputPassword2");
+		String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
+				: uiInputConfirmPassword.getLocalValue().toString();
+
+		// Let required="true" do its job.
+		if (password.isEmpty() || confirmPassword.isEmpty()) {
+			return;
+		}
+
+		if (!password.equals(confirmPassword)) {
+
+			FacesMessage msg = new FacesMessage("Password must match confirm password");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			fc.addMessage(passwordId, msg);
+			fc.renderResponse();
+
+		}
+
+	}
+
+	public User getLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(User loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 }

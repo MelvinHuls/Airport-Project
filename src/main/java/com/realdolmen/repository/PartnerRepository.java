@@ -1,6 +1,5 @@
 package com.realdolmen.repository;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,11 +7,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.realdolmen.Exceptions.AccessRightsException;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 import com.realdolmen.domain.Partner;
+import com.realdolmen.domain.User;
 
 @Stateless
 public class PartnerRepository {
@@ -80,11 +81,12 @@ public class PartnerRepository {
 	}
 
 	public Partner findByEmail(String email) {
-		try {
-			return em.createNamedQuery("SELECT c from User c WHERE c.email LIKE :email", Partner.class)
-					.setParameter("email", email).getSingleResult();
-		} catch (NoResultException e) {
+		TypedQuery<User> query = em.createQuery("Select u from User u where u.email = :email AND dtype like Partner", User.class)
+				.setParameter("email", email);
+		if (query.getResultList().isEmpty()) {
 			return null;
+		} else {
+			return (Partner) query.getSingleResult();
 		}
 	}
 }
