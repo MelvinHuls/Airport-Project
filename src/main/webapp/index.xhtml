@@ -11,7 +11,7 @@
 	<ui:define name="pageTitle">Welcome page!!! Feeling welcome is not an obligation but
 		a requirement</ui:define>
 	<ui:define name="content">
-		<h1>Welcome page filler</h1>
+		<h1><p:outputLabel value="#{user['user.index.header']}"/></h1>
 
 		<h:form styleClass="forms">
 			<h3>
@@ -25,10 +25,10 @@
 
 			<p:commandButton value="New user" icon="ui-icon-check"
 				action="register" />
+			<p:commandButton value="#{user['user.index.button.login']}" icon="ui-icon-check"
+				action="#{rAirBean.logOn(name.value, password.value)}" />
 
-			<p:commandButton value="Search Flight" action="searchFlight" />
-				<p:outputLabel id="l1" value="#{rAirBean.loggedIn.password}"></p:outputLabel>
-				<p:outputLabel id="l2" value="#{rAirBean.loggedIn.username}"></p:outputLabel>
+			<p:button value="#{user['user.index.button.searchFlights']}" outcome="searchFlight" />
 
 		</h:form>
 	</ui:define>

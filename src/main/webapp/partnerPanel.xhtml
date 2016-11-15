@@ -7,13 +7,23 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:r="http://xmlns.jcp.org/jsf/composite/realdolmen">
 
-
 <ui:composition template="/WEB-INF/templates/template_temp.xhtml">
-	<ui:define name="pageTitle">OMYGAWD NO!!!!</ui:define>
+	<ui:define name="pageTitle">
+		Partner control panel
+	</ui:define>
 	<ui:define name="content">
-		<h1><p:outputLabel value="#{user['user.booking.failure.header']}"/></h1>
-		<h3><p:outputLabel value="#{user['user.booking.failure.subheader']}"/></h3>
+		<h2>
+			<p:outputLabel value="#{part['partner.panel.header']}" />
+		</h2>
+
+		<h:form>
+			<p:commandButton value="#{part['partner.panel.discounts']}"
+				action="discounts">
+				<f:param name="company" value="#{rAirBean.partnerService.partner.company}" />
+			</p:commandButton>
+			<p:button value="#{part['partner.panel.additFlights']}" outcome="flights" />
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>
-

@@ -40,7 +40,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>add</from-outcome>
-			<to-view-id>/addFlight</to-view-id>
+			<to-view-id>/editFlight</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -156,7 +156,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>partnerLoggedIn</from-outcome>
-			<to-view-id>/overviewFlights</to-view-id>
+			<to-view-id>/partnerPanel</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -209,6 +209,26 @@
 	</navigation-rule>
 
 	<navigation-rule>
+		<from-view-id>/partnerPanel.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>discounts</from-outcome>
+			<to-view-id>/overviewDiscounts.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>flights</from-outcome>
+			<to-view-id>/overviewFlights.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/overviewDiscounts.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>return</from-outcome>
+			<to-view-id>/partnerPanel.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/WEB-INF/templates/template_temp.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>home</from-outcome>
@@ -230,6 +250,16 @@
 		</managed-property>
 	</managed-bean>
 
+	<managed-bean>
+		<managed-bean-name>discountService</managed-bean-name>
+		<managed-bean-class>com.realdolmen.service.DiscountService</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>company</property-name>
+			<value>#{param.company}</value>
+		</managed-property>
+	</managed-bean>
+
 	<application>
 		<locale-config>
 			<default-locale>en</default-locale>
@@ -239,6 +269,14 @@
 		<resource-bundle>
 			<base-name>Employee</base-name>
 			<var>empl</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>User</base-name>
+			<var>user</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>Partner</base-name>
+			<var>part</var>
 		</resource-bundle>
 	</application>
 </faces-config>
