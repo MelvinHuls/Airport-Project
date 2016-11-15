@@ -90,4 +90,13 @@ public class Location {
 	public List<GlobalRegion> getRegions() {
 		return Arrays.asList(GlobalRegion.values());
 	}
+	
+	@Override
+	public String toString() {
+		String string = "Airport:  " + airport;
+		string += "\nCountry:  " + country;
+		string += "\nCode:  " + code;
+		string += "\nRegion:  " + region + "\n";
+		return string;
+	}
 }

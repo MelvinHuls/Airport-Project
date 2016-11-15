@@ -1,13 +1,21 @@
 package com.realdolmen.service;
 
 import java.util.Date;
+import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import com.realdolmen.Exceptions.LackingPricingInformationException;
 import com.realdolmen.Exceptions.NotEnoughSeatsException;
@@ -76,12 +84,18 @@ public class CheckFlightInfoService {
 			if (bookFlight == null) {
 				bookFlight = new BookFlightBean();
 			}
-			if (returnFlight == null) {				
-				return this.bookFlight.bookFlightCreditCard(outwardFlight, creditcardNumber, expirationDate,
+			if (returnFlight == null) {
+				String result = this.bookFlight.bookFlightCreditCard(outwardFlight, creditcardNumber, expirationDate,
 						flightclass, seats);
+				 sendMail(this.bookFlight.getBooking().getClient().getEmail(),
+				 "Booking RAir", this.bookFlight.getBooking().toemail());
+				return result;
 			} else {
-				return this.bookFlight.bookFlightCreditCard(outwardFlight, returnFlight,
-						creditcardNumber, expirationDate, flightclass, seats);
+				String result = this.bookFlight.bookFlightCreditCard(outwardFlight, returnFlight, creditcardNumber,
+						expirationDate, flightclass, seats);
+				 sendMail(this.bookFlight.getBooking().getClient().getEmail(),
+				 "Booking RAir", this.bookFlight.getBooking().toemail());
+				return result;
 			}
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
@@ -90,16 +104,57 @@ public class CheckFlightInfoService {
 	}
 
 	public String BookFlightEndorsement(FlightClass flightclass, Integer seats)
-			throws NotEnoughSeatsException, LackingPricingInformationException {
+			throws NotEnoughSeatsException, LackingPricingInformationException, AddressException, MessagingException {
 		if (bookFlight == null) {
 			bookFlight = new BookFlightBean();
 		}
 		if (returnFlight == null) {
-			return this.bookFlight.bookFlightEndorsement(outwardFlight, flightclass, seats);
+			String result = this.bookFlight.bookFlightEndorsement(outwardFlight, flightclass, seats);
+			sendMail(this.bookFlight.getBooking().getClient().getEmail(), "Booking RAir",
+					this.bookFlight.getBooking().toemail());
+			return result;
 		} else {
-			return this.bookFlight.bookFlightEndorsement(outwardFlight, returnFlight, flightclass,
-					seats);
+			String result = this.bookFlight.bookFlightEndorsement(outwardFlight, returnFlight, flightclass, seats);
+			sendMail(this.bookFlight.getBooking().getClient().getEmail(), "Booking RAir",
+					this.bookFlight.getBooking().toemail());
+			return result;
 		}
-	}	
-	
+	}
+
+	private void sendMail(String recipientEmail, String title, String body)
+			throws AddressException, MessagingException {
+		// Sender's email ID needs to be mentioned
+		final String username = "realdolmenairline@gmail.com";
+		final String password = "RealdolmenAirport";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(recipientEmail));
+			message.setSubject(title);
+			message.setText(body);
+
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

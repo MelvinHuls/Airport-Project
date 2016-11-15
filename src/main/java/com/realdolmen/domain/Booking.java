@@ -111,7 +111,6 @@ public class Booking {
 	// to get the 5% discount
 	public void calculateAndSetTotalPrice()
 			throws LackingPaymentInformationException, LackingPricingInformationException {
-		System.out.println("calculateAndSetTotalPrice");
 		Double CREDITCARD_DISCOUNT = 0.05;
 		if (paymentMethod.equals(PaymentStatus.PAYED_CREDIT_CARD) && creditcardNumber != null
 				&& expirationDate != null) {
@@ -125,7 +124,6 @@ public class Booking {
 			}
 		} else if (paymentMethod.equals(PaymentStatus.PAYMENT_PENDING)) {
 			if (returnFlight == null) {
-				System.out.println("test");
 				this.totalPrice = outgoingFlight.calculateTotalPriceClass(this.flightclass, this.seats);
 			} else {
 				this.totalPrice = outgoingFlight.calculateTotalPriceClass(this.flightclass, this.seats)
@@ -134,7 +132,6 @@ public class Booking {
 		} else {
 			throw new LackingPaymentInformationException();
 		}
-		System.out.println(this.totalPrice);
 	}
 
 	public FlightClass getFlightclass() {
@@ -173,6 +170,20 @@ public class Booking {
 		out += "paymentMethod   " + paymentMethod + "\n";
 		out += "flightclass  " + flightclass + "\n";
 		out += "seats  " + seats;
+		
+		return out;
+	}
+	
+	public String toemail() {
+		String out = "You have succesfully  booked a flight at RAir, thank you for trusting us\n\n";
+		out += "You have booked " + seats + " seats in " + flightclass + "\n\n";
+		out += "------ details outgoingFlight ------\n" + outgoingFlight.tomail(flightclass) + "\n-----------------------------------\n";
+		if(returnFlight != null){
+		out += "------ details returnFlight ------\n " + returnFlight.tomail(flightclass) + "\n-----------------------------------\n";
+		}
+		out += "\nTotalPrice:   " + totalPrice + "\n";
+		out += "You payed using \"" + paymentMethod + "\"\n";
+		out += "\nWe hope you have a pleasant flight \n\nRAir corp.";
 		
 		return out;
 	}

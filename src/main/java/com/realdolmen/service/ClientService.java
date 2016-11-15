@@ -11,7 +11,6 @@ import javax.persistence.NonUniqueResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.realdolmen.beans.FlightSearchBean;
 import com.realdolmen.domain.Client;
 import com.realdolmen.repository.ClientRepository;
 

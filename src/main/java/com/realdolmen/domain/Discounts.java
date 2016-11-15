@@ -17,33 +17,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Discounts {	
+public class Discounts {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@OneToMany(mappedBy="discounts")
+
+	@OneToMany(mappedBy = "discounts")
 	private List<Discount> discounts;
-	private Double weekendDiscount;	
-	//night is between 23:00 and 06:00
-	private Double nightlyDiscount; 
+	private Double weekendDiscount;
+	// night is between 23:00 and 06:00
+	private Double nightlyDiscount;
 	private static int BEGIN_NIGHT = 23;
 	private static int END_NIGHT = 6;
-	
+
 	@ElementCollection
 	private Map<Integer, Double> seatsDiscount;
-	
+
 	private String company;
 
 	public Discounts() {
 		discounts = new ArrayList<Discount>();
 		weekendDiscount = 0d;
 		nightlyDiscount = 0d;
-		seatsDiscount = new HashMap<Integer,Double>();
+		seatsDiscount = new HashMap<Integer, Double>();
 	}
-	
+
 	public void addDiscount(Discount discount) {
-		if(discount.getDiscounts() != this){
+		if (discount.getDiscounts() != this) {
 			discount.setDiscounts(this);
 		}
 		discounts.add(discount);
@@ -71,106 +71,106 @@ public class Discounts {
 
 	public void setWeekendDiscount(Double weekendDiscount) {
 		this.weekendDiscount = weekendDiscount;
-	}	
-	
-	public Double calculatePrice(Double price, Date date, int seats) {	
+	}
+
+	public Double calculatePrice(Double price, Date date, int seats) {
 		Double discountedPrice = price;
-		 Calendar c = Calendar.getInstance();
-		c.set(date.getYear(), date.getMonth(), date.getDay());
-		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-				discountedPrice *= (1-weekendDiscount);
+		Calendar c = Calendar.getInstance();
+		c.set(date.getYear(), date.getMonth()-1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			discountedPrice *= (1 - weekendDiscount);
 		}
-		
-		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
-				discountedPrice *= (1-nightlyDiscount);
+
+		if (date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
+			discountedPrice *= (1 - nightlyDiscount);
 		}
-		
+
 		Iterator<Discount> iterator = discounts.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Discount discount = iterator.next();
-			if(discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
-					discountedPrice *= (1-discount.getPercentage());
+			if (discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
+				discountedPrice *= (1 - discount.getPercentage());
 			}
 		}
-		
+
 		Set<Integer> keySet = this.seatsDiscount.keySet();
 		Iterator<Integer> iterator2 = keySet.iterator();
 		Integer largestAmountOfSeats = 0;
-		while(iterator2.hasNext() && seats > largestAmountOfSeats) {
+		while (iterator2.hasNext() && seats > largestAmountOfSeats) {
 			Integer amountOfSeats = iterator2.next();
-			if(seats > amountOfSeats && amountOfSeats > largestAmountOfSeats) {
+			if (seats > amountOfSeats && amountOfSeats > largestAmountOfSeats) {
 				largestAmountOfSeats = amountOfSeats;
 			}
 		}
-		
-		if(largestAmountOfSeats > 0) {
-			discountedPrice *= (1-this.seatsDiscount.get(largestAmountOfSeats));
+
+		if (largestAmountOfSeats > 0) {
+			discountedPrice *= (1 - this.seatsDiscount.get(largestAmountOfSeats));
 		}
-		
+
 		return discountedPrice * seats;
 	}
-	
-	public Double calculateSeatPrice(Double price, Date date) {	
+
+	public Double calculateSeatPrice(Double price, Date date) {
 		Double discountedPrice = price;
-		 Calendar c = Calendar.getInstance();
-		c.set(date.getYear(), date.getMonth(), date.getDay());
-		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-				discountedPrice *= (1-weekendDiscount);
+		Calendar c = Calendar.getInstance();
+		c.set(date.getYear(), date.getMonth()-1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+
+		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			discountedPrice *= (1 - weekendDiscount);
 		}
-		
-		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
-				discountedPrice *= (1-nightlyDiscount);
+
+		if (date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
+			discountedPrice *= (1 - nightlyDiscount);
 		}
-		
+
 		Iterator<Discount> iterator = discounts.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Discount discount = iterator.next();
-			if(discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
-					discountedPrice *= (1-discount.getPercentage());
+			if (discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
+				discountedPrice *= (1 - discount.getPercentage());
 			}
 		}
-		
+
 		return discountedPrice;
 	}
-	
-	public Double calculateDiscount(Double price, Date date, int seats) {	
+
+	public Double calculateDiscount(Double price, Date date, int seats) {
 		Double discountedPrice = price;
-		 Calendar c = Calendar.getInstance();
-		c.set(date.getYear(), date.getMonth(), date.getDay());
-		if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-				discountedPrice *= (1-weekendDiscount);
+		Calendar c = Calendar.getInstance();
+		c.set(date.getYear(), date.getMonth()-1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			discountedPrice *= (1 - weekendDiscount);
 		}
-		
-		if(date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
-				discountedPrice *= (1-nightlyDiscount);
+
+		if (date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
+			discountedPrice *= (1 - nightlyDiscount);
 		}
-		
+
 		Iterator<Discount> iterator = discounts.iterator();
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Discount discount = iterator.next();
-			if(discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
-					discountedPrice *= (1-discount.getPercentage());
+			if (discount.getBegin().getTime() < date.getTime() && discount.getEnd().getTime() > date.getTime()) {
+				discountedPrice *= (1 - discount.getPercentage());
 			}
 		}
-		
+
 		Set<Integer> keySet = this.seatsDiscount.keySet();
 		Iterator<Integer> iterator2 = keySet.iterator();
 		Integer largestAmountOfSeats = 0;
-		while(iterator2.hasNext() && seats > largestAmountOfSeats) {
+		while (iterator2.hasNext() && seats > largestAmountOfSeats) {
 			Integer amountOfSeats = iterator2.next();
-			if(seats > amountOfSeats && amountOfSeats > largestAmountOfSeats) {
+			if (seats > amountOfSeats && amountOfSeats > largestAmountOfSeats) {
 				largestAmountOfSeats = amountOfSeats;
 			}
 		}
-		
-		if(largestAmountOfSeats > 0) {
-			discountedPrice *= (1-this.seatsDiscount.get(largestAmountOfSeats));
+
+		if (largestAmountOfSeats > 0) {
+			discountedPrice *= (1 - this.seatsDiscount.get(largestAmountOfSeats));
 		}
-		
-		return (price*seats) - (discountedPrice * seats);
+
+		return (price - discountedPrice) * seats;
 	}
-	
-	
+
 	public Map<Integer, Double> getSeatsDiscount() {
 		return seatsDiscount;
 	}
@@ -189,11 +189,10 @@ public class Discounts {
 
 	public Long getId() {
 		return id;
-	}	
-	
+	}
+
 	public void addSeatsDiscount(Integer amountOfSeats, Double percentage) {
 		this.seatsDiscount.put(amountOfSeats, percentage);
 	}
-	
-	
+
 }

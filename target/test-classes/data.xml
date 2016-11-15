@@ -1,23 +1,83 @@
 <dataset>
 	<user DTYPE="Partner" id="200" username="JohnD" password="dbtest"
 		email="JD52@gmail.com" company="airliner" />
-	
+
 	<user DTYPE="Partner" id="201" username="p" password="p"
 		email="AA31@gmail.com" company="airliner" />
-		
-		<user DTYPE="Employee" id="202" username="e" password="e"
+
+	<user DTYPE="Partner" id="204" username="Freddy" password="fourwordsalllowercase"
+		email="FDoubleU@gmail.com" company="Cloud co." />
+
+	<user DTYPE="Partner" id="174" username="m" password="m"
+		email="Melvin.hulsmans@Realdolmen.com" company="RealDolmen" />
+
+	<user DTYPE="Employee" id="202" username="e" password="e"
 		email="BB43@gmail.com" />
-		
-		<user DTYPE="Client" id="203" username="c" password="c"
+
+	<user DTYPE="Client" id="203" username="c" password="c"
 		email="CC38@gmail.com" />
 
 	<location id="501" airport="Brussels airport" country="Belgium"
 		code="BE" region="WESTERN_EUROPE" />
 	<Location id="502" airport="New York" country="United States of America"
 		code="USA" region="NORTH_AMERICA" />
+	<location id="503" airport="Liège Airport" country="Belgium"
+		code="BE" region="WESTERN_EUROPE" />
+	<location id="504" airport="Antwerp International Airport"
+		country="Belgium" code="BE" region="WESTERN_EUROPE" />
+	<Location id="505" airport="Los Angeles International Airport"
+		country="United States of America" code="USA" region="NORTH_AMERICA" />
 
 	<flight id="500" company="airliner" seatsEconomy="500"
 		seatsBusiness="300" seatsFirstClass="20" priceEconomy="200"
-		priceBusiness="300" priceFirstClass="500" departureTime="2017-01-19 15:00:00" duration="1992-01-01 08:30:00"
-		departure_id="501" destination_id="502" version="0"/>
+		priceBusiness="300" priceFirstClass="500" departureTime="2017-01-19 15:00:00"
+		duration="1992-01-01 08:30:00" departure_id="501" destination_id="502"
+		version="0" />
+
+	<flight id="501" company="airliner" seatsEconomy="400"
+		seatsBusiness="250" seatsFirstClass="20" priceEconomy="250"
+		priceBusiness="300" priceFirstClass="500" departureTime="2017-01-19 01:00:00"
+		duration="1992-01-01 09:10:00" departure_id="504" destination_id="502"
+		version="0" />
+
+	<flight id="502" company="airliner" seatsEconomy="200"
+		seatsBusiness="100" seatsFirstClass="5" priceEconomy="400"
+		priceBusiness="450" priceFirstClass="600" departureTime="2017-01-19 10:00:00"
+		duration="1992-01-01 08:50:00" departure_id="503" destination_id="502"
+		version="0" />
+
+	<flight id="503" company="airliner" seatsEconomy="500"
+		seatsBusiness="400" seatsFirstClass="50" priceEconomy="500"
+		priceBusiness="550" priceFirstClass="700" departureTime="2017-01-19 16:00:00"
+		duration="1992-01-01 08:45:00" departure_id="501" destination_id="505"
+		version="0" />
+
+	<flight id="504" company="airliner" seatsEconomy="100"
+		seatsBusiness="50" seatsFirstClass="5" priceEconomy="800"
+		priceBusiness="850" priceFirstClass="1100" departureTime="2017-02-10 15:00:00"
+		duration="1992-01-01 08:45:00" departure_id="505" destination_id="501"
+		version="0" />
+
+	<flight id="505" company="airliner" seatsEconomy="200"
+		seatsBusiness="100" seatsFirstClass="10" priceEconomy="750"
+		priceBusiness="800" priceFirstClass="1000" departureTime="2017-02-10 9:00:00"
+		duration="1992-01-01 08:35:00" departure_id="505" destination_id="503"
+		version="0" />
+
+	<flight id="506" company="airliner" seatsEconomy="130"
+		seatsBusiness="70" seatsFirstClass="15" priceEconomy="650"
+		priceBusiness="700" priceFirstClass="850" departureTime="2017-02-10 18:00:00"
+		duration="1992-01-01 08:50:00" departure_id="505" destination_id="501"
+		version="0" />
+
+	<flight id="507" company="Cloud co." seatsEconomy="120"
+		seatsBusiness="90" seatsFirstClass="18" priceEconomy="600"
+		priceBusiness="640" priceFirstClass="810" departureTime="2017-01-19 12:00:00"
+		duration="1992-01-01 08:35:00" departure_id="505" destination_id="501"
+		version="0" />
+
+	<discounts id="800" company="airliner" nightlyDiscount="0.05"
+		weekendDiscount="0.05" />
+	<discount id="900" begin="2016-12-30 9:00:00" end="2017-01-21 18:00:00"
+		percentage="0.1" discount_id="800" />
 </dataset>

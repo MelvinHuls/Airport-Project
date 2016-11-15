@@ -229,17 +229,18 @@ public class Flight {
 	private Double calculateSeatPrice(Double basePrice, Double customMarginPrice) {
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculateSeatPrice(customMarginPrice, this.departureTime);
+				
+				return Math.round(discounts.calculateSeatPrice(customMarginPrice, this.departureTime) * 100D) / 100D;
 			} else {
-				return customMarginPrice;
+				return Math.round(customMarginPrice * 100D) / 100D;
 			}
 		} else if (basePrice == null) {
 			return null;
 		} else if (discounts == null || this.departureTime == null) {
-			return basePrice * 1.1;
+			return Math.round(basePrice * 1.1 * 100D) / 100D;
 		}
 
-		return discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime);
+		return Math.round(discounts.calculateSeatPrice(basePrice * 1.1, this.departureTime) * 1.1 * 100D) / 100D;
 	}
 
 	public Double calculateTotalPriceClass(FlightClass flightClass, Integer seats)
@@ -273,17 +274,17 @@ public class Flight {
 
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculatePrice(customMarginPrice, this.departureTime, seats);
+				return Math.round(discounts.calculatePrice(customMarginPrice, this.departureTime, seats) * 100D) / 100D;
 			} else {
-				return customMarginPrice * seats;
+				return Math.round(customMarginPrice * seats * 100D) / 100D;
 			}
 		} else if (basePrice == null) {
 			throw new LackingPricingInformationException();
 		} else if (discounts == null || this.getDepartureTime() == null) {
-			return basePrice * 1.1 * seats;
+			return Math.round(basePrice * 1.1 * seats * 100D) / 100D;
 		}
 
-		return discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats);
+		return Math.round(discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats) * 100D) / 100D;
 	}
 
 	public Double calculateDiscountClass(FlightClass flightClass, Integer seats) {
@@ -315,7 +316,7 @@ public class Flight {
 
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
-				return discounts.calculateDiscount(customMarginPrice, this.departureTime, seats);
+				return Math.round(discounts.calculateDiscount(customMarginPrice, this.departureTime, seats) * 100D) / 100D;
 			} else {
 				return 0d;
 			}
@@ -325,7 +326,7 @@ public class Flight {
 			return 0d;
 		}
 
-		return discounts.calculateDiscount(basePrice * 1.1, this.departureTime, seats);
+		return Math.round(discounts.calculateDiscount(basePrice * 1.1, this.departureTime, seats) * 100D) / 100D;
 	}
 
 	public Double getCustomMarginPriceEconomy() {
@@ -370,6 +371,40 @@ public class Flight {
 		string += "destination: " + this.destination + "\n";
 		string += "departureTime: " + this.departureTime + "\n";
 		string += "duration: " + this.duration + "\n";
+
+		return string;
+	}
+
+	public String tomail(FlightClass flightclass) {
+		String string = "";
+		string += "company name: " + this.company + "\n";
+		switch (flightclass) {
+		case FIRST_CLASS:
+			if (customMarginPriceFirstClass != null) {
+				string += "Base price one seat:  " + this.customMarginPriceFirstClass + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceFirstClass + "\n";
+			}
+			break;
+		case ECONOMY:
+			if (customMarginPriceEconomy != null) {
+				string += "Base price one seat:  " + this.customMarginPriceEconomy + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceEconomy + "\n";
+			}
+			break;
+		case BUSINESS:
+			if (customMarginPriceBusiness != null) {
+				string += "Base price one seat:  " + this.customMarginPriceBusiness + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceBusiness + "\n";
+			}
+			break;
+		}
+		string += "------ departure ------\n" + this.departure + "\n";
+		string += "------ destination ------\n" + this.destination + "\n";
+		string += "departureTime:  " + this.departureTime + "\n";
+		string += "duration:  " + this.duration.getHours() + " uren en " + this.duration.getMinutes() + " minuten\n";
 
 		return string;
 	}
