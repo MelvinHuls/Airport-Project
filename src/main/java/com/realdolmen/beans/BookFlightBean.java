@@ -34,7 +34,7 @@ public class BookFlightBean {
 			String creditcardNumber, Date expirationDate, FlightClass flightclass, Integer seats)
 			throws NotEnoughSeatsException, LackingPricingInformationException {
 		/* if(user.class == client) { */
-		booking = new Booking(em.createQuery("select u from User u", User.class).getResultList().get(0), outgoingFlight, returnFlight,
+		booking = new Booking(em.createQuery("select u from User u where u.id=:id", User.class).setParameter("id", 174l).getSingleResult(), outgoingFlight, returnFlight,
 				PaymentStatus.PAYED_CREDIT_CARD, flightclass, seats);
 		booking.enterCreditCardInformation(creditcardNumber, expirationDate);
 
@@ -68,7 +68,7 @@ public class BookFlightBean {
 		/* if(user.class == client) { */
 		// Flight outgoingFlight = em.find(Flight.class, outgoingFlightId);
 
-		booking = new Booking(em.createQuery("select u from User u", User.class).getResultList().get(0),
+		booking = new Booking(em.createQuery("select u from User u where u.id=:id", User.class).setParameter("id", 174l).getSingleResult(),
 				outgoingFlight, PaymentStatus.PAYED_CREDIT_CARD, flightclass, seats);
 		booking.enterCreditCardInformation(creditcardNumber, expirationDate);
 
@@ -100,7 +100,7 @@ public class BookFlightBean {
 			throws NotEnoughSeatsException, LackingPricingInformationException {
 		/* if(user.class == client) { */
 
-		booking = new Booking(em.createQuery("select u from User u", User.class).getResultList().get(0), outgoingFlight, PaymentStatus.PAYMENT_PENDING, flightclass,
+		booking = new Booking(em.createQuery("select u from User u where u.id=:id", User.class).setParameter("id", 174l).getSingleResult(), outgoingFlight, PaymentStatus.PAYMENT_PENDING, flightclass,
 				seats);
 
 		// always execute after filling in the credit card information
@@ -127,7 +127,7 @@ public class BookFlightBean {
 			FlightClass flightclass, Integer seats) throws NotEnoughSeatsException, LackingPricingInformationException {
 		/* if(user.class == client) { */
 
-		booking = new Booking(em.createQuery("select u from User u", User.class).getResultList().get(0), outgoingFlight, returnFlight, PaymentStatus.PAYMENT_PENDING,
+		booking = new Booking(em.createQuery("select u from User u where u.id=:id", User.class).setParameter("id", 174l).getSingleResult(), outgoingFlight, returnFlight, PaymentStatus.PAYMENT_PENDING,
 				flightclass, seats);
 
 		// always execute after filling in the credit card information
@@ -167,5 +167,11 @@ public class BookFlightBean {
 		url += booking.getClient().getId();
 		return url;
 	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+	
+	
 
 }

@@ -60,6 +60,10 @@ public class FlightSearchBean {
 		return Arrays.asList(FlightClass.values());
 	}
 
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	public List<String> getCompanies() {
 		List<String> resultList = em
 				.createQuery("select u.company from User u group by u.company order by u.company", String.class)
@@ -304,7 +308,7 @@ public class FlightSearchBean {
 			if (flight.getSetAirport() == 1 && flight.getDeparture().getCountry() != null
 					&& flight.getDeparture().getAirport() != null && !flight.getDeparture().getCountry().equals("")
 					&& !flight.getDeparture().getAirport().equals("")) {
-				if (flight.getDestination().getAirport() != null && !flight.getDestination().getCountry().equals("")
+				if (flight.getDestination() != null && flight.getDestination().getAirport() != null && flight.getDestination().getCountry() != null && !flight.getDestination().getCountry().equals("")
 						&& !flight.getDestination().getAirport().equals("")) {
 					if (flight.getAirlineCompany() != null && !flight.getAirlineCompany().equals("")) {
 						return portCompDestCriteriaQuery(this.flight.getDateDeparture(), this.flight.getDeparture(),

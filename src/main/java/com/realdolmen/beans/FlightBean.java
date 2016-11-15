@@ -16,4 +16,10 @@ public class FlightBean {
 	public Flight getFlight(Long id) {
 		return em.createQuery("select f from Flight f where f.id = :id", Flight.class).setParameter("id", id).getSingleResult();
 	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
+	
 }

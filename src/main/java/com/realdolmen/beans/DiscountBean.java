@@ -27,7 +27,6 @@ public class DiscountBean {
 	}
 	
 	public Discounts getDiscounts(String company) throws CompanyCanOnlyHaveOneDiscountListException {
-		System.out.println("getDiscounts bean");
 		List<Discounts> discounts = em.createQuery("select d from Discounts d where d.company = :company", Discounts.class).setParameter("company", company).getResultList();
 		if(discounts.size() > 1) {
 			throw new CompanyCanOnlyHaveOneDiscountListException();
@@ -54,10 +53,11 @@ public class DiscountBean {
 	}
 	
 	public void add(Discount discount) {
-		System.out.println("add discount bean");
 		Discount newDiscount = new Discount(discount);
-		System.out.println("new discount bean");
 		em.persist(newDiscount);
-		System.out.println("new discount persisted bean");
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 }

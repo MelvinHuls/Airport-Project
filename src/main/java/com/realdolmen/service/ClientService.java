@@ -8,7 +8,6 @@ import javax.ejb.Stateful;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.realdolmen.beans.FlightSearchBean;
 import com.realdolmen.domain.Client;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.repository.ClientRepository;
@@ -21,8 +20,8 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 
 	private ClientRepository cRepo;
 	
-	@EJB
-	private FlightSearchBean fsearch;
+	//@EJB
+	//private FlightSearchBeanTest fsearch;
 
 	@Override
 	public void create(Client client) {

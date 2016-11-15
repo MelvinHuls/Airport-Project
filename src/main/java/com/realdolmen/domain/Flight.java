@@ -231,6 +231,8 @@ public class Flight {
 			if (this.departureTime != null && discounts != null) {
 				return discounts.calculateSeatPrice(customMarginPrice, this.departureTime);
 			} else {
+				System.out.println("discounts " + discounts);
+				System.out.println("dep time " + this.departureTime);
 				return customMarginPrice;
 			}
 		} else if (basePrice == null) {
@@ -370,6 +372,40 @@ public class Flight {
 		string += "destination: " + this.destination + "\n";
 		string += "departureTime: " + this.departureTime + "\n";
 		string += "duration: " + this.duration + "\n";
+
+		return string;
+	}
+
+	public String tomail(FlightClass flightclass) {
+		String string = "";
+		string += "company name: " + this.company + "\n";
+		switch (flightclass) {
+		case FIRST_CLASS:
+			if (customMarginPriceFirstClass != null) {
+				string += "Base price one seat:  " + this.customMarginPriceFirstClass + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceFirstClass + "\n";
+			}
+			break;
+		case ECONOMY:
+			if (customMarginPriceEconomy != null) {
+				string += "Base price one seat:  " + this.customMarginPriceEconomy + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceEconomy + "\n";
+			}
+			break;
+		case BUSINESS:
+			if (customMarginPriceBusiness != null) {
+				string += "Base price one seat:  " + this.customMarginPriceBusiness + "\n";
+			} else {
+				string += "Base price one seat:  " + this.priceBusiness + "\n";
+			}
+			break;
+		}
+		string += "------ departure ------\n" + this.departure + "\n";
+		string += "------ destination ------\n" + this.destination + "\n";
+		string += "departureTime:  " + this.departureTime + "\n";
+		string += "duration:  " + this.duration.getHours() + " uren en " + this.duration.getMinutes() + " minuten\n";
 
 		return string;
 	}

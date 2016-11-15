@@ -5,6 +5,9 @@
 	<user DTYPE="Partner" id="201" username="p" password="p"
 		email="AA31@gmail.com" company="airliner" />
 		
+		<user DTYPE="Partner" id="174" username="m" password="m"
+		email="Melvin.hulsmans@Realdolmen.com" company="RealDolmen" />
+		
 		<user DTYPE="Employee" id="202" username="e" password="e"
 		email="BB43@gmail.com" />
 		
