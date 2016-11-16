@@ -27,6 +27,7 @@ import com.realdolmen.enumerations.GlobalRegion;
 import com.realdolmen.service.ClientService;
 import com.realdolmen.service.EmployeeService;
 import com.realdolmen.service.PartnerService;
+import com.realdolmen.service.UserService;
 
 @SessionScoped
 @Stateless
@@ -45,6 +46,9 @@ public class RAirBean {
 	@EJB
 	private EmployeeService employeeService;
 
+	@EJB
+	private UserService userService;
+
 	private User user;
 
 	private User loggedIn;
@@ -52,6 +56,7 @@ public class RAirBean {
 	@PostConstruct
 	public void setup() {
 		user = new User();
+		loggedIn = new User();
 	}
 
 	public String registerClient() {
@@ -95,10 +100,21 @@ public class RAirBean {
 		}
 	}
 
-	public String logOn(String username, String password) throws NonUniqueResultException {
+	public String logOut() {
+		loggedIn = new User();
+		loggedIn.setEmail("");
+		loggedIn.setPassword("");
+		loggedIn.setUsername("");
+		return "logged out";
+	}
+
+	public String logOn() throws NonUniqueResultException {
+		String email = this.loggedIn.getEmail();
+		String password = this.loggedIn.getPassword();
+
 		try {
 			Class<? extends User> kind = Partner.class;
-			Partner partner = (Partner) searchUser(kind, username, password);
+			Partner partner = (Partner) searchUser(kind, email, password);
 			if (partner != null) {
 				partnerService.setPartner(partner);
 				clientService.setClient(null);
@@ -109,27 +125,31 @@ public class RAirBean {
 				return "partnerLoggedIn";
 			} else {
 				kind = Client.class;
-				Client client = (Client) searchUser(kind, username, password);
+				Client client = (Client) searchUser(kind, email, password);
 				if (client != null) {
 					clientService.setClient(client);
 					partnerService.setPartner(null);
 					employeeService.setEmployee(null);
 					System.out.println("client session made");
+					loggedIn.setEmail(client.getEmail());
+					loggedIn.setPassword(client.getPassword());
 					return "clientLoggedIn";
 				} else {
 					kind = Employee.class;
-					Employee employee = (Employee) searchUser(kind, username, password);
+					Employee employee = (Employee) searchUser(kind, email, password);
 					if (employee != null) {
 						employeeService.setEmployee(employee);
 						partnerService.setPartner(null);
 						clientService.setClient(null);
 						System.out.println("employee session made");
+						loggedIn.setEmail(employee.getEmail());
+						loggedIn.setPassword(employee.getPassword());
 						return "employeeLoggedIn";
 					}
 				}
 			}
 		} catch (NoResultException ex) {
-			System.out.println("No user found with username " + username);
+			System.out.println("No user found with email: " + email);
 		}
 
 		return "failedtoLogIn";

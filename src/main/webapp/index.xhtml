@@ -11,21 +11,45 @@
 	<ui:define name="pageTitle">Welcome page!!! Feeling welcome is not an obligation but
 		a requirement</ui:define>
 	<ui:define name="content">
-		<h1><p:outputLabel value="#{user['user.index.header']}"/></h1>
+		<h1>
+			<p:outputLabel value="#{user['user.index.header']}" />
+		</h1>
 
 		<h:form styleClass="forms">
-			<h3>
-				<p:inputText binding="#{name}" />
-				<p:password binding="#{password}" />
-			</h3>
+			<p:panelGrid columns="3" id="grid">
+				<p:outputLabel for="indexInputEmail" value="e-mail: "
+					rendered="#{empty rAirBean.loggedIn.email}" />
+				<p:inputText id="indexInputEmail" value="#{rAirBean.loggedIn.email}"
+					rendered="#{empty rAirBean.loggedIn.email}">
+					<f:validator validatorId="com.realdolmen.validators.emailValidator" />
+				</p:inputText>
+				<h:message id="m1" for="indexInputEmail" display="text"
+					rendered="#{empty rAirBean.loggedIn.email}" />
 
+				<p:outputLabel for="indexInputPassword" value="password: "
+					rendered="#{empty rAirBean.loggedIn.email}" />
+				<p:password id="indexInputPassword"
+					value="#{rAirBean.loggedIn.password}"
+					rendered="#{empty rAirBean.loggedIn.email}">
+				</p:password>
+				<h:message id="m2" for="indexInputPassword" display="text"
+					rendered="#{empty rAirBean.loggedIn.email}" />
+			</p:panelGrid>
+			<p:commandButton value="#{user['user.index.button.login']}"
+				icon="ui-icon-check" action="#{rAirBean.logOn()}" update="grid"
+				rendered="#{empty rAirBean.loggedIn.email}" />
+
+			<p:commandButton value="log out" icon="ui-icon-check"
+				action="#{rAirBean.logOut()}" update="grid"
+				rendered="#{not empty rAirBean.loggedIn.email}" />
+
+		</h:form>
+		<h:form>
 			<p:commandButton value="New user" icon="ui-icon-check"
 				action="register" />
-			<p:commandButton value="#{user['user.index.button.login']}" icon="ui-icon-check"
-				action="#{rAirBean.logOn(name.value, password.value)}" />
 
-			<p:button value="#{user['user.index.button.searchFlights']}" outcome="searchFlight" />
-
+			<p:button value="#{user['user.index.button.searchFlights']}"
+				outcome="searchFlight" />
 		</h:form>
 	</ui:define>
 </ui:composition>
