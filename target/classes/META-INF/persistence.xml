@@ -8,7 +8,6 @@
 	<persistence-unit name="MyPersistenceUnit"
 		transaction-type="JTA">
 		<jta-data-source>java:/rd/datasources/RealDolmenDataSource</jta-data-source>
-		<class>com.realdolmen.test.Person</class>
 		<class>com.realdolmen.domain.User</class>
 		<class>com.realdolmen.domain.Partner</class>
 		<class>com.realdolmen.domain.Flight</class>
