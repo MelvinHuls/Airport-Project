@@ -7,8 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.realdolmen.domain.Employee;
+import com.realdolmen.domain.User;
 
 @Stateless
 public class EmployeeRepository {
@@ -35,9 +37,19 @@ public class EmployeeRepository {
 
 	public List<Employee> findAll() {
 		try {
-			return em.createNamedQuery("SELECT e FROM Employee e", Employee.class).getResultList();
+			return em.createNamedQuery("SELECT e FROM User e", Employee.class).getResultList();
 		} catch (NoResultException e) {
 			return Collections.emptyList();
+		}
+	}
+
+	public Employee findByEmail(String email) {
+		TypedQuery<User> query = em.createQuery("Select u from User u where u.email = :email AND dtype like Employee", User.class)
+				.setParameter("email", email);
+		if (query.getResultList().isEmpty()) {
+			return null;
+		} else {
+			return (Employee) query.getSingleResult();
 		}
 	}
 }

@@ -19,4 +19,7 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>flick</param-value>
 	</context-param>
+	<session-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
 </web-app>

@@ -1,6 +1,5 @@
 package com.realdolmen.repository;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,9 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.realdolmen.domain.Client;
-import com.realdolmen.domain.Flight;
+import com.realdolmen.domain.User;
 
 @Stateless
 public class ClientRepository {
@@ -35,22 +35,22 @@ public class ClientRepository {
 		em.remove(o);
 	}
 
-	public List<Client> findByUserName(String userName) {
-		try {
-			return em.createNamedQuery("SELECT c from Client c WHERE c.userName LIKE :userName", Client.class)
-					.setParameter("userName", userName).getResultList();
-		} catch (NoResultException e) {
-			return Collections.emptyList();
+	public Client findByEmail(String email) {
+		TypedQuery<User> query = em.createQuery("Select u from User u where u.email = :email AND dtype like Client", User.class)
+				.setParameter("email", email);
+		if (query.getResultList().isEmpty()) {
+			return null;
+		} else {
+			return (Client) query.getSingleResult();
 		}
 	}
 
 	public List<Client> findAll() {
 		try {
-			return em.createNamedQuery("SELECT c FROM Client c", Client.class).getResultList();
+			return em.createNamedQuery("SELECT c FROM User c", Client.class).getResultList();
 		} catch (NoResultException e) {
 			return Collections.emptyList();
 		}
 	}
-	
-	
+
 }

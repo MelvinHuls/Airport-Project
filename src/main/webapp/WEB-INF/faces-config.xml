@@ -207,7 +207,7 @@
 			<to-view-id>/bookingSuccess.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/partnerPanel.xhtml</from-view-id>
 		<navigation-case>
@@ -219,7 +219,7 @@
 			<to-view-id>/overviewFlights.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/overviewDiscounts.xhtml</from-view-id>
 		<navigation-case>
@@ -249,7 +249,7 @@
 			<value>#{param.userId}</value>
 		</managed-property>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>discountService</managed-bean-name>
 		<managed-bean-class>com.realdolmen.service.DiscountService</managed-bean-class>
@@ -259,13 +259,13 @@
 			<value>#{param.company}</value>
 		</managed-property>
 	</managed-bean>
-	
+
 	<application>
 		<locale-config>
 			<default-locale>en</default-locale>
 			<supported-locale>nl</supported-locale>
 		</locale-config>
-		
+
 		<resource-bundle>
 			<base-name>Employee</base-name>
 			<var>empl</var>

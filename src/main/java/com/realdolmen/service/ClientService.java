@@ -4,24 +4,25 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.NonUniqueResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.realdolmen.domain.Client;
-import com.realdolmen.domain.Flight;
 import com.realdolmen.repository.ClientRepository;
 
 //@EJB(name="java:global/RAir/ClientService", beanInterface = SessionRemote.class, beanName="ClientService")
-@Stateful
+@Remote
+@Stateless
 @LocalBean
 public class ClientService implements SessionRemote, AbstractService<Client> {
 	private Client client;
 
+	@Inject
 	private ClientRepository cRepo;
-	
-	//@EJB
-	//private FlightSearchBeanTest fsearch;
 
 	@Override
 	public void create(Client client) {
@@ -48,8 +49,8 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 		return cRepo.read(id);
 	}
 
-	public List<Client> findByUserName(String userName) {
-		return cRepo.findByUserName(userName);
+	public Client findByEmail(String email) {
+		return cRepo.findByEmail(email);
 	}
 
 	@Override
@@ -84,11 +85,33 @@ public class ClientService implements SessionRemote, AbstractService<Client> {
 		this.client = client;
 	}
 
-	private boolean clientExistsCheck(String userName) {
-		List<Client> customerByEmail = findByUserName(userName);
-		if (customerByEmail.isEmpty()) {
+	private boolean clientExistsCheck(String email) {
+		Client client = findByEmail(email);
+		if (client == null) {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean validate(String email, String password) {
+		Client client = cRepo.findByEmail(email);
+		if (client.getId() != null) {
+			if (checkPassword(password, client.getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkPassword(String password, String hashed) {
+		try {
+			return BCrypt.checkpw(password, hashed);
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	public String hashPassword(String password) {
+		return BCrypt.hashpw(password, BCrypt.gensalt(24));
 	}
 }

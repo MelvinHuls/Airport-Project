@@ -31,7 +31,6 @@
 		<class>com.realdolmen.domain.Client</class>
 		<class>com.realdolmen.domain.Booking</class>
 		<class>com.realdolmen.domain.Employee</class>
-		<class>com.realdolmen.domain.Employee</class>
 		<class>com.realdolmen.domain.Discounts</class>
 		<class>com.realdolmen.domain.Discount</class>
 

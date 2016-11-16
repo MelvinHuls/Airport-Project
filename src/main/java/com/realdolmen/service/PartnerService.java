@@ -23,7 +23,7 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	private Partner partner;
 
 	private Flight flight;
-	
+
 	private Boolean editFlight;
 
 	@PersistenceContext
@@ -58,7 +58,7 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 		return pRepo.findAll();
 	}
 
-	protected PartnerService() {
+	public PartnerService() {
 	}
 
 	public PartnerService(Partner partner) {
@@ -157,6 +157,9 @@ public class PartnerService implements SessionRemote, AbstractService<Partner> {
 	public void setEditFlight(Boolean editFlight) {
 		this.editFlight = editFlight;
 	}
-	
-	
+
+	public Partner findByEmail(String email) {
+		return pRepo.findByEmail(email);
+	}
+
 }

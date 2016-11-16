@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -12,8 +14,10 @@ import com.realdolmen.domain.Employee;
 import com.realdolmen.domain.Flight;
 import com.realdolmen.domain.Location;
 import com.realdolmen.repository.EmployeeRepository;
+import com.realdolmen.repository.LocationRepository;
 
 //@EJB(name="java:global/RAir/EmployeeService", beanInterface = SessionRemote.class, beanName="EmployeeService")
+@Remote
 @Stateful
 @LocalBean
 public class EmployeeService implements SessionRemote, AbstractService<Employee> {
@@ -21,6 +25,9 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 
 	private Location location;
 	private Flight flight;
+
+	@RequestScoped
+	private LocationRepository lRepo;
 
 	@PersistenceContext
 	EntityManager em;
@@ -79,7 +86,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public List<Location> obtainLocations() {
-		return em.createQuery("select l from Location l", Location.class).getResultList();
+		return lRepo.findAll();
 	}
 
 	public String storeLocation(Location location) {
@@ -88,7 +95,7 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public String changeLocation() {
-		//this.location.setRegion();
+		// this.location.setRegion();
 
 		em.merge(this.location);
 		this.location = null;
@@ -101,8 +108,8 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	}
 
 	public String addLocation() {
-		//this.location.setRegion();
-	
+		// this.location.setRegion();
+
 		em.persist(this.location);
 		this.location = null;
 
@@ -121,9 +128,13 @@ public class EmployeeService implements SessionRemote, AbstractService<Employee>
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
-	
+
 	public String editFlight(Flight flight) {
 		this.flight = flight;
 		return "edit";
+	}
+
+	public Employee findByEmail(String email) {
+		return eRepo.findByEmail(email);
 	}
 }

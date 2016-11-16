@@ -16,8 +16,9 @@ public class BookingRepository {
 	@PersistenceContext
 	EntityManager em;
 
-	public void create(Booking o) {
+	public Booking create(Booking o) {
 		em.persist(o);
+		return o;
 	}
 
 	public Booking read(Long id) {
@@ -29,8 +30,9 @@ public class BookingRepository {
 		return "success";
 	}
 
-	public void delete(Booking o) {
+	public Booking delete(Booking o) {
 		em.remove(o);
+		return o;
 	}
 
 	public List<Booking> findAll() {

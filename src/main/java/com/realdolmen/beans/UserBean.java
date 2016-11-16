@@ -5,6 +5,6 @@ import javax.ejb.Stateless;
 
 @Stateless
 @LocalBean
-public class UserBean implements UserBeanRemote{
+public class UserBean implements UserBeanRemote {
 
 }
