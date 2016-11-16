@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Discounts {
 	@GeneratedValue
 	private Long id;
 
-	@OneToMany(mappedBy = "discounts")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "discounts")
 	private List<Discount> discounts;
 	private Double weekendDiscount;
 	// night is between 23:00 and 06:00
@@ -30,7 +31,7 @@ public class Discounts {
 	private static int BEGIN_NIGHT = 23;
 	private static int END_NIGHT = 6;
 
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private Map<Integer, Double> seatsDiscount;
 
 	private String company;
@@ -80,11 +81,9 @@ public class Discounts {
 		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 			discountedPrice *= (1 - weekendDiscount);
 		}
-
 		if (date.getHours() >= BEGIN_NIGHT || date.getHours() < END_NIGHT) {
 			discountedPrice *= (1 - nightlyDiscount);
 		}
-
 		Iterator<Discount> iterator = discounts.iterator();
 		while (iterator.hasNext()) {
 			Discount discount = iterator.next();
@@ -92,7 +91,6 @@ public class Discounts {
 				discountedPrice *= (1 - discount.getPercentage());
 			}
 		}
-
 		Set<Integer> keySet = this.seatsDiscount.keySet();
 		Iterator<Integer> iterator2 = keySet.iterator();
 		Integer largestAmountOfSeats = 0;
@@ -102,11 +100,9 @@ public class Discounts {
 				largestAmountOfSeats = amountOfSeats;
 			}
 		}
-
 		if (largestAmountOfSeats > 0) {
 			discountedPrice *= (1 - this.seatsDiscount.get(largestAmountOfSeats));
 		}
-
 		return discountedPrice * seats;
 	}
 

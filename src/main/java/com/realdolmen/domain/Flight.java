@@ -271,9 +271,10 @@ public class Flight {
 			throws LackingPricingInformationException {
 		if (seats == null || seats == 0)
 			return 0d;
-
+System.out.println("test");
 		if (customMarginPrice != null) {
 			if (this.departureTime != null && discounts != null) {
+				System.out.println("test 2");
 				return Math.round(discounts.calculatePrice(customMarginPrice, this.departureTime, seats) * 100D) / 100D;
 			} else {
 				return Math.round(customMarginPrice * seats * 100D) / 100D;
@@ -283,7 +284,7 @@ public class Flight {
 		} else if (discounts == null || this.getDepartureTime() == null) {
 			return Math.round(basePrice * 1.1 * seats * 100D) / 100D;
 		}
-
+System.out.println("test 3");
 		return Math.round(discounts.calculatePrice(basePrice * 1.1, this.departureTime, seats) * 100D) / 100D;
 	}
 
